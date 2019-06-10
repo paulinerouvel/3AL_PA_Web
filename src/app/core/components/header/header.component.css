@@ -1,0 +1,53 @@
+.navbar{
+    background : #000000;
+    border : none;
+}
+
+.collapse a{
+    
+        color: white;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.collapse a:hover{
+    color:#8cfedc;
+    text-decoration: none;
+    font-size: 110%;
+    
+}
+
+
+
+
+
+#logo {
+    height: 50px;
+}
+
+li{
+    margin-right : 10px;
+}
+
+#title{
+    font-size: 25px; 
+}
+
+#item{
+    padding-top: 10px; 
+}
+
+
+#connexion{
+    background: #c8295a;
+    color: white;
+    margin-top: 7px;
+}
+#connexion:hover{
+    background: #A71F49;
+}
+
+.btn:focus {
+    cursor: pointer;
+    outline: none;
+
+}
+

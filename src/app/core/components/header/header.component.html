@@ -1,0 +1,27 @@
+
+
+<!--Main Navigation-->
+<header>
+
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark pink scrolling-navbar">
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" (click)="isShown = !isShown" [attr.aria-expanded]="isShown" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" [ngClass]="{ 'show': isShown }" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li><a href="#" (click)="isShown = false" style="padding: 0px;"><img id="logo" src="..\..\..\assets\images\logo.PNG" ></a></li>
+        <li><a id="title" (click)="isShown = false"href="#">WasteMart</a></li>
+        <li id="item"><a  href="#" (click)="isShown = false">Associations</a></li>
+        <li id="item"><a  href="#" (click)="isShown = false">Bla</a></li>
+        <li id="item"><a  href="#" (click)="isShown = false">Truc</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><input id="connexion" class="btn" type="button" value="Se connecter"></li>
+    </ul>
+    </div>
+  </nav>
+
+</header>
+<!--Main Navigation-->
