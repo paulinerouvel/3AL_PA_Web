@@ -32,8 +32,13 @@ li{
 }
 
 #item{
-    padding-top: 10px; 
+    padding-top: 7px; 
 }
+
+#item_long{
+    font-size: 1px;
+}
+
 
 
 #connexion{
