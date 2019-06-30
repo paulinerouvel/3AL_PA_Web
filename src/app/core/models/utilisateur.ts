@@ -15,6 +15,7 @@ export class Utilisateur {
         public photo: string,
         public desc: string,
         public tailleOrganisme: number,
+        public estValide: number,
         public statut: string,
         public siret: string,
         public dateDeNaissance: string,

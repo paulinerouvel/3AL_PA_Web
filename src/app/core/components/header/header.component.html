@@ -18,7 +18,7 @@
         <li id="item"><a  href="#" (click)="isShown = false">Boutique</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><input id="connexion" class="btn" type="button" value="Se connecter"></li>
+        <li><input id="connexion" [routerLink]="['login']" class="btn" type="button" value="Se connecter"></li>
     </ul>
     </div>
   </nav>

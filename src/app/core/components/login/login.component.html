@@ -1,0 +1,37 @@
+
+<div class="container-fluid" style="background:#383838;">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-6" style="background:white; ">
+        <div class="marge"></div>
+
+        <form #connexionForm="ngForm" class="text-left" (ngSubmit)="onSubmit()" novalidate>
+            <!--{{connexionForm.value | json}}-->
+
+            <!--{{userModel | json}}-->
+            <h2 class="text-center">Se connecter</h2>
+
+            <div *ngIf="errorConnection" class="alert alert-danger" >
+                {{errorConnection}}
+            </div>
+
+            <div class="form-group">
+                <label for="emailLabel">Email</label>
+                <input  #mail="ngModel" [class.is-invalid]="mail.invalid && mail.touched" required [(ngModel)]="userModel.mail" type="email" class="form-control" name="mail" placeholder="email@outlook.fr">
+            </div>
+
+            <div class="form-group">
+                <label for="mdpLabel">Mot de passe</label>
+                <input  #mdp="ngModel" [class.is-invalid]="mdp.invalid && mdp.touched" required [(ngModel)]="userModel.mdp" type="password" class="form-control" name="mdp" >
+            </div>
+
+
+            <button [disabled]="connexionForm.form.invalid" type="submit" class="btn float-right text-white" style="background: #3db4b4;" >Valider</button>
+            <div class="marge_50"></div>
+        </form>
+        </div>
+        <div class="col"></div>
+
+        
+    </div>
+</div>

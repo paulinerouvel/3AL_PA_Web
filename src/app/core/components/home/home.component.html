@@ -1,0 +1,204 @@
+<div class="container-fluid" style="background:#383838;">
+    <div class="row">
+
+        <div class="col" style="margin-left: 100px; ">
+            <div class="marge"></div>
+            <div class="circular--landscape"><img src="../../../../assets/images/Fruits.jpg"></div>
+            <div class="accroche">Réduisez le gaspillage</div>
+            <div class="circular--landscape"><img src="../../../../assets/images/legumes.jpg" /></div>
+        </div>
+        <div class="col">
+            <div class="marge"></div>
+            <div class="accroche">Economisez sur vos courses</div>
+            <div class="circular--landscape"><img src="../../../../assets/images/Fotolia_72051110_M.jpg"></div>
+            <div class="accroche">Faites des dons à des associations carritatives</div>
+        </div>
+        <div class="col-4" style="background: white; margin-top:50px; padding-bottom: 50px;">
+
+            <div class="marge_50"></div>
+            <div class="alert alert-danger" *ngIf="errorMsg">
+                {{errorMsg}}
+            </div>
+
+            <div class="alert alert-info" *ngIf="infoMsg">
+                {{infoMsg}}
+            </div>
+            <h2 class="text-center">Je m'inscris</h2>
+
+            <p><label for="nomLabel">Je suis</label></p>
+            <div class="form-group text-center">
+                Un particulier
+                <label class="switch" (change)="switchUser()">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+                Une association
+            </div>
+
+
+            <div *ngIf="userType == 'particulier'">
+                <form #inscriptionParticulier="ngForm" class="text-left" (ngSubmit)="onSubmitParticulier()" novalidate
+                    class="text-left">
+
+
+
+
+                    <div class="form-group">
+                        <label for="nomLabel">Nom*</label>
+                        <input #nom="ngModel" [class.is-invalid]="nom.invalid && nom.touched" required
+                            [(ngModel)]="userModel.nom" type="text" class="form-control" name="nom" placeholder="Nom">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prenomLabel">Prenom*</label>
+                        <input #prenom="ngModel" [class.is-invalid]="prenom.invalid && prenom.touched" required
+                            [(ngModel)]="userModel.prenom" type="text" class="form-control" name="prenom"
+                            placeholder="Prenom">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dateNaissance">Date de naissance*</label>
+                        <input #dateNaissance="ngModel"
+                            [class.is-invalid]="dateNaissance.invalid && dateNaissance.touched" required
+                            [(ngModel)]="userModel.dateDeNaissance" type="date" class="form-control"
+                            name="dateNaissance">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="emailLabel">Email*</label>
+                        <input #mail="ngModel" [class.is-invalid]="mail.invalid && mail.touched" required
+                            [(ngModel)]="userModel.mail" type="email" class="form-control" name="email"
+                            placeholder="name@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="telLabel">Telephone</label>
+                        <input #tel="ngModel" [class.is-invalid]="tel.invalid && tel.touched"
+                            [(ngModel)]="userModel.tel" type="text" class="form-control" name="tel"
+                            placeholder="n° téléphone">
+                    </div>
+                    <div class="form-group">
+                        <label for="adresseLabel">Adresse*</label>
+                        <input #adresse="ngModel" [class.is-invalid]="adresse.invalid && adresse.touched" required
+                            [(ngModel)]="userModel.adresse" type="text" class="form-control" name="adresse"
+                            placeholder="12 Avenue des Champs Elysées">
+                    </div>
+                    <div class="form-group">
+                        <label for="cpLabel">Code Postal*</label>
+                        <input #cp="ngModel" [class.is-invalid]="cp.invalid && cp.touched" required
+                            [(ngModel)]="userModel.codePostal" type="text" class="form-control" name="cp"
+                            placeholder="75008">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="villeLabel">Ville*</label>
+                        <input #ville="ngModel" [class.is-invalid]="ville.invalid && ville.touched" required
+                            [(ngModel)]="userModel.ville" type="text" class="form-control" name="ville"
+                            placeholder="Paris">
+                    </div>
+                    <div class="form-group">
+                        <label for="pseudoLabel">Pseudo*</label>
+                        <input #pseudo="ngModel" [class.is-invalid]="pseudo.invalid && pseudo.touched" required
+                            [(ngModel)]="userModel.pseudo" type="text" class="form-control" name="pseudo"
+                            placeholder="">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mdpLabel">Mot de passe*</label>
+                        <input #mot_de_passe="ngModel" [class.is-invalid]="mot_de_passe.invalid && mot_de_passe.touched"
+                            required [(ngModel)]="userModel.mdp" type="password" class="form-control"
+                            name="mot_de_passe" placeholder="">
+                    </div>
+
+                    <button [disabled]="inscriptionParticulier.form.invalid" type="submit"
+                        class="btn float-right text-white" style="background:#3db4b4;">Valider</button>
+                </form>
+            </div>
+
+            <div *ngIf="userType == 'association'">
+                <form #inscriptionAsso="ngForm" class="text-left" (ngSubmit)="onSubmitAsso()" novalidate class="text-left">
+
+                    <div class="form-group">
+                        <label for="libelleLabel">Libelle*</label>
+                        <input #libelle="ngModel" [class.is-invalid]="libelle.invalid && libelle.touched" required
+                            [(ngModel)]="userModel.libelle" type="text" class="form-control" name="libelle"
+                            placeholder="Libelle">
+                    </div>
+                    <div class="form-group">
+                        <label for="emailAssoLabel">Email*</label>
+                        <input #mailAsso="ngModel" [class.is-invalid]="mailAsso.invalid && mailAsso.touched" required
+                            [(ngModel)]="userModel.mail" type="email" class="form-control" name="email"
+                            placeholder="name@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="telLabel">Telephone</label>
+                        <input #tel="ngModel" [class.is-invalid]="tel.invalid && tel.touched"
+                            [(ngModel)]="userModel.tel" type="text" class="form-control" name="tel"
+                            placeholder="n° téléphone">
+                    </div>
+                    <div class="form-group">
+                        <label for="adresseLabel">Adresse*</label>
+                        <input #adresse="ngModel" [class.is-invalid]="adresse.invalid && adresse.touched" required
+                            [(ngModel)]="userModel.adresse" type="text" class="form-control" name="adresse"
+                            placeholder="12 Avenue des Champs Elysées">
+                    </div>
+                    <div class="form-group">
+                        <label for="cpLabel">Code Postal*</label>
+                        <input #cp="ngModel" [class.is-invalid]="cp.invalid && cp.touched" required
+                            [(ngModel)]="userModel.codePostal" type="text" class="form-control" name="cp"
+                            placeholder="75008">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="villeLabel">Ville*</label>
+                        <input #ville="ngModel" [class.is-invalid]="ville.invalid && ville.touched" required
+                            [(ngModel)]="userModel.ville" type="text" class="form-control" name="ville"
+                            placeholder="Paris">
+                    </div>
+                    <div class="form-group">
+                        <label for="mdpLabel">Pseudo*</label>
+                        <input #pseudo="ngModel" [class.is-invalid]="pseudo.invalid && pseudo.touched" required
+                            [(ngModel)]="userModel.pseudo" type="text" class="form-control" name="pseudo"
+                            placeholder="">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mdpLabel">Mot de passe*</label>
+                        <input #mot_de_passe="ngModel" [class.is-invalid]="mot_de_passe.invalid && mot_de_passe.touched"
+                            required [(ngModel)]="userModel.mdp" type="password" class="form-control"
+                            name="mot_de_passe" placeholder="">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="siretLabel">Siret*</label>
+                        <input #siret="ngModel" [class.is-invalid]="siret.invalid && siret.touched"
+                            required [(ngModel)]="userModel.siret" type="text" class="form-control"
+                            name="siret" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="tailleOrganismeLabel">Taille de l'organisme*</label>
+                        <input #tailleOrganisme="ngModel" [class.is-invalid]="tailleOrganisme.invalid && tailleOrganisme.touched"
+                            required [(ngModel)]="userModel.tailleOrganisme" type="text" class="form-control"
+                            name="tailleOrganisme" placeholder="Nombre d'effectifs">
+                    </div>
+                    <div class="form-group">
+                        <label for="descriptionLabel">Description*</label>
+                        <textarea #description="ngModel" [class.is-invalid]="description.invalid && description.touched"
+                            required [(ngModel)]="userModel.description"  class="form-control"
+                            name="description" placeholder="Decrivez-vous..."></textarea>
+                    </div>
+
+
+
+                    <button [disabled]="inscriptionAsso.form.invalid" type="submit" class="btn float-right text-white"
+                        style="background:#3db4b4;">Valider</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="marge"></div>
+</div>

@@ -7,6 +7,11 @@ import { HeaderComponent } from './core/components/header/header.component';
 import { PageNotFoundComponent } from './core/components/page-not-found/page-not-found.component';
 import { HomeComponent } from './core/components/home/home.component';
 import { FooterComponent } from './core/components/footer/footer.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { LoginComponent } from './core/components/login/login.component';
+
 
 @NgModule({
   declarations: [
@@ -14,11 +19,18 @@ import { FooterComponent } from './core/components/footer/footer.component';
     HeaderComponent,
     PageNotFoundComponent,
     HomeComponent,
+    LoginComponent,
+
     FooterComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,                               
+    ReactiveFormsModule,
+    HttpClientModule,
+    RouterModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

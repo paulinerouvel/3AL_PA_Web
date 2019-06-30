@@ -1,4 +1,4 @@
-export class Alerte {
+export class Categorie_utilisateur {
 
     constructor(
       public id: number,
