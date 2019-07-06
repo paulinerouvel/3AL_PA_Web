@@ -6,7 +6,8 @@ export class Produit {
         public desc: string,
         public photo: string,
         public prix: number,
-        public reduction: number,
+        public prixInitial: number,
+        public quantite : number,
         public dlc: string,
         public codeBarre: string,
         public enRayon: number,
@@ -17,4 +18,5 @@ export class Produit {
     ){}
       
 }
+
 

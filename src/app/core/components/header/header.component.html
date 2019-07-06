@@ -11,11 +11,11 @@
     </button>
     <div class="collapse navbar-collapse" [ngClass]="{ 'show': isShown }" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li><a href="#" (click)="isShown = false" style="padding: 0px;"><img id="logo" src="..\..\..\assets\images\logo.PNG" ></a></li>
-        <li><a id="title" (click)="isShown = false"href="#">WasteMart</a></li>
-        <li id="item item_long"><a  href="#" (click)="isShown = false">Associations <br/>Partenaires</a></li>
-        <li id="item item_long"><a  href="#" (click)="isShown = false">Entreprises <br/>Partenaires</a></li>
-        <li id="item"><a  href="#" (click)="isShown = false">Boutique</a></li>
+        <li><a [routerLink]="['home']" (click)="isShown = false" style="padding: 0px;"><img id="logo" src="..\..\..\assets\images\logo.PNG" ></a></li>
+        <li><a id="title" (click)="isShown = false" [routerLink]="['home']">WasteMart</a></li>
+        <li id="item item_long"><a  href="#" [routerLink]="['associationsPartenaires']" (click)="isShown = false"><div>Associations <br/>Partenaires</div></a></li>
+        <li id="item item_long"><a  href="#" [routerLink]="['entreprisesPartenaires']" (click)="isShown = false"><div>Entreprises <br/>Partenaires</div></a></li>
+        <li id="item"><a  href="#" [routerLink]="['boutique']" (click)="isShown = false"><div>Boutique</div></a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><input id="connexion" [routerLink]="['login']" class="btn" type="button" value="Se connecter"></li>

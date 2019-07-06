@@ -1,0 +1,86 @@
+.marge{
+    height: 100px;
+}
+
+.item{
+    width: 100%;
+    background: white;
+    color : black;
+    margin-bottom: 30px;
+    display: block;
+    overflow: auto;
+    margin-left:30px;
+}
+
+.item:hover{
+    background: lightgray;
+    cursor : pointer;
+}
+
+.title{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.half-div{
+    
+    padding: 20px; 
+    width: 50%;
+    float: left;
+    display: block;
+    
+}
+
+.third-div{
+    
+    padding: 20px; 
+    width: 33%;
+    float: left;
+    display: block;
+    
+}
+.full{
+    width: 100%;
+    float: left;
+    padding: 20px;
+}
+
+
+.prix{
+    color: #c8295a;
+    font-size: 25px;
+}
+
+.panier{
+    border : 2px solid #8cfedc;
+    width: 20%;
+    display: block;
+    overflow: auto;
+    min-height: 600px;
+    position: fixed;
+    right: 0;
+    top: 0;
+    color: white;
+    margin-top: 100px;
+    padding: 20px; 
+    margin-right : 20px;
+}
+
+.floatR{
+    float: right;
+}
+
+
+.btn{
+    background: white  ;
+    /* color:#c8295a; */
+    color: #383838;
+    border: 1px solid black;
+    margin-right:10px;
+}
+
+.btn:hover{
+    background: #8cfedc;
+    border : none;
+    color : white;
+}

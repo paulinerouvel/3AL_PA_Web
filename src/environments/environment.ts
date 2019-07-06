@@ -3,8 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  //UrlAPI: 'https://wastemart-api.herokuapp.com',
-  UrlAPI: 'http://localhost:5000',
+  UrlAPI: 'https://wastemart-api.herokuapp.com',
+  UrlIMG: 'http://51.75.143.205:9876',
+  //UrlAPI: 'http://localhost:5000',
   production: false
 };
 

@@ -11,7 +11,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from './core/components/login/login.component';
-
+import { AssociationsPartenairesComponent } from './core/components/associations-partenaires/associations-partenaires.component';
+import { EntreprisesPartenairesComponent } from './core/components/entreprises-partenaires/entreprises-partenaires.component';
+import { BoutiqueComponent } from './core/components/boutique/boutique.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -20,7 +24,9 @@ import { LoginComponent } from './core/components/login/login.component';
     PageNotFoundComponent,
     HomeComponent,
     LoginComponent,
-
+    AssociationsPartenairesComponent,
+    EntreprisesPartenairesComponent,
+    BoutiqueComponent,
     FooterComponent
   ],
   imports: [
@@ -29,10 +35,11 @@ import { LoginComponent } from './core/components/login/login.component';
     FormsModule,                               
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    FontAwesomeModule
 
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,13 @@
+.marge{
+    height: 150px;
+}
+
+.item{
+    width: 100%;
+    background: white;
+    color : black;
+    height: 100px;
+    margin-bottom: 50px;
+    border-radius:10px;
+    padding: 20px; 
+}

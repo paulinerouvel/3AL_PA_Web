@@ -1,39 +1,20 @@
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 import { environment } from '../../../environments/environment'
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
 import { Utilisateur } from '../models/utilisateur';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthentificationService {
+export class UserService {
 
   constructor(private http : HttpClient) { }
 
 
   private _url: string = environment.UrlAPI + "/user";
 
-
-  register(utilisateur : Utilisateur) : Observable<any>{
-    
-    let reqHeader = new HttpHeaders({ 
-      'Authorization': 'SECRET',
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-
-   });
-    return this.http.post<Utilisateur>(this._url + "/register", utilisateur, {headers : reqHeader}).pipe(catchError( this.handleError));
-  }
-
-  login(utilisateur : Utilisateur) : Observable<any>{
-    let reqHeader = new HttpHeaders({ 
-      'accept': 'application/json',
-      'content-type': 'application/json'
-   });
-    return this.http.post<Utilisateur>(this._url + "/login", utilisateur, {headers : reqHeader}).pipe(catchError( this.handleError));
-  }
 
 
   getUsersByCategory(category : string) : Observable<any>{
@@ -45,6 +26,17 @@ export class AuthentificationService {
     let params = new HttpParams();
     params = params.append('type', category);
     return this.http.get<Utilisateur>(this._url + "/allByCategory", {params: params, headers : reqHeader} ).pipe(catchError( this.handleError));
+  }
+
+  getValidUsersByCategory(category : string) : Observable<any>{
+    let reqHeader = new HttpHeaders({ 
+      'accept': 'application/json',
+      'content-type': 'application/json'
+   });
+
+    let params = new HttpParams();
+    params = params.append('type', category);
+    return this.http.get<Utilisateur>(this._url + "/allValidByCategory", {params: params, headers : reqHeader} ).pipe(catchError( this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -63,4 +55,3 @@ export class AuthentificationService {
       'The connection to API failed.');
   };
 }
-

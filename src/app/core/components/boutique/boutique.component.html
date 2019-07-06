@@ -1,0 +1,50 @@
+<div class="container-fluid" style="background:#383838;">
+    <div class="row">
+      <!-- <div class="col"></div> -->
+  
+      <div class="col-8">
+        <div class="marge"></div>
+  
+        <div class="item" *ngFor="let item of produits;">
+          <div class="third-div">
+            //IMG
+          </div>
+          <div class="third-div">
+            <span class="title">{{item.libelle}}</span>
+            <p>{{item.desc}}</p>
+            <p class="prix">{{item.prix}}€</p>
+            <span>Quantité disponible : <b>{{item.quantite}}</b></span>
+          </div>
+          <div class="third-div">
+            <div class="floatR">
+              
+              <button class="btn" (click)="addPanier(item.id)"><fa-icon [icon]="faShoppingBasket"></fa-icon></button>
+              <button class="btn"><fa-icon [icon]="faFileAlt"></fa-icon></button>
+              
+            </div>
+          </div>
+
+
+          
+
+        </div>
+  
+        
+      </div>
+      <div class="marge"></div>
+      <div class="col-4">
+        
+        <div class="panier">
+
+          <span class="title ">Mon Panier</span>
+
+          <div *ngFor="let p of panier">
+            {{p.libelle}}
+          </div>
+
+        </div>
+      </div>
+
+  
+    </div>
+  </div>
