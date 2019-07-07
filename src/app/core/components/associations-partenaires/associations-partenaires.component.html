@@ -1,40 +1,49 @@
 <div class="container-fluid" style="background:#383838;">
   <div class="row">
+
     <div class="col"></div>
 
     <div class="col-6">
       <div class="marge"></div>
+      <div class="titre_page">Associations Partenaires</div>
+      <div class="item" [routerLink]="['/detailAssociation', item.Utilisateur_id]"  *ngFor="let item of listeAssos;">
 
-      <div class="item" *ngFor="let item of listeAssos;">
-        <span>{{item.Libelle}}</span>
+            <div class="third-div">
+              //IMG
+            </div>
+            <div class="third-div">
+              <span class="title">{{item.Libelle}}</span>
+              <div class="contact">Contact : <b>{{item.tel}} / {{item.mail}}</b></div>
+            </div>
+            <div class="third-div">
+              <div class="floatR">
+
+
+              </div>
+            </div>
+
       </div>
 
-      
+
     </div>
     <div class="col"></div>
     <!--
 
-    Categorie_utilisateur_id: 1
-Libelle: "habitant morbi tristique senectus et"
-Utilisateur_id: 5
+      tel: "01 89 77 41 06"
+      mail: "nunc.est.mollis@suscipit.org"
+      photo: null
+
+
+ville: "Hope"
 adresse: "718-4196 Libero. Avenue"
 codePostal: 5932
-dateDeNaissance: null
+
 desc: "aliquet. Phasellus fermentum convallis ligula. Donec luctus aliquet odio. Etiam"
-estValide: 0
-id: 1
-libelle: "Association"
-mail: "nunc.est.mollis@suscipit.org"
-mdp: "TXD49QAZ2DV"
-nbPointsSourire: null
-nom: "Rodgers"
-photo: null
-prenom: "Cecilia"
-pseudo: "Rhiannon.Carr"
 siret: ""
 tailleOrganisme: 204
-tel: "01 89 77 41 06"
-ville: "Hope"-->
+
+
+-->
 
   </div>
 </div>

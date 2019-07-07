@@ -13,8 +13,13 @@
 }
 
 .item:hover{
-    background: lightgray;
-    cursor : pointer;
+        /*background: lightgray;*/
+        cursor : pointer;
+        box-shadow: -1px 2px 10px 3px rgba(0, 0, 0, 0.3) inset;
+}
+
+.item-panier{
+    padding-top: 5px;
 }
 
 .title{
@@ -51,6 +56,10 @@
     font-size: 25px;
 }
 
+.prix-panier{
+    padding-right: 10px;
+}
+
 .panier{
     border : 2px solid #8cfedc;
     width: 20%;
@@ -84,3 +93,21 @@
     border : none;
     color : white;
 }
+
+.btn-delete{
+    background: #383838  ;
+    /* color:#c8295a; */
+    color: white;
+    border: 1px solid black;
+}
+
+.btn-delete:hover{
+    background: #8cfedc;
+    border : 1px solid white;
+    color : white;
+}
+
+hr{
+    background: white;
+}
+

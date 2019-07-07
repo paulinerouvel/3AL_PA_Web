@@ -1,25 +1,23 @@
+agm-map {
+    height: 300px;
+    width: 300px;
+  }
 .marge{
     height: 150px;
 }
 
 .item{
     width: 100%;
+    position: relative;
     background: white;
     color : black;
-    margin-bottom: 30px;
-    display: block;
+    /* margin-bottom: 30px; */
+    /* display: block; */
     overflow: auto;
-    margin-left:30px;
+    /* margin-left:30px;  */
     border-radius: 5px;
 }
 
-
-
-.item:hover{
-    /*background: lightgray;*/
-    cursor : pointer;
-    box-shadow: -1px 2px 10px 3px rgba(0, 0, 0, 0.3) inset;
-}
 
 .titre_page{
     color: white;
@@ -47,6 +45,14 @@
     display: block;
     
 }
+.full-div{
+    
+    padding: 20px; 
+    width: 100%;
+    float: left;
+    display: block;
+    
+}
 
 .third-div{
     
@@ -55,4 +61,9 @@
     float: left;
     display: block;
     
+}
+
+
+.floatR{
+    float: right;
 }

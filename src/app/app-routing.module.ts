@@ -7,12 +7,14 @@ import { LoginComponent } from './core/components/login/login.component';
 import { AssociationsPartenairesComponent } from './core/components/associations-partenaires/associations-partenaires.component';
 import { EntreprisesPartenairesComponent } from './core/components/entreprises-partenaires/entreprises-partenaires.component';
 import { BoutiqueComponent } from './core/components/boutique/boutique.component';
+import { DetailAssociationComponent } from './core/components/detail-association/detail-association.component';
 
 const routes: Routes = [
   {path:"", redirectTo:"/home", pathMatch:"full"},
   {path:"home", component: HomeComponent},
   {path:"login", component: LoginComponent},
   {path:"associationsPartenaires", component: AssociationsPartenairesComponent},
+  {path:"detailAssociation/:id", component: DetailAssociationComponent},
   {path:"entreprisesPartenaires", component: EntreprisesPartenairesComponent},
   {path:"boutique", component: BoutiqueComponent},
   {path:"**", component: PageNotFoundComponent}

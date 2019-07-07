@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProduitService } from '../../services/produit.service';
-import {  faShoppingBasket, faFileAlt } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingBasket, faFileAlt, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { CookieService } from 'ngx-cookie-service';
-import { Produit } from '../../models/produit';
 
 @Component({
   selector: 'app-boutique',
@@ -11,75 +10,106 @@ import { Produit } from '../../models/produit';
 })
 export class BoutiqueComponent implements OnInit {
 
-  
+
   produits;
-  panierId = [];
-  panier = [];
+  parsedPanier = [];
+  totalPanier = 0;
 
 
   faShoppingBasket = faShoppingBasket;
   faFileAlt = faFileAlt;
+  faTimesCircle = faTimesCircle;
 
-  constructor(private _produitService : ProduitService, private _cookieService : CookieService) { }
+  constructor(private _produitService: ProduitService, private _cookieService: CookieService) { }
 
   async ngOnInit() {
 
     this.produits = await this._produitService.getAllProductEnRayon().toPromise();
 
-    let cookie = this._cookieService.get("productsPanier");
-    
-    let tabCookie = cookie.split('|');
-    this.panierId = [];
-    this.panier = [];
-  
-    for (const p in tabCookie) {
-      this.panierId.push(parseInt(tabCookie[p]));
+    //recupération du contenu du panier
+    let cookie = this._cookieService.get("produitPanier");
+    this.parsedPanier = JSON.parse(cookie);
 
-      //get produit by id 
-      let selectedProduct = await this._produitService.getProductById(parseInt(tabCookie[p])).toPromise();
-
-      this.panier.push(selectedProduct);
-    }
-
-  }
-
-  async addPanier(idProduit){
-    let oldProduits = this._cookieService.get('productsPanier');
-
-    if(!oldProduits){
-      this._cookieService.set( 'productsPanier', idProduit );
-      this.panierId = [];
-      this.panierId.push(parseInt(idProduit));
-    }
-    else{
-      let newCookie = oldProduits += "|" + idProduit;
-      this._cookieService.set( 'productsPanier', newCookie );
-
-      let tabCookie = newCookie.split('|');
-
-
-      this.panierId = [];
-      this.panier = [];
-    
-      for (const p in tabCookie) {
-        this.panierId.push(parseInt(tabCookie[p]));
-        let selectedProduct = await this._produitService.getProductById(parseInt(tabCookie[p])).toPromise();
-
-        this.panier.push(selectedProduct);
-
+    for(let j = 0; j < this.produits.length; j++){
+      for(let k = 0; k < this.parsedPanier.length; k++){
+        if(this.produits[j].id == this.parsedPanier[k].id){
+          this.parsedPanier[k].quantite = this.produits[j].quantite ;
+        }
       }
-
-
     }
-    
-  }
-
-  deletePanier(idProduit){
-
+    this.calculTotalPanier();
   }
 
 
 
+  async addPanier(produit) {
+    let alreadyInPan = false;
+
+
+    for (let i = 0; i < this.parsedPanier.length; i++) {
+      if (this.parsedPanier[i].id == produit.id) {
+        alreadyInPan = true;
+      }
+    }
+
+    if (!alreadyInPan) {
+      produit.nb = 1
+      this.parsedPanier.push(produit);
+      this.savePanier(this.parsedPanier);
+      let cookie = this._cookieService.get("produitPanier");
+      this.parsedPanier = JSON.parse(cookie);
+    }
+    else {
+      alert("Déjà dans le panier !");
+    }
+
+  }
+
+  deletePanier(idProduit) {
+
+    for (let i = 0; i < this.parsedPanier.length; i++) {
+      if (this.parsedPanier[i].id == idProduit) {
+        this.parsedPanier.splice(i, 1);
+        this.savePanier(this.parsedPanier);
+      }
+    }
+  }
+
+  calculTotalPanier(){
+    this.totalPanier = 0;
+    for(let k = 0; k< this.parsedPanier.length; k++){
+      this.totalPanier += this.parsedPanier[k].prix * this.parsedPanier[k].nb;
+    }
+  }
+
+
+  savePanier(produitPanier) {
+    this._cookieService.set('produitPanier', JSON.stringify(produitPanier), 5);//expire dans 5 jours
+    this.calculTotalPanier();
+  }
+
+
+  counter(nb) {
+    nb = parseInt(nb);
+    let counter = [];
+
+    for (let i = 1; i <= nb; i++) {
+      counter.push(i)
+    }
+    return counter;
+  }
+
+
+  updateQuantite(id, i) {
+    i = parseInt(i)
+    for (let o = 0; o < this.parsedPanier.length; o++) {
+      if (this.parsedPanier[o].id == id) {
+
+        this.parsedPanier[o].nb = i;
+        this.savePanier(this.parsedPanier);
+      }
+    }
+  }
 
 
 

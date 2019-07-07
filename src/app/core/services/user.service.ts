@@ -15,6 +15,16 @@ export class UserService {
 
   private _url: string = environment.UrlAPI + "/user";
 
+  getUserById(id : string) : Observable<any>{
+    let reqHeader = new HttpHeaders({ 
+      'accept': 'application/json',
+      'content-type': 'application/json'
+   });
+   let params = new HttpParams();
+   params = params.append('id', id);
+   return this.http.get<Utilisateur>(this._url, {params : params, headers : reqHeader} ).pipe(catchError( this.handleError));
+
+  }
 
 
   getUsersByCategory(category : string) : Observable<any>{

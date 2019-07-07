@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
-import { Utilisateur } from '../../models/utilisateur';
 import { ImageService } from '../../services/image.service';
 
 @Component({
@@ -17,13 +16,15 @@ export class AssociationsPartenairesComponent implements OnInit {
   async ngOnInit() {
 
     this.listeAssos = await this.userService.getValidUsersByCategory("Association").toPromise();
-    this._imageService.getValidUsersByCategory("couou").subscribe(res=>{
-      console.log(res);
-    }, err=>{
-      console.log(err)
-    });
+
+    // this._imageService.getValidUsersByCategory("couou").subscribe(res=>{
+    //   console.log(res);
+    // }, err=>{
+    //   console.log(err)
+    // });
 
 
   }
+
 
 }

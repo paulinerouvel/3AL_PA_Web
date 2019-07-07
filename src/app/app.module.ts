@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { AgmCoreModule } from '@agm/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +17,7 @@ import { EntreprisesPartenairesComponent } from './core/components/entreprises-p
 import { BoutiqueComponent } from './core/components/boutique/boutique.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CookieService } from 'ngx-cookie-service';
+import { DetailAssociationComponent } from './core/components/detail-association/detail-association.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { CookieService } from 'ngx-cookie-service';
     AssociationsPartenairesComponent,
     EntreprisesPartenairesComponent,
     BoutiqueComponent,
-    FooterComponent
+    FooterComponent,
+    DetailAssociationComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,10 @@ import { CookieService } from 'ngx-cookie-service';
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCugXjPRVP1fJLnIlAo9ZRRiQvvzMVxBE4'
+    })
 
   ],
   providers: [CookieService],
