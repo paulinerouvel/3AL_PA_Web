@@ -1,25 +1,36 @@
-
-
 <!--Main Navigation-->
 <header>
 
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark pink scrolling-navbar">
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" (click)="isShown = !isShown" [attr.aria-expanded]="isShown" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" (click)="isShown = !isShown"
+      [attr.aria-expanded]="isShown" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+      aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" [ngClass]="{ 'show': isShown }" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li><a [routerLink]="['home']" (click)="isShown = false" style="padding: 0px;"><img id="logo" src="..\..\..\assets\images\logo.PNG" ></a></li>
-        <li><a id="title" (click)="isShown = false" [routerLink]="['home']">WasteMart</a></li>
-        <li id="item item_long"><a  href="#" [routerLink]="['associationsPartenaires']" (click)="isShown = false"><div>Associations <br/>Partenaires</div></a></li>
-        <li id="item item_long"><a  href="#" [routerLink]="['entreprisesPartenaires']" (click)="isShown = false"><div>Entreprises <br/>Partenaires</div></a></li>
-        <li id="item"><a  href="#" [routerLink]="['boutique']" (click)="isShown = false"><div>Boutique</div></a></li>
+        <li><a [routerLink]="['/home']" (click)="isShown = false" style="padding: 0px;"><img id="logo"
+              src="..\..\..\assets\images\logo.PNG"></a></li>
+        <li><a id="title" (click)="isShown = false" [routerLink]="['/home']">WasteMart</a></li>
+        <li id="item item_long"><a href="#" [routerLink]="['/associationsPartenaires']" (click)="isShown = false">
+            <div>Associations <br />Partenaires</div>
+          </a></li>
+        <li id="item item_long"><a href="#" [routerLink]="['/entreprisesPartenaires']" (click)="isShown = false">
+            <div>Entreprises <br />Partenaires</div>
+          </a></li>
+        <li id="item">
+          <a href="#" [routerLink]="['/boutique']" (click)="isShown = false">
+            <div>Boutique</div>
+          </a>
+        </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><input id="connexion" [routerLink]="['login']" class="btn" type="button" value="Se connecter"></li>
-    </ul>
+          <li *ngIf="isConnected == true" class="pseudo">{{curUser.pseudo}}</li>
+          <li *ngIf="isConnected == false"><input id="connexion" [routerLink]="['/login']" class="btn" type="button" value="Se connecter"></li>
+          <li *ngIf="isConnected == true"><input id="connexion" (click)="deconnexion()" class="btn" type="button" value="Se déconnecter"></li>
+      </ul>
+
     </div>
   </nav>
 

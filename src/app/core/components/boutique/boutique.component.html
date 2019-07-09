@@ -22,7 +22,9 @@
             <button class="btn" (click)="addPanier(item)">
               <fa-icon [icon]="faShoppingBasket"></fa-icon>
             </button>
-
+            <div class="full-div">
+              DLC : {{item.dlc | date}}
+            </div>
           </div>
         </div>
 
@@ -59,7 +61,8 @@
 
         <hr>
         TOTAL : <div class="floatR">{{totalPanier}} €</div>
-        <a href="">sqd</a>
+        <div class="div-button-panier"><input type="button" class="btn button-panier" value="Valider mon panier"></div>
+        
 
       </div>
     </div>

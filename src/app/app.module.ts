@@ -19,6 +19,15 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CookieService } from 'ngx-cookie-service';
 import { DetailAssociationComponent } from './core/components/detail-association/detail-association.component';
 
+import { LOCALE_ID } from '@angular/core';
+
+import { registerLocaleData } from '@angular/common';
+
+import localeFr from '@angular/common/locales/fr';
+import { ContactComponent } from './core/components/contact/contact.component';
+
+registerLocaleData(localeFr);
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +39,8 @@ import { DetailAssociationComponent } from './core/components/detail-association
     EntreprisesPartenairesComponent,
     BoutiqueComponent,
     FooterComponent,
-    DetailAssociationComponent
+    DetailAssociationComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +55,8 @@ import { DetailAssociationComponent } from './core/components/detail-association
     })
 
   ],
-  providers: [CookieService],
+  providers: [CookieService,
+    {provide: LOCALE_ID, useValue: "fr-CA" } ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

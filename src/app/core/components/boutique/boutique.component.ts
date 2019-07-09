@@ -26,18 +26,23 @@ export class BoutiqueComponent implements OnInit {
 
     this.produits = await this._produitService.getAllProductEnRayon().toPromise();
 
+
+
     //recupération du contenu du panier
     let cookie = this._cookieService.get("produitPanier");
-    this.parsedPanier = JSON.parse(cookie);
+    if(cookie){
+      this.parsedPanier = JSON.parse(cookie);
 
-    for(let j = 0; j < this.produits.length; j++){
-      for(let k = 0; k < this.parsedPanier.length; k++){
-        if(this.produits[j].id == this.parsedPanier[k].id){
-          this.parsedPanier[k].quantite = this.produits[j].quantite ;
+      for(let j = 0; j < this.produits.length; j++){
+        for(let k = 0; k < this.parsedPanier.length; k++){
+          if(this.produits[j].id == this.parsedPanier[k].id){
+            this.parsedPanier[k].quantite = this.produits[j].quantite ;
+          }
         }
       }
+      this.calculTotalPanier();
     }
-    this.calculTotalPanier();
+
   }
 
 

@@ -5,10 +5,11 @@ import { AssociationsPartenairesComponent } from './components/associations-part
 import { EntreprisesPartenairesComponent } from './components/entreprises-partenaires/entreprises-partenaires.component';
 import { BoutiqueComponent } from './components/boutique/boutique.component';
 import { DetailAssociationComponent } from './components/detail-association/detail-association.component';
+import { ContactComponent } from './components/contact/contact.component';
 
 
 @NgModule({
-  declarations: [LoginComponent, AssociationsPartenairesComponent, EntreprisesPartenairesComponent, BoutiqueComponent, DetailAssociationComponent],
+  declarations: [LoginComponent, AssociationsPartenairesComponent, EntreprisesPartenairesComponent, BoutiqueComponent, DetailAssociationComponent, ContactComponent],
   imports: [
     CommonModule
   ]

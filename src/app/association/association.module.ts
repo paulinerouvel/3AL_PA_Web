@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HomeAssociationComponent } from './components/home-association/home-association.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [HomeAssociationComponent],
   imports: [
     CommonModule
   ]

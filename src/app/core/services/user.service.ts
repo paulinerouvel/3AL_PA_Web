@@ -15,6 +15,17 @@ export class UserService {
 
   private _url: string = environment.UrlAPI + "/user";
 
+
+  addUserCategory(id : string, category : string) : Observable<any>{
+
+    console.log("himm")
+    let reqHeader = new HttpHeaders({ 
+      'accept': 'application/json',
+      'content-type': 'application/json'
+   });
+   return this.http.post<any>(this._url + '/category', {"categoryUserId" : category, "userId": id} , { headers : reqHeader} ).pipe(catchError( this.handleError));
+  }
+
   getUserById(id : string) : Observable<any>{
     let reqHeader = new HttpHeaders({ 
       'accept': 'application/json',
@@ -22,6 +33,17 @@ export class UserService {
    });
    let params = new HttpParams();
    params = params.append('id', id);
+   return this.http.get<Utilisateur>(this._url, {params : params, headers : reqHeader} ).pipe(catchError( this.handleError));
+
+  }
+
+  getUserByEmail(mail : string) : Observable<any>{
+    let reqHeader = new HttpHeaders({ 
+      'accept': 'application/json',
+      'content-type': 'application/json'
+   });
+   let params = new HttpParams();
+   params = params.append('mail', mail);
    return this.http.get<Utilisateur>(this._url, {params : params, headers : reqHeader} ).pipe(catchError( this.handleError));
 
   }

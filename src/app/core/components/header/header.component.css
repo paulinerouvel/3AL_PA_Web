@@ -16,7 +16,11 @@
 }
 
 
-
+.pseudo{
+    color : white;
+    padding: 8px;
+    font-size: 25px;
+}
 
 
 #logo {

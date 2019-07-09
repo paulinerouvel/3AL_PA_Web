@@ -36,16 +36,6 @@ export class AuthentificationService {
   }
 
 
-  getUsersByCategory(category : string) : Observable<any>{
-    let reqHeader = new HttpHeaders({ 
-      'accept': 'application/json',
-      'content-type': 'application/json'
-   });
-
-    let params = new HttpParams();
-    params = params.append('type', category);
-    return this.http.get<Utilisateur>(this._url + "/allByCategory", {params: params, headers : reqHeader} ).pipe(catchError( this.handleError));
-  }
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
