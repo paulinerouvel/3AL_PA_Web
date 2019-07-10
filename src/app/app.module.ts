@@ -25,6 +25,8 @@ import { registerLocaleData } from '@angular/common';
 
 import localeFr from '@angular/common/locales/fr';
 import { ContactComponent } from './core/components/contact/contact.component';
+import { AssociationModule } from './association/association.module';
+import { ParticulierModule } from './particulier/particulier.module';
 
 registerLocaleData(localeFr);
 
@@ -44,6 +46,8 @@ registerLocaleData(localeFr);
   ],
   imports: [
     BrowserModule,
+    AssociationModule,
+    ParticulierModule,
     AppRoutingModule,
     FormsModule,                               
     ReactiveFormsModule,

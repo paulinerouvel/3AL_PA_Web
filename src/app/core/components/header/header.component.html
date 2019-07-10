@@ -20,7 +20,14 @@
             <div>Entreprises <br />Partenaires</div>
           </a></li>
         <li id="item">
-          <a href="#" [routerLink]="['/boutique']" (click)="isShown = false">
+          
+          <a *ngIf="isConnected == true && type == 1" href="#" [routerLink]="['/boutique-asso']" (click)="isShown = false">
+            <div>Boutique</div>
+          </a>
+          <a *ngIf="isConnected == true && type == 3" href="#" [routerLink]="['/boutique-part']" (click)="isShown = false">
+            <div>Boutique</div>
+          </a>
+          <a *ngIf="(isConnected == false) || (isConnected == false && type != 1 && type != 3)" href="#" [routerLink]="['/boutique']" (click)="isShown = false">
             <div>Boutique</div>
           </a>
         </li>

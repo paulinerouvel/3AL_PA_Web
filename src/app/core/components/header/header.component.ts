@@ -6,6 +6,7 @@ import * as jwt_decode from 'jwt-decode';
 import { Utilisateur } from '../../models/utilisateur';
 import { UserService } from '../../services/user.service';
 import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -16,9 +17,11 @@ export class HeaderComponent implements OnInit {
 
   isShown:boolean = false;
   isConnected = false;
+  type;
   curUser : Utilisateur = new Utilisateur(0, "", "", "","", "", "", "", "","", "","", "", 0, 0, "", "", "", 0);
   
-  constructor(private _storageService : StorageService, private _userService : UserService, private _cookieService: CookieService) { 
+  constructor(private _storageService : StorageService, private _userService : UserService, private _cookieService: CookieService
+    , private _router : Router) { 
     
   }
 
@@ -28,6 +31,7 @@ export class HeaderComponent implements OnInit {
     if(token != undefined){
       this.isConnected = true;
       let token_decoded = jwt_decode(token);
+      this.type = token_decoded['type'];
       this.curUser = await this._userService.getUserById(token_decoded["id"]).toPromise();
     }
 
@@ -38,6 +42,7 @@ export class HeaderComponent implements OnInit {
       if(data != "remove"){
         this.isConnected = true;
         let token_decoded = jwt_decode(data);
+        this.type = token_decoded['type'];
         this.curUser = await this._userService.getUserById(token_decoded["id"]).toPromise();
       }
       else{
@@ -53,6 +58,7 @@ export class HeaderComponent implements OnInit {
   deconnexion(){
     this._storageService.removeItem("token");
     this._cookieService.delete('produitPanier');
+    this._router.navigateByUrl('/home');
   }
 
 

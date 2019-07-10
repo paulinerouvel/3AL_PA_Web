@@ -19,6 +19,7 @@
 .pseudo{
     color : white;
     padding: 8px;
+    padding-right: 15px; 
     font-size: 25px;
 }
 
