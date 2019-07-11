@@ -1,48 +1,33 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../../environments/environment'
+import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { Utilisateur } from '../models/utilisateur';
 import { catchError } from 'rxjs/operators';
-import { Produit } from '../models/produit';
-
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProduitService {
+export class DonService {
 
   
+  private _url: string = environment.UrlAPI + "/donation";
+
 
   constructor(private http : HttpClient) { }
 
-
-  
-  private _url: string = environment.UrlAPI + "/product";
-
-
-  getProductById(id) : Observable<any>{
-    let reqHeader = new HttpHeaders({ 
-      'accept': 'application/json',
-      'content-type': 'application/json'
-   });
-   let params = new HttpParams();
-   params = params.append('id', id);
-   return this.http.get<Produit>(this._url + "/", {params : params, headers : reqHeader} ).pipe(catchError( this.handleError));
-  }
-  
-  getAllProductEnRayonByDest(dest) : Observable<any>{
+  getAllDonByIdReceveur(idR : string){
     let reqHeader = new HttpHeaders({ 
       'accept': 'application/json',
       'content-type': 'application/json'
    });
 
    let params = new HttpParams();
-   params = params.append('dest', dest);
+   params = params.append('idR', idR);
 
-    return this.http.get<Produit>(this._url + "/enRayon", {params : params, headers : reqHeader} ).pipe(catchError( this.handleError));
+
+    return this.http.get<any>(this._url , {params : params, headers : reqHeader} ).pipe(catchError( this.handleError));
+    
   }
-
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

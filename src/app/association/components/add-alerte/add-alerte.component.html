@@ -1,0 +1,22 @@
+<div class="container-fluid" style="background:#383838;">
+  <div class="row">
+    <div class="col"></div>
+    <div class="col-6" style="background:white; ">
+
+      <div class="marge"></div>
+      <div class="titre">Saisissez vos mots clés</div>
+      <form #alertForm="ngForm" class="text-left" (ngSubmit)="onSubmit()" novalidate>
+
+        <div class="form-group">
+          <input #libelle="ngModel" [class.is-invalid]="libelle.invalid && libelle.touched" required
+            [(ngModel)]="alerte.libelle" type="text" class="form-control" name="libelle" placeholder="Cerises">
+        </div>
+        <button [disabled]="alertForm.form.invalid" type="submit" class="btn float-right text-white"
+          style="background: #3db4b4;">Valider</button>
+
+        <div class="marge_50"></div>
+      </form>
+    </div>
+    <div class="col"></div>
+  </div>
+</div>

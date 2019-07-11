@@ -24,7 +24,7 @@ export class BoutiqueComponent implements OnInit {
 
   async ngOnInit() {
 
-    this.produits = await this._produitService.getAllProductEnRayon().toPromise();
+    this.produits = await this._produitService.getAllProductEnRayonByDest("3").toPromise();
 
 
 

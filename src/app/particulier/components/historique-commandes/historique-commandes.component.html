@@ -1,0 +1,32 @@
+<div class="container-fluid" style="background:#383838;">
+  <div class="row">
+    <div class="col"></div>
+
+    <div class="col-6">
+      <div class="marge"></div>
+
+
+      <div class="item" *ngFor="let item of commandes;">
+        <div class="third-div">
+          <span class="title">Achat du {{item.date | date}}</span>
+        </div>
+        <div class="third-div">
+          <ul>
+            <li *ngFor="let p of item.produits"> {{p.libelle}} {{p.prix}}€ <b> x {{p.quantite}}</b></li>
+          </ul>
+          
+        </div>
+        <div class="third-div">
+          <div class="floatR">
+
+            <div class="full-div">
+              <p class="prix">Total {{item.total}}€</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="marge"></div>
+    <div class="col"></div>
+  </div>
+</div>

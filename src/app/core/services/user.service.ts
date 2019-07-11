@@ -18,7 +18,6 @@ export class UserService {
 
   addUserCategory(id : string, category : string) : Observable<any>{
 
-    console.log("himm")
     let reqHeader = new HttpHeaders({ 
       'accept': 'application/json',
       'content-type': 'application/json'
@@ -69,6 +68,17 @@ export class UserService {
     let params = new HttpParams();
     params = params.append('type', category);
     return this.http.get<Utilisateur>(this._url + "/allValidByCategory", {params: params, headers : reqHeader} ).pipe(catchError( this.handleError));
+  }
+
+
+
+  updateUser(user : Utilisateur) : Observable<any>{
+    let reqHeader = new HttpHeaders({ 
+      'accept': 'application/json',
+      'content-type': 'application/json'
+    });
+    return this.http.put<any>(this._url , user , { headers : reqHeader} ).pipe(catchError( this.handleError));
+  
   }
 
   private handleError(error: HttpErrorResponse) {

@@ -1,0 +1,23 @@
+<div class="marge"></div>
+<button class="btn add" [routerLink]="['add']">
+  <fa-icon [icon]="faPlus"></fa-icon> Ajouter une alerte
+</button>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Libelle</th>
+      <th scope="col">Date</th>
+      <th scope="col ">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of alerts">
+      <td>{{item.libelle}}</td>
+      <td>{{item.date | date}}</td>
+      <td>
+        <button class="btn" (click)="deleteAlert(item.id)">
+          <fa-icon [icon]="faTimesCircle"></fa-icon>
+        </button></td>
+    </tr>
+  </tbody>
+</table>

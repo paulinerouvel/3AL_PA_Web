@@ -14,7 +14,8 @@ export class Produit {
         public dateMiseEnRayon: string,
         public categorieProduit_id: number,
         public listProduct_id: number,
-        public entrepotwm_id: number
+        public entrepotwm_id: number,
+        public destinataire: number
     ){}
       
 }

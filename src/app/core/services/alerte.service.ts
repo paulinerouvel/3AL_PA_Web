@@ -1,48 +1,59 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../../environments/environment'
-import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { Utilisateur } from '../models/utilisateur';
+import { throwError, Observable } from 'rxjs';
+import { HttpErrorResponse, HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
+import { Alert } from 'selenium-webdriver';
 import { catchError } from 'rxjs/operators';
-import { Produit } from '../models/produit';
-
+import { Alerte } from '../models/alerte';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProduitService {
-
-  
+export class AlerteService {
 
   constructor(private http : HttpClient) { }
 
-
-  
-  private _url: string = environment.UrlAPI + "/product";
+  private _url: string = environment.UrlAPI + "/alert";
 
 
-  getProductById(id) : Observable<any>{
+
+  addAlert(alert : Alerte){
     let reqHeader = new HttpHeaders({ 
       'accept': 'application/json',
       'content-type': 'application/json'
    });
+
+    return this.http.post<Alerte>(this._url , alert, {headers : reqHeader} ).pipe(catchError( this.handleError));
+    
+  }
+
+  getAllAlertByUserId(id : string) : Observable<any>{
+    let reqHeader = new HttpHeaders({ 
+      'accept': 'application/json',
+      'content-type': 'application/json'
+   });
+
    let params = new HttpParams();
    params = params.append('id', id);
-   return this.http.get<Produit>(this._url + "/", {params : params, headers : reqHeader} ).pipe(catchError( this.handleError));
+
+
+    return this.http.get<Alerte[]>(this._url , {params : params, headers : reqHeader} ).pipe(catchError( this.handleError));
   }
-  
-  getAllProductEnRayonByDest(dest) : Observable<any>{
+
+
+  deleteAlertById(id : string){
     let reqHeader = new HttpHeaders({ 
       'accept': 'application/json',
       'content-type': 'application/json'
    });
 
    let params = new HttpParams();
-   params = params.append('dest', dest);
+   params = params.append('id', id);
 
-    return this.http.get<Produit>(this._url + "/enRayon", {params : params, headers : reqHeader} ).pipe(catchError( this.handleError));
+
+    return this.http.delete<Alert[]>(this._url , {params : params, headers : reqHeader} ).pipe(catchError( this.handleError));
+    
   }
-
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
