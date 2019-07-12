@@ -8,11 +8,11 @@
   
         <div class="item" *ngFor="let item of commandes;">
           <div class="third-div">
-            <span class="title">Achat du {{item.date | date}}</span>
+            <span class="title">Commande du {{item.date | date}}</span>
           </div>
           <div class="third-div">
             <ul>
-              <li *ngFor="let p of item.produits"> {{p.libelle}} {{p.prix}}€ <b> x {{p.quantite}}</b></li>
+              <li *ngFor="let p of item.produits"> {{p.libelle}}  <b> x {{p.quantite}}</b></li>
             </ul>
             
           </div>
@@ -20,7 +20,6 @@
             <div class="floatR">
   
               <div class="full-div">
-                <p class="prix">Total {{item.total}}€</p>
               </div>
             </div>
           </div>

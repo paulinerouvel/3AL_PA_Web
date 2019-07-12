@@ -8,7 +8,7 @@ export class Produit {
         public prix: number,
         public prixInitial: number,
         public quantite : number,
-        public DLC: string,
+        public dlc: string,
         public codeBarre: string,
         public enRayon: number,
         public dateMiseEnRayon: string,

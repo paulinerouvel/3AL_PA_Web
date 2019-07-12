@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
-import { throwError } from 'rxjs';
+import { throwError, Observable } from 'rxjs';
 import { Commande } from '../models/commande';
 import { catchError } from 'rxjs/operators';
 
@@ -24,6 +24,20 @@ export class CommandeService {
 
 
     return this.http.post<any>(this._url, commande, { headers: reqHeader }).pipe(catchError(this.handleError));
+
+  }
+
+
+  addProductInCommande(commande_has_produit){
+
+    let reqHeader = new HttpHeaders({
+      'accept': 'application/json',
+      'content-type': 'application/json'
+    });
+
+
+
+    return this.http.post<any>(this._url, commande_has_produit, { headers: reqHeader }).pipe(catchError(this.handleError));
 
   }
 
@@ -53,6 +67,38 @@ export class CommandeService {
 
 
     return this.http.get<any>(this._url + "/products", { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
+
+  }
+
+  getSumOfProductsOrderByUserAndDate(dateDebut, dateFin, idUser) {
+    let reqHeader = new HttpHeaders({
+      'accept': 'application/json',
+      'content-type': 'application/json'
+    });
+
+
+    let params = new HttpParams();
+    params = params.append('dateDebut', dateDebut);
+    params = params.append('dateFin', dateFin);
+    params = params.append('idUser', idUser);
+
+
+    return this.http.get<any>(this._url + "/products", { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
+
+  }
+
+  getLastOrderByIdUser( idUser) {
+    let reqHeader = new HttpHeaders({
+      'accept': 'application/json',
+      'content-type': 'application/json'
+    });
+
+
+    let params = new HttpParams();
+    params = params.append('idUser', idUser);
+
+
+    return this.http.get<any>(this._url + "/last", { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
 
   }
 

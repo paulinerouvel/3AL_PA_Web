@@ -43,6 +43,17 @@ export class ProduitService {
     return this.http.get<Produit>(this._url + "/enRayon", {params : params, headers : reqHeader} ).pipe(catchError( this.handleError));
   }
 
+  updateProduct(produit) :Observable<any>{
+    let reqHeader = new HttpHeaders({ 
+      'accept': 'application/json',
+      'content-type': 'application/json'
+   });
+
+
+    return this.http.put<Produit>(this._url , produit,  { headers : reqHeader} ).pipe(catchError( this.handleError));
+  
+  }
+
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
