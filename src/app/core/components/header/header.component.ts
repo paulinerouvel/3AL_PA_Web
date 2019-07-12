@@ -15,7 +15,8 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  isShown:boolean = false;
+  isShown : boolean = false;
+  isShownBis : boolean = false;
   isConnected = false;
   type;
   curUser : Utilisateur = new Utilisateur(0, "", "", "","", "", "", "", "","", "","", "", 0, 0, "", "", "", 0);

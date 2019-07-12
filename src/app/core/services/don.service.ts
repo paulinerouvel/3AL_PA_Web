@@ -29,6 +29,20 @@ export class DonService {
     
   }
 
+  getAllDonByIdDonneur(idD : string){
+    let reqHeader = new HttpHeaders({ 
+      'accept': 'application/json',
+      'content-type': 'application/json'
+   });
+
+   let params = new HttpParams();
+   params = params.append('idD', idD);
+
+
+    return this.http.get<any>(this._url , {params : params, headers : reqHeader} ).pipe(catchError( this.handleError));
+    
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

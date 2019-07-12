@@ -1,3 +1,30 @@
-<p>
-  historique-dons works!
-</p>
+<div class="container-fluid" style="background:#383838;">
+    <div class="row">
+      <div class="col"></div>
+  
+      <div class="col-6">
+        <div class="marge"></div>
+  
+  
+        <div class="item" *ngFor="let item of dons;">
+          <div class="third-div">
+            //IMG
+          </div>
+          <div class="third-div">
+            <span class="title">A "{{item.receveur}}"</span>
+            <p class="prix">{{item.montant}}€</p>
+          </div>
+          <div class="third-div">
+            <div class="floatR">
+  
+              <div class="full-div">
+                Date du don : {{item.date | date}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="marge"></div>
+      <div class="col"></div>
+    </div>
+  </div>

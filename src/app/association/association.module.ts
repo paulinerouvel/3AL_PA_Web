@@ -9,9 +9,10 @@ import { GestionAlertesComponent } from './components/gestion-alertes/gestion-al
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AddAlerteComponent } from './components/add-alerte/add-alerte.component';
+import { MonPanierAssoComponent } from './components/mon-panier-asso/mon-panier-asso.component';
 
 @NgModule({
-  declarations: [ BoutiqueAssoComponent, ModifProfilComponent, HistoriqueCommandesComponent, HistoriqueDonsComponent, GestionAlertesComponent, AddAlerteComponent],
+  declarations: [ BoutiqueAssoComponent, ModifProfilComponent, HistoriqueCommandesComponent, HistoriqueDonsComponent, GestionAlertesComponent, AddAlerteComponent, MonPanierAssoComponent],
   imports: [
     CommonModule,
     FormsModule,  

@@ -17,7 +17,7 @@ export class AssociationsPartenairesComponent implements OnInit {
 
     this.listeAssos = await this.userService.getValidUsersByCategory("Association").toPromise();
 
-    // this._imageService.getValidUsersByCategory("couou").subscribe(res=>{
+    // this._imageService.getImage.subscribe(res=>{
     //   console.log(res);
     // }, err=>{
     //   console.log(err)

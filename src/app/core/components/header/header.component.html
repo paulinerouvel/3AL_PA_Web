@@ -9,7 +9,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" [ngClass]="{ 'show': isShown }" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav mr-auto bandeau">
         <li><a [routerLink]="['/home']" (click)="isShown = false" style="padding: 0px;"><img id="logo"
               src="..\..\..\assets\images\logo.PNG"></a></li>
         <li><a id="title" (click)="isShown = false" [routerLink]="['/home']">WasteMart</a></li>
@@ -20,22 +20,58 @@
             <div>Entreprises <br />Partenaires</div>
           </a></li>
         <li id="item">
-          
-          <a *ngIf="isConnected == true && type == 1" href="#" [routerLink]="['/boutique-asso']" (click)="isShown = false">
+
+          <a *ngIf="isConnected == true && type == 1" href="#" [routerLink]="['/boutique-asso']"
+            (click)="isShown = false">
             <div>Boutique</div>
           </a>
-          <a *ngIf="isConnected == true && type == 3" href="#" [routerLink]="['/boutique-part']" (click)="isShown = false">
+          <a *ngIf="isConnected == true && type == 3" href="#" [routerLink]="['/boutique-part']"
+            (click)="isShown = false">
             <div>Boutique</div>
           </a>
-          <a *ngIf="(isConnected == false) || (isConnected == false && type != 1 && type != 3)" href="#" [routerLink]="['/boutique']" (click)="isShown = false">
+          <a *ngIf="(isConnected == false) || (isConnected == false && type != 1 && type != 3)" href="#"
+            [routerLink]="['/boutique']" (click)="isShown = false">
             <div>Boutique</div>
           </a>
         </li>
       </ul>
+
       <ul class="nav navbar-nav navbar-right">
-          <li *ngIf="isConnected == true" class="pseudo">{{curUser.pseudo}}</li>
-          <li *ngIf="isConnected == false"><input id="connexion" [routerLink]="['/login']" class="btn" type="button" value="Se connecter"></li>
-          <li *ngIf="isConnected == true"><input id="connexion" (click)="deconnexion()" class="btn" type="button" value="Se déconnecter"></li>
+
+
+
+
+        <div *ngIf="type == 3 && isConnected == true" class="dropdown" >
+          <button class="btn pseudo dropdown-toggle"  (click)="isShownBis = !isShownBis" type="button" data-toggle="dropdown">
+            {{curUser.pseudo}}
+          </button>
+          <div [ngClass]="{ 'show': isShownBis }" class="dropdown-menu">
+            <a class="dropdown-item" [routerLink]="['/panier-part']">Mon panier</a>
+            <a class="dropdown-item" [routerLink]="['/modif-profil-part']">Mon profil</a>
+            <a class="dropdown-item" [routerLink]="['/dons-part']">Historiques de mes dons</a>
+            <a class="dropdown-item" [routerLink]="['/commandes-part']">Historiques de mes commandes</a>
+            <a class="dropdown-item" [routerLink]="['/gestion-alertes-part']">Gérer mes alertes</a>
+          </div>
+        </div>
+
+        <div *ngIf="type == 1 && isConnected == true" class="dropdown" >
+            <button class="btn pseudo dropdown-toggle"  (click)="isShownBis = !isShownBis" type="button" data-toggle="dropdown">
+              {{curUser.pseudo}}
+            </button>
+            <div [ngClass]="{ 'show': isShownBis }" class="dropdown-menu">
+              <a class="dropdown-item" [routerLink]="['/panier-asso']">Mon panier</a>
+              <a class="dropdown-item" [routerLink]="['/modif-profil-asso']">Mon profil</a>
+              <a class="dropdown-item" [routerLink]="['/dons-asso']">Historiques de mes dons reçus</a>
+              <a class="dropdown-item" [routerLink]="['/commandes-asso']">Historiques de mes commandes</a>
+              <a class="dropdown-item" [routerLink]="['/gestion-alertes-asso']">Gérer mes alertes</a>
+            </div>
+          </div>
+
+
+        <li *ngIf="isConnected == false"><input id="connexion" [routerLink]="['/login']" class="btn" type="button"
+            value="Se connecter"></li>
+        <li *ngIf="isConnected == true"><input id="connexion" (click)="deconnexion()" class="btn" type="button"
+            value="Se déconnecter"></li>
       </ul>
 
     </div>

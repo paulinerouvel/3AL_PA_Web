@@ -53,10 +53,7 @@ registerLocaleData(localeFr);
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
-    FontAwesomeModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCugXjPRVP1fJLnIlAo9ZRRiQvvzMVxBE4'
-    })
+    FontAwesomeModule
 
   ],
   providers: [CookieService,

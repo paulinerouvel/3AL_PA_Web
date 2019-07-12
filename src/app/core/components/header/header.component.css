@@ -3,12 +3,12 @@
     border : none;
 }
 
-.collapse a{
+.bandeau a{
     
         color: white;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-.collapse a:hover{
+.bandeau a:hover{
     color:#8cfedc;
     text-decoration: none;
     font-size: 110%;
@@ -19,7 +19,7 @@
 .pseudo{
     color : white;
     padding: 8px;
-    padding-right: 15px; 
+    padding-right: 25px; 
     font-size: 25px;
 }
 
@@ -61,6 +61,6 @@ li{
 
 }
 
-.cliquable{
-    
+.dropdown-item{
+    color:black;
 }

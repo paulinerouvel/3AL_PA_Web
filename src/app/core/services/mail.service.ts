@@ -1,26 +1,27 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../../environments/environment'
-import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { Utilisateur } from '../models/utilisateur';
+import { HttpErrorResponse, HttpHeaders,HttpClient } from '@angular/common/http';
+import { throwError, Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
+import { Mail } from '../models/mail';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ImageService {
+export class MailService {
+  private _url: string = environment.UrlAPI + "/mail";
 
   constructor(private http : HttpClient) { }
 
-  private _url: string = environment.UrlIMG;
-
-  getImage() : Observable<any>{
-    let reqHeader = new HttpHeaders({ 
+  sendMail(mail: Mail) : Observable<any> {
+    let reqHeader = new HttpHeaders({
       'accept': 'application/json',
       'content-type': 'application/json'
-   });
+    });
+  
 
-    return this.http.get<any>(this._url + "/Berlingots.jpg", { headers : reqHeader} ).pipe(catchError( this.handleError));
+    return this.http.post<any>(this._url, mail, { headers: reqHeader }).pipe(catchError(this.handleError));
+
   }
 
   private handleError(error: HttpErrorResponse) {
