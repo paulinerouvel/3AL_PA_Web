@@ -1,0 +1,20 @@
+.marge{
+    height: 100px;;
+}
+
+.add:hover{
+    color : lightgray;
+}
+
+.btn-delete{
+    background: #383838;
+    /* color:#c8295a; */
+    color: white;
+    border: 1px solid black;
+}
+
+.btn-delete:hover{
+    background: #8cfedc;
+    border : 1px solid white;
+    color : white;
+}

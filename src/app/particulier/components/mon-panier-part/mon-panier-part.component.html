@@ -1,3 +1,45 @@
-<p>
-  mon-panier-part works!
-</p>
+<div class="marge"></div>
+<button *ngIf="isEmpty == false" class="btn btn-success" (click)="validatePanier()">
+   Valider mon panier 
+</button>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Produit</th>
+      <th scope="col">Description</th>
+      <th scope="col ">Quantité</th>
+      <th scope="col ">DLC</th>
+      <th scope="col ">Prix</th>
+      <th scope="col ">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of parsedPanier">
+      <td>{{item.libelle}}</td>
+      <td>{{item.desc}}</td>
+      <td>
+        <select selected="item.nb" (change)="updateQuantite(item.id, $event.target.value)">
+          <option *ngFor="let i of counter(item.quantite)" [selected]="i == item.nb" value="{{i}}">{{i}}</option>
+        </select>
+      </td>
+      <td>{{item.dlc | date}}</td>
+      <td>{{item.prix}} €</td>
+      <td>
+        
+        <button class="btn-delete floatR" (click)="deletePanier(item.id)">
+          <fa-icon [icon]="faTimesCircle"></fa-icon>
+        </button>
+
+      </td>
+    </tr>
+    <tr>
+      <td>TOTAL</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>€</td>
+      <td></td>
+
+    </tr>
+  </tbody>
+</table>
