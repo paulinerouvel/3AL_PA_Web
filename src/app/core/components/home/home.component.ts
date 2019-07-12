@@ -18,11 +18,43 @@ export class HomeComponent implements OnInit {
   userModel = new Utilisateur(-1, "", "", "", "", "", "", "", "", "", "", "", "", 0, 0, "", "", "", 0);
 
 
+  //Pour la dropdown
+
+  dropdownList = [];
+  selectedItems = [];
+  dropdownSettings = {};
 
 
   constructor(private authentificationService: AuthentificationService, private router: Router, private _userService : UserService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+
+
+    let categories = await this._userService.getAllCategoryAssociation().toPromise();
+
+    categories.forEach(ca => {
+      this.dropdownList.push({ item_id : ca.id, item_text : ca.libelle})
+    });
+
+    
+   /* this.dropdownList = [
+      { item_id: 1, item_text: 'Mumbai' },
+      { item_id: 2, item_text: 'Bangaluru' },
+      { item_id: 3, item_text: 'Pune' },
+      { item_id: 4, item_text: 'Navsari' },
+      { item_id: 5, item_text: 'New Delhi' }
+    ];*/
+    this.selectedItems = [
+    ];
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'item_id',
+      textField: 'item_text',
+      selectAllText: 'Séléctionner tout',
+      unSelectAllText: 'Déséléctionner tout',
+      itemsShowLimit: 3,
+      allowSearchFilter: true
+    };
   }
 
 
@@ -68,7 +100,16 @@ export class HomeComponent implements OnInit {
 
     if(res == null){
       let userInscrit : Utilisateur= await this._userService.getUserByEmail(this.userModel.mail).toPromise();
-      this._userService.addUserCategory(userInscrit.id.toString(), "1").toPromise();
+      await this._userService.addUserCategory(userInscrit.id.toString(), "1").toPromise();
+
+      for (const item of this.selectedItems) {
+
+        await this._userService.addCategoryAssociation(item.item_id , userInscrit.id).toPromise();
+      }
+
+      
+
+
       this.errorMsg = "";
       this.infoMsg = "Vous êtes désormais inscrit ! Connectez vous !";
       window.scrollTo(0, 0);
@@ -79,6 +120,23 @@ export class HomeComponent implements OnInit {
     }
 
   }
+
+  
+  onItemSelect(elem){
+    console.log(this.selectedItems);
+  }
+
+  onDeSelect(elem){
+    console.log(this.selectedItems);
+  }
+
+  onSelectAll(elem){
+    console.log(this.selectedItems);
+    
+  }
+
+
+
 
 
 

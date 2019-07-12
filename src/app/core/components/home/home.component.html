@@ -115,7 +115,8 @@
             </div>
 
             <div *ngIf="userType == 'association'">
-                <form #inscriptionAsso="ngForm" class="text-left" (ngSubmit)="onSubmitAsso()" novalidate class="text-left">
+                <form #inscriptionAsso="ngForm" class="text-left" (ngSubmit)="onSubmitAsso()" novalidate
+                    class="text-left">
 
                     <div class="form-group">
                         <label for="libelleLabel">Libelle*</label>
@@ -171,28 +172,27 @@
 
                     <div class="form-group">
                         <label for="siretLabel">Siret*</label>
-                        <input #siret="ngModel" [class.is-invalid]="siret.invalid && siret.touched"
-                            required [(ngModel)]="userModel.siret" type="text" class="form-control"
-                            name="siret" placeholder="">
+                        <input #siret="ngModel" [class.is-invalid]="siret.invalid && siret.touched" required
+                            [(ngModel)]="userModel.siret" type="text" class="form-control" name="siret" placeholder="">
                     </div>
                     <div class="form-group">
                         <label for="tailleOrganismeLabel">Taille de l'organisme*</label>
-                        <input #tailleOrganisme="ngModel" [class.is-invalid]="tailleOrganisme.invalid && tailleOrganisme.touched"
-                            required [(ngModel)]="userModel.tailleOrganisme" type="text" class="form-control"
+                        <input #tailleOrganisme="ngModel"
+                            [class.is-invalid]="tailleOrganisme.invalid && tailleOrganisme.touched" required
+                            [(ngModel)]="userModel.tailleOrganisme" type="text" class="form-control"
                             name="tailleOrganisme" placeholder="Nombre d'effectifs">
                     </div>
                     <div class="form-group">
                         <label for="descriptionLabel">Description*</label>
                         <textarea #description="ngModel" [class.is-invalid]="description.invalid && description.touched"
-                            required [(ngModel)]="userModel.description"  class="form-control"
-                            name="description" placeholder="Decrivez-vous..."></textarea>
+                            required [(ngModel)]="userModel.description" class="form-control" name="description"
+                            placeholder="Decrivez-vous..."></textarea>
                     </div>
 
-                    <select class="selectpicker" multiple data-live-search="true">
-                            <option>Mustard</option>
-                            <option>Ketchup</option>
-                            <option>Relish</option>
-                          </select>
+                    <ng-multiselect-dropdown required [placeholder]="'Catégorie association'" [data]="dropdownList"
+                        [(ngModel)]="selectedItems" [settings]="dropdownSettings" [ngModelOptions]="{standalone: true}" (onSelect)="onItemSelect($event)"
+                        (onSelectAll)="onSelectAll($event)" (onDeSelect)="onDeSelect($event)" >
+                    </ng-multiselect-dropdown>
 
 
 
