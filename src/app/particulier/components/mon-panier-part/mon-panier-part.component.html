@@ -2,6 +2,12 @@
 <button *ngIf="isEmpty == false" class="btn btn-success" (click)="validatePanier()">
   Valider mon panier
 </button>
+<button *ngIf="isEmpty == false && reduction == false" class="btn btn-success" (click)="addReduction()">
+  Réduction points sourires 
+</button>
+<button *ngIf="isEmpty == false && reduction == true" class="btn btn-warning" (click)="deleteReduction()">
+  Retirer la réduction
+</button>
 <table class="table">
   <thead>
     <tr>
@@ -31,6 +37,15 @@
         </button>
 
       </td>
+    </tr>
+    <tr *ngIf="reduction == true && isEmpty == false && parsedPanier.length != 0">
+      <td>Reduction Points Sourires</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>-{{ptSourires}}€</td>
+      <td></td>
+
     </tr>
     <tr>
       <td>TOTAL</td>

@@ -23,7 +23,16 @@ export class HeaderComponent implements OnInit {
 
   constructor(private _storageService: StorageService, private _userService: UserService, private _cookieService: CookieService
     , private _router: Router) {
-
+      let token = this._storageService.getItem('token');
+      if (token != undefined) {
+        this.isConnected = true;
+        let token_decoded = jwt_decode(token);
+        this.type = token_decoded['type'];
+        this._userService.getUserById(token_decoded["id"]).subscribe(res=>{
+          this.curUser = res
+        })
+      }
+  
   }
 
   async ngOnInit() {
@@ -48,7 +57,7 @@ export class HeaderComponent implements OnInit {
       }
       else {
         this.isConnected = false;
-        this.curUser = undefined;
+        //this.curUser = undefined;
       }
 
     });
@@ -59,6 +68,8 @@ export class HeaderComponent implements OnInit {
   deconnexion() {
     this._storageService.removeItem("token");
     this._cookieService.delete('produitPanier');
+    this.isConnected = false;
+    this.curUser = undefined;
     this._router.navigateByUrl('/home');
   }
 

@@ -128,6 +128,7 @@ export class BoutiqueAssoComponent implements OnInit {
 
 
   savePanier(produitPanier) {
+    this._cookieService.delete('produitPanier', '/boutique-asso');
     this._cookieService.set('produitPanier', JSON.stringify(produitPanier), 5);//expire dans 5 jours
     this.calculTotalPanier();
   }

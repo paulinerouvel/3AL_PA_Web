@@ -11,6 +11,8 @@ import { Commande } from 'src/app/core/models/commande';
 import { Commande_has_produit } from 'src/app/core/models/commande_has_produit';
 import { Produit } from 'src/app/core/models/produit';
 import { Mail } from 'src/app/core/models/mail';
+import { Router } from '@angular/router';
+import { Utilisateur } from 'src/app/core/models/utilisateur';
 
 @Component({
   selector: 'app-mon-panier-part',
@@ -19,7 +21,7 @@ import { Mail } from 'src/app/core/models/mail';
 })
 export class MonPanierPartComponent implements OnInit {
 
-  constructor(private _cookieService: CookieService, private _produitService: ProduitService, private _userService: UserService, private _mailService: MailService, private _storageService: StorageService, private _commandeService: CommandeService) { }
+  constructor(private _cookieService: CookieService,private _route : Router, private storageService : StorageService, private userService : UserService) { }
 
   parsedPanier = [];
   faShoppingBasket = faShoppingBasket;
@@ -27,16 +29,24 @@ export class MonPanierPartComponent implements OnInit {
   faTimesCircle = faTimesCircle;
   isEmpty = true;
   totalPanier = 0;
+  reduction = false;
+  curUser = new Utilisateur(0,"","","","","","","","","","","","",0,0,"","","",0)
+  ptSourires = 0;
 
 
-  ngOnInit() {
+  async ngOnInit() {
     let cookie = this._cookieService.get("produitPanier");
     if (cookie) {
       this.parsedPanier = JSON.parse(cookie);
       this.isEmpty = false;
 
+
     }
     this.calculTotalPanier();
+
+    let token = this.storageService.getItem('token');
+    let token_decoded = jwt_decode(token);
+    this.curUser = await this.userService.getUserById(token_decoded['id']).toPromise();
   }
 
 
@@ -50,7 +60,8 @@ export class MonPanierPartComponent implements OnInit {
     }
   }
 
-  savePanier(produitPanier) {
+   savePanier(produitPanier) {
+    this._cookieService.delete('produitPanier', '/panier-part');
     this._cookieService.set('produitPanier', JSON.stringify(produitPanier), 5);//expire dans 5 jours
     this.calculTotalPanier();
   }
@@ -86,44 +97,23 @@ export class MonPanierPartComponent implements OnInit {
   }
 
   async validatePanier() {
-    let token = this._storageService.getItem('token');
-    let token_decoded = jwt_decode(token);
-    let now = new Date(Date.now());
-    let c = new Commande(-1, now.toISOString(), token_decoded['id']);
-    let res = await this._commandeService.addCommande(c).toPromise();
-    if (res == null) {
-      let curCommande: Commande = await this._commandeService.getLastOrderByIdUser(token_decoded['id']).toPromise();
+    this._route.navigate(['paiement'], {queryParams : {parsedPanier : this.parsedPanier, ptSourires : this.ptSourires ,total : encodeURIComponent(JSON.stringify({type: 'float', value: this.totalPanier.toString()}))}});
 
+  }
 
-      for (let p of this.parsedPanier) {
-        let commande_has_produit = new Commande_has_produit(p["id"], curCommande[0].id, p["nb"]);
-        await this._commandeService.addProductInCommande(commande_has_produit).toPromise();
+  addReduction(){
+    this.reduction = true;
+    this.ptSourires = this.curUser.nbPointsSourire /10;
+    this.totalPanier = this.totalPanier - this.ptSourires;
 
+    
 
+  }
 
-
-        let upProduit = new Produit(p["id"], p["libelle"], p["desc"], p["photo"], p["prix"], p["prixInitial"], parseInt(p["quantite"]) - parseInt(p['nb']),
-          p["dlc"], p["codeBarre"], p["enRayon"], p["dateMiseEnRayon"], p["categorieProduit_id"], p["listProduct_id"], p["entrepotwm_id"], p["destinataire"]);
-
-        await this._produitService.updateProduct(upProduit).toPromise();
-
-      }
-
-      this._cookieService.delete('produitPanier');
-
-      let curUser = await this._userService.getUserById(token_decoded['id']).toPromise();
-
-      let mail = new Mail("wastemart.company@gmail.com", curUser.mail, "Votre Commande",
-        "Vous avez commandé des produits chez WasteMart ! <br/> Votre commande sera à votre porte d'ici un jour ouvré.<br/>Cordialement,<br/>L'équipe WasteMart");
-
-      await this._mailService.sendMail(mail).toPromise();
-
-    }
-
-    this.isEmpty = true;
-
-    alert("Votre commande à bien été prise en compte, vous allez recevoir un mail de confirmation de votre achat !");
-    location.reload();
+  deleteReduction(){
+    this.reduction = false;
+    this.totalPanier = this.totalPanier + this.ptSourires;
+    this.ptSourires = 0;
   }
 
 }

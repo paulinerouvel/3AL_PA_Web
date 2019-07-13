@@ -6,7 +6,7 @@
       <div class="titre">Modification de mes informations</div>
       <form #modifProfil="ngForm" class="text-left" (ngSubmit)="onSubmit()" novalidate class="text-left">
 
-
+        <p><b>Nombre de points sourires* : {{userModel.nbPointsSourire}}</b></p>
 
 
         <div class="form-group">
@@ -69,6 +69,8 @@
         <button [disabled]="modifProfil.form.invalid" type="submit" class="btn float-right text-white"
           style="background:#3db4b4;">Valider</button>
       </form>
+
+      <p>*100 points sourires = 10 € de réduction</p>
       <div class="marge"></div>
     </div>
     <div class="col"></div>

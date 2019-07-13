@@ -48,6 +48,7 @@ export class MonPanierAssoComponent implements OnInit {
   }
 
   savePanier(produitPanier) {
+    this._cookieService.delete('produitPanier', '/panier-asso');
     this._cookieService.set('produitPanier', JSON.stringify(produitPanier), 5);//expire dans 5 jours
 
   }

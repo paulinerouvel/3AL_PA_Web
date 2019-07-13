@@ -8,6 +8,7 @@ import { AddAlerteComponent } from './components/add-alerte/add-alerte.component
 import { HistoriqueCommandesComponent } from './components/historique-commandes/historique-commandes.component';
 import { HistoriqueDonsComponent } from './components/historique-dons/historique-dons.component';
 import { MonPanierPartComponent } from './components/mon-panier-part/mon-panier-part.component';
+import { PaiementComponent } from './components/paiement/paiement.component';
 
 
 const partRoutes: Routes = [
@@ -17,7 +18,8 @@ const partRoutes: Routes = [
   { path: 'gestion-alertes-part/add',  component: AddAlerteComponent, canActivate : [AuthGuard]},
   { path: 'dons-part',  component: HistoriqueDonsComponent, canActivate : [AuthGuard]},
   { path: 'commandes-part',  component: HistoriqueCommandesComponent, canActivate : [AuthGuard]},
-  { path: 'panier-part',  component: MonPanierPartComponent, canActivate : [AuthGuard]}
+  { path: 'panier-part',  component: MonPanierPartComponent, canActivate : [AuthGuard]},
+  { path: 'paiement',  component: PaiementComponent, canActivate : [AuthGuard]}
 ];
 
 @NgModule({

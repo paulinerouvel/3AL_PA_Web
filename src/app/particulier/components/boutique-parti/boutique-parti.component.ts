@@ -89,6 +89,7 @@ export class BoutiquePartiComponent implements OnInit {
 
 
   savePanier(produitPanier) {
+    this._cookieService.delete('produitPanier', '/boutique-part');
     this._cookieService.set('produitPanier', JSON.stringify(produitPanier), 5);//expire dans 5 jours
     this.calculTotalPanier();
   }

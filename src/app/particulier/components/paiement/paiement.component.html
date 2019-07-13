@@ -1,0 +1,41 @@
+<div class="container-fluid" style="background:#383838;">
+  <div class="row">
+      <div class="col"></div>
+      <div class="col-6" style="background:white; ">
+          <div class="marge"></div>
+
+          <form novalidate>
+
+              <h2 class="text-center">Procéder au payement de ma commande de {{total}}€</h2>
+
+              <div *ngIf="errorConnection" class="alert alert-danger">
+                  {{errorConnection}}
+              </div>
+
+              <div class="form-group">
+                  <label for="emailLabel">Numéro de carte</label>
+                  <input />
+              </div>
+
+              <div class="form-group">
+                  <label for="mdpLabel">Titulaire de la carte</label>
+                  <input />
+              </div>
+
+              <div class="form-group">
+                <label for="mdpLabel">Cryptogramme</label>
+                <input />
+            </div>
+
+
+              <button  type="submit" (click)="validatePanier()" class="btn float-right text-white"
+                  style="background: #3db4b4;">Valider</button>
+
+              <div class="marge_50"></div>
+          </form>
+      </div>
+      <div class="col"></div>
+
+
+  </div>
+</div>
