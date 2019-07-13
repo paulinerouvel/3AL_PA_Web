@@ -8,22 +8,22 @@ import * as jwt_decode from 'jwt-decode';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements  CanActivate{
-  constructor(private _storageService : StorageService, private _router : Router){
+export class AuthGuard implements CanActivate {
+  constructor(private _storageService: StorageService, private _router: Router) {
 
   }
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
     let data = this._storageService.getItem("token");
 
-    if(data != undefined){
+    if (data != undefined) {
       let token_decoded = jwt_decode(data);
-      if(token_decoded["type"] == 3){
+      if (token_decoded["type"] == 3) {
         return true;
       }
     }
-    
+
     this._router.navigateByUrl('/home');
     return false;
-}
+  }
 }

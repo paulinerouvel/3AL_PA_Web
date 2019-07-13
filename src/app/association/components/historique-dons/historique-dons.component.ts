@@ -12,9 +12,9 @@ import { UserService } from 'src/app/core/services/user.service';
 })
 export class HistoriqueDonsComponent implements OnInit {
 
-  dons ;
+  dons;
 
-  constructor(private _donService : DonService, private _storageService : StorageService, private _userService : UserService) { }
+  constructor(private _donService: DonService, private _storageService: StorageService, private _userService: UserService) { }
 
   async ngOnInit() {
 
@@ -26,9 +26,9 @@ export class HistoriqueDonsComponent implements OnInit {
 
     this.dons.forEach(async element => {
       let donneur = await this._userService.getUserById(element.Donneur_id).toPromise();
-      
+
       element.donneur = donneur.nom + " " + donneur.prenom;
-      
+
     });
 
 

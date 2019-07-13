@@ -1,7 +1,3 @@
-<!-- <agm-map [latitude]="lat" [longitude]="lng">
-  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-</agm-map> -->
-
 <div class="container-fluid" style="background:#383838;">
   <div class="row">
 
@@ -20,12 +16,14 @@
 
           </div>
         </div>
-        <div class="full-div">{{curAsso.desc}}</div>
+        <div class="full-div">
+          {{curAsso.desc}}
+          <br /><br /><br />
+          <p> <b>{{curAsso.adresse}} {{curAsso.cp}} {{curAsso.ville}}</b></p>
+        </div>
 
       </div>
       <div class="col-4 floatL">
-        cocou
-
       </div>
 
     </div>

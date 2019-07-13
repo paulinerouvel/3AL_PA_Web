@@ -13,18 +13,18 @@ import { Alerte } from 'src/app/core/models/alerte';
 })
 export class GestionAlertesComponent implements OnInit {
 
-  alerts : Alert[];
+  alerts: Alert[];
   faTimesCircle = faTimesCircle;
 
   faPlus = faPlus;
 
-  constructor(private _alertService : AlerteService, private _storageService : StorageService) { }
+  constructor(private _alertService: AlerteService, private _storageService: StorageService) { }
 
   async ngOnInit() {
 
     let data = this._storageService.getItem('token');
 
-    if(data){
+    if (data) {
       let token_decoded = jwt_decode(data);
 
       this.alerts = await this._alertService.getAllAlertByUserId(token_decoded["id"]).toPromise();
@@ -33,7 +33,7 @@ export class GestionAlertesComponent implements OnInit {
   }
 
 
-  deleteAlert(id){
+  deleteAlert(id) {
     this._alertService.deleteAlertById(id).toPromise();
     location.reload();
   }

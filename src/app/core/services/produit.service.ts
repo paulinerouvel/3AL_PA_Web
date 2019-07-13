@@ -12,46 +12,46 @@ import { Produit } from '../models/produit';
 })
 export class ProduitService {
 
-  
-
-  constructor(private http : HttpClient) { }
 
 
-  
+  constructor(private http: HttpClient) { }
+
+
+
   private _url: string = environment.UrlAPI + "/product";
 
 
-  getProductById(id) : Observable<any>{
-    let reqHeader = new HttpHeaders({ 
+  getProductById(id): Observable<any> {
+    let reqHeader = new HttpHeaders({
       'accept': 'application/json',
       'content-type': 'application/json'
-   });
-   let params = new HttpParams();
-   params = params.append('id', id);
-   return this.http.get<Produit>(this._url + "/", {params : params, headers : reqHeader} ).pipe(catchError( this.handleError));
-  }
-  
-  getAllProductEnRayonByDest(dest) : Observable<any>{
-    let reqHeader = new HttpHeaders({ 
-      'accept': 'application/json',
-      'content-type': 'application/json'
-   });
-
-   let params = new HttpParams();
-   params = params.append('dest', dest);
-
-    return this.http.get<Produit>(this._url + "/enRayon", {params : params, headers : reqHeader} ).pipe(catchError( this.handleError));
+    });
+    let params = new HttpParams();
+    params = params.append('id', id);
+    return this.http.get<Produit>(this._url + "/", { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
   }
 
-  updateProduct(produit) :Observable<any>{
-    let reqHeader = new HttpHeaders({ 
+  getAllProductEnRayonByDest(dest): Observable<any> {
+    let reqHeader = new HttpHeaders({
       'accept': 'application/json',
       'content-type': 'application/json'
-   });
+    });
+
+    let params = new HttpParams();
+    params = params.append('dest', dest);
+
+    return this.http.get<Produit>(this._url + "/enRayon", { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
+  }
+
+  updateProduct(produit): Observable<any> {
+    let reqHeader = new HttpHeaders({
+      'accept': 'application/json',
+      'content-type': 'application/json'
+    });
 
 
-    return this.http.put<Produit>(this._url , produit,  { headers : reqHeader} ).pipe(catchError( this.handleError));
-  
+    return this.http.put<Produit>(this._url, produit, { headers: reqHeader }).pipe(catchError(this.handleError));
+
   }
 
 

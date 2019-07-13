@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from '../../../environments/environment'
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Utilisateur } from '../models/utilisateur';
 
 @Injectable({
@@ -10,29 +10,29 @@ import { Utilisateur } from '../models/utilisateur';
 })
 export class AuthentificationService {
 
-  constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) { }
 
 
   private _url: string = environment.UrlAPI + "/user";
 
 
-  register(utilisateur : Utilisateur) : Observable<any>{
-    
-    let reqHeader = new HttpHeaders({ 
+  register(utilisateur: Utilisateur): Observable<any> {
+
+    let reqHeader = new HttpHeaders({
       'Authorization': 'SECRET',
       'Accept': 'application/json',
       'Content-Type': 'application/json'
 
-   });
-    return this.http.post<Utilisateur>(this._url + "/register", utilisateur, {headers : reqHeader}).pipe(catchError( this.handleError));
+    });
+    return this.http.post<Utilisateur>(this._url + "/register", utilisateur, { headers: reqHeader }).pipe(catchError(this.handleError));
   }
 
-  login(utilisateur : Utilisateur) : Observable<any>{
-    let reqHeader = new HttpHeaders({ 
+  login(utilisateur: Utilisateur): Observable<any> {
+    let reqHeader = new HttpHeaders({
       'accept': 'application/json',
       'content-type': 'application/json'
-   });
-    return this.http.post<Utilisateur>(this._url + "/login", utilisateur, {headers : reqHeader}).pipe(catchError( this.handleError));
+    });
+    return this.http.post<Utilisateur>(this._url + "/login", utilisateur, { headers: reqHeader }).pipe(catchError(this.handleError));
   }
 
 

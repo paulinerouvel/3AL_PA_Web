@@ -12,22 +12,22 @@ import { AlerteService } from 'src/app/core/services/alerte.service';
 })
 export class AddAlerteComponent implements OnInit {
 
-  alerte : Alerte = new Alerte(-1, "", "", 0);
+  alerte: Alerte = new Alerte(-1, "", "", 0);
 
-  constructor(private _alerteService : AlerteService, private _storageService : StorageService, private _router : Router) { }
+  constructor(private _alerteService: AlerteService, private _storageService: StorageService, private _router: Router) { }
 
 
   ngOnInit() {
   }
 
-  onSubmit(){
+  onSubmit() {
     let token = this._storageService.getItem("token");
 
     let token_decoded = jwt_decode(token);
     this.alerte.utilisateur_id = token_decoded['id'];
 
     let d = Date.now();
-    let date : Date = new Date(d);
+    let date: Date = new Date(d);
 
     this.alerte.date = date.toISOString();
 

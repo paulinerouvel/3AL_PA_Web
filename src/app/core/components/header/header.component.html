@@ -41,8 +41,9 @@
 
 
 
-        <div *ngIf="type == 3 && isConnected == true" class="dropdown" >
-          <button class="btn pseudo dropdown-toggle"  (click)="isShownBis = !isShownBis" type="button" data-toggle="dropdown">
+        <div *ngIf="type == 3 && isConnected == true" class="dropdown">
+          <button class="btn pseudo dropdown-toggle" (click)="isShownBis = !isShownBis" type="button"
+            data-toggle="dropdown">
             {{curUser.pseudo}}
           </button>
           <div [ngClass]="{ 'show': isShownBis }" class="dropdown-menu">
@@ -54,18 +55,19 @@
           </div>
         </div>
 
-        <div *ngIf="type == 1 && isConnected == true" class="dropdown" >
-            <button class="btn pseudo dropdown-toggle"  (click)="isShownBis = !isShownBis" type="button" data-toggle="dropdown">
-              {{curUser.pseudo}}
-            </button>
-            <div [ngClass]="{ 'show': isShownBis }" class="dropdown-menu">
-              <a class="dropdown-item" [routerLink]="['/panier-asso']">Mon panier</a>
-              <a class="dropdown-item" [routerLink]="['/modif-profil-asso']">Mon profil</a>
-              <a class="dropdown-item" [routerLink]="['/dons-asso']">Historiques de mes dons reçus</a>
-              <a class="dropdown-item" [routerLink]="['/commandes-asso']">Historiques de mes commandes</a>
-              <a class="dropdown-item" [routerLink]="['/gestion-alertes-asso']">Gérer mes alertes</a>
-            </div>
+        <div *ngIf="type == 1 && isConnected == true" class="dropdown">
+          <button class="btn pseudo dropdown-toggle" (click)="isShownBis = !isShownBis" type="button"
+            data-toggle="dropdown">
+            {{curUser.pseudo}}
+          </button>
+          <div [ngClass]="{ 'show': isShownBis }" class="dropdown-menu">
+            <a class="dropdown-item" [routerLink]="['/panier-asso']">Mon panier</a>
+            <a class="dropdown-item" [routerLink]="['/modif-profil-asso']">Mon profil</a>
+            <a class="dropdown-item" [routerLink]="['/dons-asso']">Historiques de mes dons reçus</a>
+            <a class="dropdown-item" [routerLink]="['/commandes-asso']">Historiques de mes commandes</a>
+            <a class="dropdown-item" [routerLink]="['/gestion-alertes-asso']">Gérer mes alertes</a>
           </div>
+        </div>
 
 
         <li *ngIf="isConnected == false"><input id="connexion" [routerLink]="['/login']" class="btn" type="button"

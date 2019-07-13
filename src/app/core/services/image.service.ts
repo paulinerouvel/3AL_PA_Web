@@ -10,17 +10,21 @@ import { catchError } from 'rxjs/operators';
 })
 export class ImageService {
 
-  constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   private _url: string = environment.UrlIMG;
 
-  getImage() : Observable<any>{
-    let reqHeader = new HttpHeaders({ 
+  getImage(): Observable<Blob> {
+    let reqHeader = new HttpHeaders({
       'accept': 'application/json',
       'content-type': 'application/json'
-   });
+    });
 
-    return this.http.get<any>(this._url + "/Berlingots.jpg", { headers : reqHeader} ).pipe(catchError( this.handleError));
+
+      return this.http.get(this._url + "/Berlingots.jpg", { responseType: 'blob' });
+
+
+    //return this.http.get<any>(this._url + "/Berlingots.jpg", { headers: reqHeader }).pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {

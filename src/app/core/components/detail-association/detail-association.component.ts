@@ -10,13 +10,13 @@ import { Utilisateur } from '../../models/utilisateur';
 })
 export class DetailAssociationComponent implements OnInit {
 
-  curAsso = new Utilisateur(0, "", "", "", "", "", "", "", "", "", "","", "", 0, 0, "", "", "", 0) ;
+  curAsso = new Utilisateur(0, "", "", "", "", "", "", "", "", "", "", "", "", 0, 0, "", "", "", 0);
 
   // title: string = 'My first AGM project';
   // lat: number = 51.678418;
   // lng: number = 7.809007;
 
-  constructor(private _userService : UserService, private route : ActivatedRoute) { }
+  constructor(private _userService: UserService, private route: ActivatedRoute) { }
 
   async ngOnInit() {
     const idAsso = this.route.snapshot.paramMap.get("id");

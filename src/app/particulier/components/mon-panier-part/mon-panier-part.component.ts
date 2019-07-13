@@ -19,7 +19,7 @@ import { Mail } from 'src/app/core/models/mail';
 })
 export class MonPanierPartComponent implements OnInit {
 
-  constructor(private _cookieService: CookieService, private _produitService : ProduitService, private _userService : UserService, private _mailService : MailService, private _storageService: StorageService, private _commandeService: CommandeService){}
+  constructor(private _cookieService: CookieService, private _produitService: ProduitService, private _userService: UserService, private _mailService: MailService, private _storageService: StorageService, private _commandeService: CommandeService) { }
 
   parsedPanier = [];
   faShoppingBasket = faShoppingBasket;
@@ -52,7 +52,7 @@ export class MonPanierPartComponent implements OnInit {
 
   savePanier(produitPanier) {
     this._cookieService.set('produitPanier', JSON.stringify(produitPanier), 5);//expire dans 5 jours
-
+    this.calculTotalPanier();
   }
 
 
@@ -78,9 +78,9 @@ export class MonPanierPartComponent implements OnInit {
     }
   }
 
-  calculTotalPanier(){
+  calculTotalPanier() {
     this.totalPanier = 0;
-    for(let k = 0; k< this.parsedPanier.length; k++){
+    for (let k = 0; k < this.parsedPanier.length; k++) {
       this.totalPanier += this.parsedPanier[k].prix * this.parsedPanier[k].nb;
     }
   }
@@ -92,18 +92,18 @@ export class MonPanierPartComponent implements OnInit {
     let c = new Commande(-1, now.toISOString(), token_decoded['id']);
     let res = await this._commandeService.addCommande(c).toPromise();
     if (res == null) {
-      let curCommande : Commande = await this._commandeService.getLastOrderByIdUser(token_decoded['id']).toPromise();
+      let curCommande: Commande = await this._commandeService.getLastOrderByIdUser(token_decoded['id']).toPromise();
 
-      
+
       for (let p of this.parsedPanier) {
         let commande_has_produit = new Commande_has_produit(p["id"], curCommande[0].id, p["nb"]);
         await this._commandeService.addProductInCommande(commande_has_produit).toPromise();
-        
 
 
 
-        let upProduit = new Produit(p["id"], p["libelle"],p["desc"], p["photo"],p["prix"], p["prixInitial"], parseInt(p["quantite"]) - parseInt(p['nb']) ,
-        p["dlc"],p["codeBarre"],p["enRayon"],p["dateMiseEnRayon"],p["categorieProduit_id"],p["listProduct_id"],p["entrepotwm_id"],p["destinataire"]);
+
+        let upProduit = new Produit(p["id"], p["libelle"], p["desc"], p["photo"], p["prix"], p["prixInitial"], parseInt(p["quantite"]) - parseInt(p['nb']),
+          p["dlc"], p["codeBarre"], p["enRayon"], p["dateMiseEnRayon"], p["categorieProduit_id"], p["listProduct_id"], p["entrepotwm_id"], p["destinataire"]);
 
         await this._produitService.updateProduct(upProduit).toPromise();
 
@@ -114,7 +114,7 @@ export class MonPanierPartComponent implements OnInit {
       let curUser = await this._userService.getUserById(token_decoded['id']).toPromise();
 
       let mail = new Mail("wastemart.company@gmail.com", curUser.mail, "Votre Commande",
-       "Vous avez commandé des produits chez WasteMart ! <br/> Votre commande sera à votre porte d'ici un jour ouvré.<br/>Cordialement,<br/>L'équipe WasteMart");
+        "Vous avez commandé des produits chez WasteMart ! <br/> Votre commande sera à votre porte d'ici un jour ouvré.<br/>Cordialement,<br/>L'équipe WasteMart");
 
       await this._mailService.sendMail(mail).toPromise();
 

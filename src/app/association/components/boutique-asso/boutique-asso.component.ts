@@ -150,7 +150,7 @@ export class BoutiqueAssoComponent implements OnInit {
 
 
       if (this.maxArticle - i <= 0) {
-        alert("Vous ne pouvez pas mettre autant d'article dans votre panier, car vous il vous reste " + this.maxArticle  + " produits cette semaine !");
+        alert("Vous ne pouvez pas mettre autant d'article dans votre panier, car vous il vous reste " + this.maxArticle + " produits cette semaine !");
         location.reload();
       }
       else {

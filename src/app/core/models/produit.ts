@@ -7,7 +7,7 @@ export class Produit {
         public photo: string,
         public prix: number,
         public prixInitial: number,
-        public quantite : number,
+        public quantite: number,
         public dlc: string,
         public codeBarre: string,
         public enRayon: number,
@@ -16,8 +16,8 @@ export class Produit {
         public listProduct_id: number,
         public entrepotwm_id: number,
         public destinataire: number
-    ){}
-      
+    ) { }
+
 }
 
 

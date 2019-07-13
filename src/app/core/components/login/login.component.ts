@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   errorConnection: string = "";
   userModel: Utilisateur = new Utilisateur(-1, "", "", "", "", "", "", "", "", "", "", "", "", 0, 0, "", "", "", 0);
 
-  constructor(private _authService: AuthentificationService, private _storageService : StorageService, private _router : Router) { }
+  constructor(private _authService: AuthentificationService, private _storageService: StorageService, private _router: Router) { }
 
 
 
@@ -27,20 +27,20 @@ export class LoginComponent implements OnInit {
     this._authService.login(this.userModel).subscribe(res => {
       let token_decoded = jwt_decode(res.token);
 
-      if(token_decoded["type"] == 1 || token_decoded["type"] == 3 || token_decoded["type"] == 4 || token_decoded["type"] == 5){
+      if (token_decoded["type"] == 1 || token_decoded["type"] == 3 || token_decoded["type"] == 4 || token_decoded["type"] == 5) {
 
         this._storageService.setItem("token", res.token);
-        if(token_decoded["type"] == 1){
+        if (token_decoded["type"] == 1) {
           this._router.navigateByUrl('/boutique-asso');
         }
-        if(token_decoded["type"] == 3){
+        if (token_decoded["type"] == 3) {
           this._router.navigateByUrl('/boutique-part');
         }
-        else{
+        else {
           this._router.navigateByUrl('/boutique');
         }
       }
-      else{
+      else {
         this.errorConnection = "Vous n'êtes pas autorisé à accéder au site car vous avez un compte professionnel "
       }
 

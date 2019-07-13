@@ -30,13 +30,13 @@ export class BoutiquePartiComponent implements OnInit {
 
     //recupération du contenu du panier
     let cookie = this._cookieService.get("produitPanier");
-    if(cookie){
+    if (cookie) {
       this.parsedPanier = JSON.parse(cookie);
 
-      for(let j = 0; j < this.produits.length; j++){
-        for(let k = 0; k < this.parsedPanier.length; k++){
-          if(this.produits[j].id == this.parsedPanier[k].id){
-            this.parsedPanier[k].quantite = this.produits[j].quantite ;
+      for (let j = 0; j < this.produits.length; j++) {
+        for (let k = 0; k < this.parsedPanier.length; k++) {
+          if (this.produits[j].id == this.parsedPanier[k].id) {
+            this.parsedPanier[k].quantite = this.produits[j].quantite;
           }
         }
       }
@@ -80,9 +80,9 @@ export class BoutiquePartiComponent implements OnInit {
     }
   }
 
-  calculTotalPanier(){
+  calculTotalPanier() {
     this.totalPanier = 0;
-    for(let k = 0; k< this.parsedPanier.length; k++){
+    for (let k = 0; k < this.parsedPanier.length; k++) {
       this.totalPanier += this.parsedPanier[k].prix * this.parsedPanier[k].nb;
     }
   }

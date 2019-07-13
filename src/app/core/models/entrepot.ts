@@ -10,8 +10,8 @@ export class Entrepot {
         public photo: string,
         public placeTotal: number,
         public placeLibre: number
-    ){}
-      
+    ) { }
+
 }
 
 

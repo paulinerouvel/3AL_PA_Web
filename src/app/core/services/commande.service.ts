@@ -28,7 +28,7 @@ export class CommandeService {
   }
 
 
-  addProductInCommande(commande_has_produit){
+  addProductInCommande(commande_has_produit) {
 
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
@@ -55,7 +55,7 @@ export class CommandeService {
     return this.http.get<any>(this._url, { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
   }
 
-  getAllProductByOrder(idOrder){
+  getAllProductByOrder(idOrder) {
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
       'content-type': 'application/json'
@@ -87,7 +87,7 @@ export class CommandeService {
 
   }
 
-  getLastOrderByIdUser( idUser) {
+  getLastOrderByIdUser(idUser) {
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
       'content-type': 'application/json'

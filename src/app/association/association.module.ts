@@ -12,10 +12,10 @@ import { AddAlerteComponent } from './components/add-alerte/add-alerte.component
 import { MonPanierAssoComponent } from './components/mon-panier-asso/mon-panier-asso.component';
 
 @NgModule({
-  declarations: [ BoutiqueAssoComponent, ModifProfilComponent, HistoriqueCommandesComponent, HistoriqueDonsComponent, GestionAlertesComponent, AddAlerteComponent, MonPanierAssoComponent],
+  declarations: [BoutiqueAssoComponent, ModifProfilComponent, HistoriqueCommandesComponent, HistoriqueDonsComponent, GestionAlertesComponent, AddAlerteComponent, MonPanierAssoComponent],
   imports: [
     CommonModule,
-    FormsModule,  
+    FormsModule,
     AssociationRoutingModule,
     FontAwesomeModule
   ]

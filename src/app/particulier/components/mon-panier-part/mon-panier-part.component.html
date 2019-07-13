@@ -1,6 +1,6 @@
 <div class="marge"></div>
 <button *ngIf="isEmpty == false" class="btn btn-success" (click)="validatePanier()">
-   Valider mon panier 
+  Valider mon panier
 </button>
 <table class="table">
   <thead>
@@ -23,9 +23,9 @@
         </select>
       </td>
       <td>{{item.dlc | date}}</td>
-      <td>{{item.prix}} €</td>
+      <td>{{item.prix * item.nb}} €</td>
       <td>
-        
+
         <button class="btn-delete floatR" (click)="deletePanier(item.id)">
           <fa-icon [icon]="faTimesCircle"></fa-icon>
         </button>
@@ -37,7 +37,7 @@
       <td></td>
       <td></td>
       <td></td>
-      <td>€</td>
+      <td>{{totalPanier}}€</td>
       <td></td>
 
     </tr>

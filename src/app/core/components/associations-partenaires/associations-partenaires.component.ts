@@ -10,18 +10,34 @@ import { ImageService } from '../../services/image.service';
 export class AssociationsPartenairesComponent implements OnInit {
 
   listeAssos;
+  isEmpty = false;
+  imageToShow = [];
 
-  constructor(private userService : UserService, private _imageService : ImageService) { }
+  constructor(private userService: UserService, private _imageService: ImageService) { }
+
+  createImageFromBlob(image: Blob) {
+    let reader = new FileReader();
+    reader.addEventListener("load", () => {
+       this.imageToShow.push(reader.result);
+    }, false);
+ 
+    if (image) {
+       reader.readAsDataURL(image);
+    }
+ }
 
   async ngOnInit() {
 
     this.listeAssos = await this.userService.getValidUsersByCategory("Association").toPromise();
+    if (this.listeAssos == []) {
+      this.isEmpty = true;
+    }
 
-    // this._imageService.getImage.subscribe(res=>{
-    //   console.log(res);
-    // }, err=>{
-    //   console.log(err)
-    // });
+    this._imageService.getImage().subscribe(res=>{
+      this.createImageFromBlob(res);
+    }, err=>{
+      console.log(err)
+    });
 
 
   }

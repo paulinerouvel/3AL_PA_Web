@@ -8,24 +8,27 @@
       <div class="titre_page">Contactez-Nous ! </div>
       <div class="item">
 
-          <form #contactForm="ngForm" class="text-left" (ngSubmit)="onSubmit()" novalidate>
+        <form #contactForm="ngForm" class="text-left" (ngSubmit)="onSubmit()" novalidate>
 
 
-              <div class="form-group">
-                  <label for="sujet">Sujet</label>
-                  <input  #sujet="ngModel" [class.is-invalid]="sujet.invalid && sujet.touched" required [(ngModel)]="mail.subject" type="text" class="form-control" name="sujet" placeholder="Question commande">
-              </div>
-  
-              <div class="form-group">
-                  <label for="descLabel">Description</label>
-                  <textarea  #desc="ngModel" [class.is-invalid]="desc.invalid && desc.touched" required [(ngModel)]="mail.message" type="text" class="form-control" name="desc" ></textarea>
-              </div>
-  
-  
-              <button [disabled]="contactForm.form.invalid" type="submit" class="btn float-right text-white" style="background: #3db4b4;" >Valider</button>
+          <div class="form-group">
+            <label for="sujet">Sujet</label>
+            <input #sujet="ngModel" [class.is-invalid]="sujet.invalid && sujet.touched" required
+              [(ngModel)]="mail.subject" type="text" class="form-control" name="sujet" placeholder="Question commande">
+          </div>
 
-              <div class="marge_50"></div>
-          </form>
+          <div class="form-group">
+            <label for="descLabel">Description</label>
+            <textarea #desc="ngModel" [class.is-invalid]="desc.invalid && desc.touched" required
+              [(ngModel)]="mail.message" type="text" class="form-control" name="desc"></textarea>
+          </div>
+
+
+          <button [disabled]="contactForm.form.invalid" type="submit" class="btn float-right text-white"
+            style="background: #3db4b4;">Valider</button>
+
+          <div class="marge_50"></div>
+        </form>
 
 
       </div>

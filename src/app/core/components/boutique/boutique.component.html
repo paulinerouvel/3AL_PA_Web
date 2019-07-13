@@ -5,6 +5,8 @@
     <div class="col-8">
       <div class="marge"></div>
 
+      <div *ngIf="isEmpty == true">Aucun Produit</div>
+
 
       <div class="item" *ngFor="let item of produits;">
         <div class="third-div">
@@ -45,7 +47,7 @@
 
         <div class="item-panier" *ngFor="let p of parsedPanier">
 
-            {{p.libelle}}
+          {{p.libelle}}
 
 
           <select selected="p.nb" (change)="updateQuantite(p.id, $event.target.value)">
@@ -61,8 +63,9 @@
 
         <hr>
         TOTAL : <div class="floatR">{{totalPanier}} €</div>
-        <div class="div-button-panier"><input type="button" [routerLink]="['/login']" class="btn button-panier" value="Valider mon panier"></div>
-        
+        <div class="div-button-panier"><input type="button" [routerLink]="['/login']" class="btn button-panier"
+            value="Valider mon panier"></div>
+
 
       </div>
     </div>

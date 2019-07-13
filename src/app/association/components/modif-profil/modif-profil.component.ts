@@ -11,9 +11,9 @@ import { StorageService } from 'src/app/core/services/storage.service';
 })
 export class ModifProfilComponent implements OnInit {
 
-  userModel : Utilisateur = new Utilisateur(0, "", "","", "", "", "", "", "", "", "", "", "", 0, 0, "", "", "", 0);
+  userModel: Utilisateur = new Utilisateur(0, "", "", "", "", "", "", "", "", "", "", "", "", 0, 0, "", "", "", 0);
 
-  constructor(private _storageService : StorageService, private _userService : UserService) { }
+  constructor(private _storageService: StorageService, private _userService: UserService) { }
 
   async ngOnInit() {
     let data = this._storageService.getItem("token");
@@ -22,7 +22,7 @@ export class ModifProfilComponent implements OnInit {
 
   }
 
-  onSubmit(){
+  onSubmit() {
 
     this._userService.updateUser(this.userModel).toPromise();
     window.location.reload();

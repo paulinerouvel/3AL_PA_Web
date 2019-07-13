@@ -6,25 +6,26 @@
       <div class="marge"></div>
 
       <div class="titre_page">Entreprises Partenaires</div>
-      <div class="item" [routerLink]="['/detailAssociation', item.Utilisateur_id]"  *ngFor="let item of listeEntreprises;">
+      <div class="item" [routerLink]="['/detailAssociation', item.Utilisateur_id]"
+        *ngFor="let item of listeEntreprises;">
 
-            <div class="third-div">
-              //IMG
-            </div>
-            <div class="third-div">
-              <span class="title">{{item.Libelle}}</span>
-              <div class="contact">Contact : <b>{{item.tel}} / {{item.mail}}</b></div>
-            </div>
-            <div class="third-div">
-              <div class="floatR">
+        <div class="third-div">
+          //IMG
+        </div>
+        <div class="third-div">
+          <span class="title">{{item.Libelle}}</span>
+          <div class="contact">Contact : <b>{{item.tel}} / {{item.mail}}</b></div>
+        </div>
+        <div class="third-div">
+          <div class="floatR">
 
 
-              </div>
-            </div>
+          </div>
+        </div>
 
       </div>
 
-      
+
     </div>
     <div class="col"></div>
     <!--

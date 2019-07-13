@@ -9,38 +9,38 @@ import { throwError } from 'rxjs';
 })
 export class DonService {
 
-  
+
   private _url: string = environment.UrlAPI + "/donation";
 
 
-  constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  getAllDonByIdReceveur(idR : string){
-    let reqHeader = new HttpHeaders({ 
+  getAllDonByIdReceveur(idR: string) {
+    let reqHeader = new HttpHeaders({
       'accept': 'application/json',
       'content-type': 'application/json'
-   });
+    });
 
-   let params = new HttpParams();
-   params = params.append('idR', idR);
+    let params = new HttpParams();
+    params = params.append('idR', idR);
 
 
-    return this.http.get<any>(this._url , {params : params, headers : reqHeader} ).pipe(catchError( this.handleError));
-    
+    return this.http.get<any>(this._url, { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
+
   }
 
-  getAllDonByIdDonneur(idD : string){
-    let reqHeader = new HttpHeaders({ 
+  getAllDonByIdDonneur(idD: string) {
+    let reqHeader = new HttpHeaders({
       'accept': 'application/json',
       'content-type': 'application/json'
-   });
+    });
 
-   let params = new HttpParams();
-   params = params.append('idD', idD);
+    let params = new HttpParams();
+    params = params.append('idD', idD);
 
 
-    return this.http.get<any>(this._url , {params : params, headers : reqHeader} ).pipe(catchError( this.handleError));
-    
+    return this.http.get<any>(this._url, { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
+
   }
 
   private handleError(error: HttpErrorResponse) {

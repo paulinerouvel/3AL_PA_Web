@@ -20,7 +20,7 @@ export class Utilisateur {
         public siret: string,
         public dateDeNaissance: string,
         public nbPointsSourire: number
-    ){}
-      
+    ) { }
+
 }
 

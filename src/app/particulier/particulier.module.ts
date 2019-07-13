@@ -16,7 +16,7 @@ import { MonPanierPartComponent } from './components/mon-panier-part/mon-panier-
   imports: [
     CommonModule,
     ParticulierRoutingModule,
-    FormsModule,  
+    FormsModule,
     FontAwesomeModule
   ]
 })

@@ -6,7 +6,7 @@ import { Subject, Observable } from 'rxjs';
 })
 export class StorageService {
 
-  private storageSub= new Subject<any>();
+  private storageSub = new Subject<any>();
 
 
   watchStorage(): Observable<any> {
@@ -25,7 +25,7 @@ export class StorageService {
     this.storageSub.next('remove');
   }
 
-  getItem(key){
+  getItem(key) {
     return localStorage.getItem(key);
   }
 

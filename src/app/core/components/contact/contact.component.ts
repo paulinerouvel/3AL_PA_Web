@@ -14,12 +14,12 @@ import { Router } from '@angular/router';
 export class ContactComponent implements OnInit {
 
   mail = new Mail("", "wastemart.company@gmail.com", "", "");
-  constructor(private _storageService : StorageService, private _userService : UserService, private _mailService : MailService, private router : Router) { }
+  constructor(private _storageService: StorageService, private _userService: UserService, private _mailService: MailService, private router: Router) { }
 
   ngOnInit() {
   }
 
-  async onSubmit(){
+  async onSubmit() {
 
     let token = this._storageService.getItem('token');
     let token_decoded = jwt_decode(token);
@@ -28,14 +28,14 @@ export class ContactComponent implements OnInit {
 
     this.mail.sender = user.mail;
     this.mail.message += "<br/>" + user.mail + " " + user.prenom + " " + user.nom;
-    
+
     await this._mailService.sendMail(this.mail).toPromise();
 
     this.mail.subject += "-COPIE";
     this.mail.destination = user.mail;
     await this._mailService.sendMail(this.mail).toPromise();
 
-    
+
     this.router.navigateByUrl('/home');
   }
 

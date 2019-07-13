@@ -15,21 +15,21 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  isShown : boolean = false;
-  isShownBis : boolean = false;
+  isShown: boolean = false;
+  isShownBis: boolean = false;
   isConnected = false;
   type;
-  curUser : Utilisateur = new Utilisateur(0, "", "", "","", "", "", "", "","", "","", "", 0, 0, "", "", "", 0);
-  
-  constructor(private _storageService : StorageService, private _userService : UserService, private _cookieService: CookieService
-    , private _router : Router) { 
-    
+  curUser: Utilisateur = new Utilisateur(0, "", "", "", "", "", "", "", "", "", "", "", "", 0, 0, "", "", "", 0);
+
+  constructor(private _storageService: StorageService, private _userService: UserService, private _cookieService: CookieService
+    , private _router: Router) {
+
   }
 
   async ngOnInit() {
 
     let token = this._storageService.getItem('token');
-    if(token != undefined){
+    if (token != undefined) {
       this.isConnected = true;
       let token_decoded = jwt_decode(token);
       this.type = token_decoded['type'];
@@ -38,25 +38,25 @@ export class HeaderComponent implements OnInit {
 
 
     //regarde si le localStorage change pour le token 
-    this._storageService.watchStorage().subscribe(async (data:string) => {
+    this._storageService.watchStorage().subscribe(async (data: string) => {
 
-      if(data != "remove"){
+      if (data != "remove") {
         this.isConnected = true;
         let token_decoded = jwt_decode(data);
         this.type = token_decoded['type'];
         this.curUser = await this._userService.getUserById(token_decoded["id"]).toPromise();
       }
-      else{
-        this.isConnected= false;
+      else {
+        this.isConnected = false;
         this.curUser = undefined;
       }
 
     });
 
-  } 
+  }
 
 
-  deconnexion(){
+  deconnexion() {
     this._storageService.removeItem("token");
     this._cookieService.delete('produitPanier');
     this._router.navigateByUrl('/home');

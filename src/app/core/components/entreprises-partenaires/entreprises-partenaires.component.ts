@@ -10,7 +10,7 @@ export class EntreprisesPartenairesComponent implements OnInit {
 
   listeEntreprises;
 
-  constructor(private _userService : UserService) { }
+  constructor(private _userService: UserService) { }
 
   async ngOnInit() {
 

@@ -11,48 +11,48 @@ import { Alerte } from '../models/alerte';
 })
 export class AlerteService {
 
-  constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   private _url: string = environment.UrlAPI + "/alert";
 
 
 
-  addAlert(alert : Alerte){
-    let reqHeader = new HttpHeaders({ 
+  addAlert(alert: Alerte) {
+    let reqHeader = new HttpHeaders({
       'accept': 'application/json',
       'content-type': 'application/json'
-   });
+    });
 
-    return this.http.post<Alerte>(this._url , alert, {headers : reqHeader} ).pipe(catchError( this.handleError));
-    
+    return this.http.post<Alerte>(this._url, alert, { headers: reqHeader }).pipe(catchError(this.handleError));
+
   }
 
-  getAllAlertByUserId(id : string) : Observable<any>{
-    let reqHeader = new HttpHeaders({ 
+  getAllAlertByUserId(id: string): Observable<any> {
+    let reqHeader = new HttpHeaders({
       'accept': 'application/json',
       'content-type': 'application/json'
-   });
+    });
 
-   let params = new HttpParams();
-   params = params.append('id', id);
+    let params = new HttpParams();
+    params = params.append('id', id);
 
 
-    return this.http.get<Alerte[]>(this._url , {params : params, headers : reqHeader} ).pipe(catchError( this.handleError));
+    return this.http.get<Alerte[]>(this._url, { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
   }
 
 
-  deleteAlertById(id : string){
-    let reqHeader = new HttpHeaders({ 
+  deleteAlertById(id: string) {
+    let reqHeader = new HttpHeaders({
       'accept': 'application/json',
       'content-type': 'application/json'
-   });
+    });
 
-   let params = new HttpParams();
-   params = params.append('id', id);
+    let params = new HttpParams();
+    params = params.append('id', id);
 
 
-    return this.http.delete<Alert[]>(this._url , {params : params, headers : reqHeader} ).pipe(catchError( this.handleError));
-    
+    return this.http.delete<Alert[]>(this._url, { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
+
   }
 
   private handleError(error: HttpErrorResponse) {

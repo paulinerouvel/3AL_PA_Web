@@ -12,7 +12,7 @@ export class HistoriqueCommandesComponent implements OnInit {
 
   commandes;
 
-  constructor(private _storageService: StorageService, private _commandeService : CommandeService) { }
+  constructor(private _storageService: StorageService, private _commandeService: CommandeService) { }
 
   async ngOnInit() {
 
@@ -24,7 +24,7 @@ export class HistoriqueCommandesComponent implements OnInit {
     this.commandes.forEach(async element => {
       element.produits = await this._commandeService.getAllProductByOrder(element.id).toPromise();
       let t = 0;
-      for(let p of element.produits){
+      for (let p of element.produits) {
         t += p.prix * p.quantite;
       }
 
@@ -32,7 +32,7 @@ export class HistoriqueCommandesComponent implements OnInit {
 
     });
 
-    
+
   }
 
 }
