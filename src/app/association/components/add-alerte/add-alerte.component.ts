@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Alert } from 'selenium-webdriver';
 import { Alerte } from 'src/app/core/models/alerte';
 import { AlerteService } from 'src/app/core/services/alerte.service';
 import * as jwt_decode from 'jwt-decode';

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { throwError, Observable } from 'rxjs';
 import { HttpErrorResponse, HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { Alert } from 'selenium-webdriver';
 import { catchError } from 'rxjs/operators';
 import { Alerte } from '../models/alerte';
 
