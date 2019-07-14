@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Alert } from 'selenium-webdriver';
 import { AlerteService } from 'src/app/core/services/alerte.service';
 import { StorageService } from 'src/app/core/services/storage.service';
 import * as jwt_decode from 'jwt-decode';
@@ -13,7 +12,7 @@ import { Alerte } from 'src/app/core/models/alerte';
 })
 export class GestionAlertesComponent implements OnInit {
 
-  alerts: Alert[];
+  alerts: Alerte[];
   faTimesCircle = faTimesCircle;
 
   faPlus = faPlus;
