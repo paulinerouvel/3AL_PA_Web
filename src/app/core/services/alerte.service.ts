@@ -50,7 +50,7 @@ export class AlerteService {
     params = params.append('id', id);
 
 
-    return this.http.delete<Alert[]>(this._url, { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
+    return this.http.delete<Alerte[]>(this._url, { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
 
   }
 
