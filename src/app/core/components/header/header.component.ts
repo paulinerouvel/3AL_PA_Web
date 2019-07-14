@@ -7,6 +7,8 @@ import { Utilisateur } from '../../models/utilisateur';
 import { UserService } from '../../services/user.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import { ImageService } from '../../services/image.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-header',
@@ -19,9 +21,22 @@ export class HeaderComponent implements OnInit {
   isShownBis: boolean = false;
   isConnected = false;
   type;
+  imageToShow;
   curUser: Utilisateur = new Utilisateur(0, "", "", "", "", "", "", "", "", "", "", "", "", 0, 0, "", "", "", 0);
 
-  constructor(private _storageService: StorageService, private _userService: UserService, private _cookieService: CookieService
+  createImageFromBlob(image: Blob) {
+    let reader = new FileReader();
+    reader.addEventListener("load", () => {
+      this.imageToShow = reader.result;
+    }, false);
+
+    if (image) {
+      reader.readAsDataURL(image);
+    }
+  }
+
+
+  constructor(private _storageService: StorageService,private _imageService : ImageService, private _userService: UserService, private _cookieService: CookieService
     , private _router: Router) {
       let token = this._storageService.getItem('token');
       if (token != undefined) {
@@ -45,6 +60,16 @@ export class HeaderComponent implements OnInit {
       this.curUser = await this._userService.getUserById(token_decoded["id"]).toPromise();
     }
 
+    this._imageService.getImage(this.curUser.photo).subscribe(res => {
+      this.createImageFromBlob(res);
+    }, err => {
+      //console.log(err)
+    });
+
+
+
+
+    //this._imageService.postImage("couco", "cojj").toPromise();
 
     //regarde si le localStorage change pour le token 
     this._storageService.watchStorage().subscribe(async (data: string) => {

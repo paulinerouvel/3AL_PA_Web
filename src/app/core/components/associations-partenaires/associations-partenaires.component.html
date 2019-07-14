@@ -7,10 +7,10 @@
       <div class="marge"></div>
       <div *ngIf="isEmpty == true" class="titre_page"> Aucune Association</div>
       <div *ngIf="isEmpty == false" class="titre_page">Associations Partenaires</div>
-      <div class="item" [routerLink]="['/detailAssociation', item.Utilisateur_id]" *ngFor="let item of listeAssos; let index = index">
+      <div class="item" [routerLink]="['/detailAssociation', item.Utilisateur_id]" *ngFor="let item of listeAssos">
 
         <div class="third-div">
-          <img [src]="imageToShow[index]"/>
+          <img [src]="imageToShow[item.Utilisateur_id]" width="150px"/>
         </div>
         <div class="third-div">
           <span class="title">{{item.Libelle}}</span>

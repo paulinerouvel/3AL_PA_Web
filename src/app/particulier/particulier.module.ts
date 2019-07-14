@@ -11,14 +11,17 @@ import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MonPanierPartComponent } from './components/mon-panier-part/mon-panier-part.component';
 import { PaiementComponent } from './components/paiement/paiement.component';
+import { Ng5SliderModule } from 'ng5-slider';
+import { DonAssoComponent } from './components/don-asso/don-asso.component';
 
 @NgModule({
-  declarations: [BoutiquePartiComponent, ModifProfilComponent, HistoriqueCommandesComponent, HistoriqueDonsComponent, GestionAlertesComponent, AddAlerteComponent, MonPanierPartComponent, PaiementComponent],
+  declarations: [BoutiquePartiComponent, ModifProfilComponent, HistoriqueCommandesComponent, HistoriqueDonsComponent, GestionAlertesComponent, AddAlerteComponent, MonPanierPartComponent, PaiementComponent, DonAssoComponent],
   imports: [
     CommonModule,
     ParticulierRoutingModule,
     FormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    Ng5SliderModule
   ]
 })
 export class ParticulierModule { }

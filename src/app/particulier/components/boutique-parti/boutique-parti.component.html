@@ -1,14 +1,46 @@
 <div class="container-fluid" style="background:#383838;">
+
+
   <div class="row">
     <!-- <div class="col"></div> -->
+
+
+
+
+
 
     <div class="col-8">
       <div class="marge"></div>
 
+      <div class="full" style="color: white;">
+        <div class="third-div">
+
+          <p>Mot clé </p>
+          <input id="motCle" type="text" value="" (keyup.enter)="motCleChange($event)"
+          (blur)="motCleChange()"/>
+          <button (click)="filtreMotCle()" class="btn btn-primary">Ok</button>
+        </div>
+
+        <div class="third-div">
+          <p>Prix </p>
+          <ng5-slider [(value)]="value" [(highValue)]="highValue" [options]="options" (click)="filtrePrix()"></ng5-slider>
+
+        </div>
+
+        <div class="third-div">
+          <p>Catégorie</p>
+          <Select>
+            <option>coucou</option>
+          </Select>
+          <button class="btn btn-primary">Ok</button>
+        </div>
+
+      </div>
+
 
       <div class="item" *ngFor="let item of produits;">
         <div class="third-div">
-          //IMG
+          <img [src]="imageToShow[item.id]" width="250px"/>
         </div>
         <div class="third-div">
           <span class="title">{{item.libelle}}</span>

@@ -9,6 +9,7 @@ import { HistoriqueCommandesComponent } from './components/historique-commandes/
 import { HistoriqueDonsComponent } from './components/historique-dons/historique-dons.component';
 import { MonPanierPartComponent } from './components/mon-panier-part/mon-panier-part.component';
 import { PaiementComponent } from './components/paiement/paiement.component';
+import { DonAssoComponent } from './components/don-asso/don-asso.component';
 
 
 const partRoutes: Routes = [
@@ -19,7 +20,8 @@ const partRoutes: Routes = [
   { path: 'dons-part',  component: HistoriqueDonsComponent, canActivate : [AuthGuard]},
   { path: 'commandes-part',  component: HistoriqueCommandesComponent, canActivate : [AuthGuard]},
   { path: 'panier-part',  component: MonPanierPartComponent, canActivate : [AuthGuard]},
-  { path: 'paiement',  component: PaiementComponent, canActivate : [AuthGuard]}
+  { path: 'paiement',  component: PaiementComponent, canActivate : [AuthGuard]},
+  { path: 'donAsso',  component: DonAssoComponent, canActivate : [AuthGuard]}
 ];
 
 @NgModule({

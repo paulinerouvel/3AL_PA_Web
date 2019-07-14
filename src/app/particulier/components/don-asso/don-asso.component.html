@@ -1,0 +1,45 @@
+<div class="container-fluid" style="background:#383838;">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-6" style="background:white; ">
+            <div class="marge"></div>
+
+            <form #donForm="ngForm" class="text-left" (ngSubmit)="onSubmit()" novalidate>
+
+                <h2 class="text-center">Faites un don</h2>
+
+                <div *ngIf="errorConnection" class="alert alert-danger">
+                    {{errorConnection}}
+                </div>
+
+                <div class="form-group">
+                    <label for="montantLabel">Montant</label>
+                    <input #montant="ngModel" [class.is-invalid]="montant.invalid && montant.touched" required
+                        [(ngModel)]="don.montant" type="text" class="form-control" name="montant">
+                </div>
+
+                <div class="form-group">
+                    <label for="mdpLabel">Numéro de carte bancaire</label>
+                    <input required type="text" class="form-control" name="mdp">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="mdpLabel">Titulaire</label>
+                    <input required type="text" class="form-control" name="titulaire">
+                </div>
+                <div class="form-group">
+                    <label for="mdpLabel">Cryptogramme</label>
+                    <input required type="text" class="form-control" name="crypto">
+                </div>
+
+
+                <button [disabled]="donForm.form.invalid" type="submit" class="btn float-right text-white"
+                    style="background: #3db4b4;">Valider</button>
+
+                <div class="marge"></div>
+            </form>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>

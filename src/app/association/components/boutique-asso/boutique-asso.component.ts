@@ -6,6 +6,7 @@ import { ProduitService } from 'src/app/core/services/produit.service';
 import { CommandeService } from 'src/app/core/services/commande.service';
 import * as jwt_decode from 'jwt-decode';
 import { StorageService } from 'src/app/core/services/storage.service';
+import { ImageService } from 'src/app/core/services/image.service';
 
 @Component({
   selector: 'app-boutique-asso',
@@ -25,7 +26,21 @@ export class BoutiqueAssoComponent implements OnInit {
   faFileAlt = faFileAlt;
   faTimesCircle = faTimesCircle;
 
-  constructor(private _produitService: ProduitService, private _storageService: StorageService, private _cookieService: CookieService, private _commandeService: CommandeService) { }
+  imageToShow=[];
+
+  constructor(private _produitService: ProduitService, private _imageService : ImageService, private _storageService: StorageService, private _cookieService: CookieService, private _commandeService: CommandeService) { }
+
+
+  createImageFromBlob(image: Blob, id) {
+    let reader = new FileReader();
+    reader.addEventListener("load", () => {
+      this.imageToShow[id] = reader.result;
+    }, false);
+
+    if (image) {
+      reader.readAsDataURL(image);
+    }
+  }
 
   formatDate(date: string): string {
     let dateTab = date.split("T");
@@ -54,6 +69,14 @@ export class BoutiqueAssoComponent implements OnInit {
     }
 
     this.produits = await this._produitService.getAllProductEnRayonByDest("1").toPromise();
+
+    this.produits.forEach(element => {
+      this._imageService.getImage(element.photo).subscribe(res => {
+        this.createImageFromBlob(res, element.id);
+      }, err => {
+        //console.log(err)
+      });
+    });
 
 
 

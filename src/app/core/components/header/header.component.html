@@ -42,6 +42,9 @@
 
 
         <div *ngIf="type == 3 && isConnected == true" class="dropdown">
+
+          <img class="img_profil" [src]="imageToShow" width="50px">
+
           <button class="btn pseudo dropdown-toggle" (click)="isShownBis = !isShownBis" type="button"
             data-toggle="dropdown">
             {{curUser.pseudo}}

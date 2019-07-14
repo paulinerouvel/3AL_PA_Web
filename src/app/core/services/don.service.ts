@@ -15,6 +15,18 @@ export class DonService {
 
   constructor(private http: HttpClient) { }
 
+
+  addDon(don){
+    let reqHeader = new HttpHeaders({
+      'accept': 'application/json',
+      'content-type': 'application/json'
+    });
+
+
+
+    return this.http.post<any>(this._url, don, {  headers: reqHeader }).pipe(catchError(this.handleError));
+  }
+
   getAllDonByIdReceveur(idR: string) {
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',

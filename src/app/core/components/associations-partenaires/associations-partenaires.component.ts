@@ -15,16 +15,16 @@ export class AssociationsPartenairesComponent implements OnInit {
 
   constructor(private userService: UserService, private _imageService: ImageService) { }
 
-  createImageFromBlob(image: Blob) {
+  createImageFromBlob(image: Blob, id ) {
     let reader = new FileReader();
     reader.addEventListener("load", () => {
-       this.imageToShow.push(reader.result);
+      this.imageToShow[id] = reader.result;
     }, false);
- 
+
     if (image) {
-       reader.readAsDataURL(image);
+      reader.readAsDataURL(image);
     }
- }
+  }
 
   async ngOnInit() {
 
@@ -33,10 +33,13 @@ export class AssociationsPartenairesComponent implements OnInit {
       this.isEmpty = true;
     }
 
-    this._imageService.getImage().subscribe(res=>{
-      this.createImageFromBlob(res);
-    }, err=>{
-      console.log(err)
+    this.listeAssos.forEach(element => {
+      this._imageService.getImage(element.photo).subscribe(async res => {
+
+        this.createImageFromBlob(res, element.Utilisateur_id);
+      }, err => {
+        //console.log(err)
+      });
     });
 
 

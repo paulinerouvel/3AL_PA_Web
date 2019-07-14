@@ -14,16 +14,31 @@ export class ImageService {
 
   private _url: string = environment.UrlIMG;
 
-  getImage(): Observable<Blob> {
+  getImage(name): Observable<Blob> {
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
       'content-type': 'application/json'
     });
 
 
-      return this.http.get(this._url + "/Berlingots.jpg", { responseType: 'blob' });
+    return this.http.get(this._url + "/" + name, { responseType: 'blob' });
+    
+    //return this.http.get<any>(this._url + "/Berlingots.jpg", { headers: reqHeader }).pipe(catchError(this.handleError));
+  }
+
+  postImage(name, image): Observable<any> {
+    let reqHeader = new HttpHeaders({
+      'accept': 'application/json',
+      'content-type': 'application/json'
+    });
 
 
+    let formData: FormData = new FormData();
+    formData.append('file', "ldfsf");
+
+
+    return this.http.post(this._url + "/coucou.jpg" , formData);
+    
     //return this.http.get<any>(this._url + "/Berlingots.jpg", { headers: reqHeader }).pipe(catchError(this.handleError));
   }
 

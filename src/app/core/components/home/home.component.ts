@@ -29,6 +29,8 @@ export class HomeComponent implements OnInit {
 
   async ngOnInit() {
 
+    this.userModel.photo = "img_profil.png";
+
 
     let categories = await this._userService.getAllCategoryAssociation().toPromise();
 

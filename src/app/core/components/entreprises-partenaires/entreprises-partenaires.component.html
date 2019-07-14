@@ -7,10 +7,10 @@
 
       <div class="titre_page">Entreprises Partenaires</div>
       <div class="item" [routerLink]="['/detailAssociation', item.Utilisateur_id]"
-        *ngFor="let item of listeEntreprises;">
+        *ngFor="let item of listeEntreprises">
 
         <div class="third-div">
-          //IMG
+          <img [src]="imageToShow[item.Utilisateur_id]" width="150px"/>
         </div>
         <div class="third-div">
           <span class="title">{{item.Libelle}}</span>

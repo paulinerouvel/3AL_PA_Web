@@ -8,7 +8,7 @@
 
       <div class="item" *ngFor="let item of produits;">
         <div class="third-div">
-          //IMG
+          <img [src]="imageToShow[item.id]" width="250px"/>
         </div>
         <div class="third-div">
           <span class="title">{{item.libelle}}</span>

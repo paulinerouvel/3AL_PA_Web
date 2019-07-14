@@ -5,8 +5,8 @@ export class Don {
     public date: string,
     public montant: number,
     public type: string,
-    public Donneur_id: number,
-    public Receveur_id: number
+    public donneur_id: number,
+    public receveur_id: number
 
   ) { }
 

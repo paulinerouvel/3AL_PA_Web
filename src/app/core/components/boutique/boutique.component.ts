@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProduitService } from '../../services/produit.service';
 import { faShoppingBasket, faFileAlt, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { CookieService } from 'ngx-cookie-service';
+import { ImageService } from '../../services/image.service';
 
 @Component({
   selector: 'app-boutique',
@@ -21,7 +22,22 @@ export class BoutiqueComponent implements OnInit {
   faFileAlt = faFileAlt;
   faTimesCircle = faTimesCircle;
 
-  constructor(private _produitService: ProduitService, private _cookieService: CookieService) { }
+  imageToShow=[];
+
+  
+
+  constructor(private _produitService: ProduitService, private _cookieService: CookieService, private _imageService : ImageService) { }
+
+  createImageFromBlob(image: Blob, id) {
+    let reader = new FileReader();
+    reader.addEventListener("load", () => {
+      this.imageToShow[id] = reader.result;
+    }, false);
+
+    if (image) {
+      reader.readAsDataURL(image);
+    }
+  }
 
   async ngOnInit() {
 
@@ -30,6 +46,14 @@ export class BoutiqueComponent implements OnInit {
       this.isEmpty = true;
 
     }
+
+    this.produits.forEach(element => {
+      this._imageService.getImage(element.photo).subscribe(res => {
+        this.createImageFromBlob(res, element.id);
+      }, err => {
+        //console.log(err)
+      });
+    });
 
 
 

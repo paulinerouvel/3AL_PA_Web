@@ -26,12 +26,43 @@ export class MonPanierAssoComponent implements OnInit {
   faTimesCircle = faTimesCircle;
   isEmpty = true;
 
+  maxArticle = 50;
+  maxArticleFixe = 50;
 
-  ngOnInit() {
+  formatDate(date: string): string {
+    let dateTab = date.split("T");
+    return dateTab[0];
+  }
+
+
+  async ngOnInit() {
+
+
+    
+    let sevenDays = 604800000;
+    let now = new Date(Date.now());
+    let oneSemaineLeft = new Date(Date.now() - sevenDays);
+
+
+    let token = this._storageService.getItem('token');
+    let token_decoded = jwt_decode(token);
+
+
+    let maxInit = await this._commandeService.getSumOfProductsOrderByUserAndDate(this.formatDate(oneSemaineLeft.toISOString()),
+      this.formatDate(now.toISOString()), token_decoded['id']).toPromise();
+
+
+    if (maxInit != 0) {
+      if (maxInit[0].total != null) {
+        this.maxArticle -= maxInit[0].total;
+      }
+    }
+
     let cookie = this._cookieService.get("produitPanier");
     if (cookie) {
       this.parsedPanier = JSON.parse(cookie);
       this.isEmpty = false;
+      this.savePanier(this.parsedPanier);
 
     }
   }
@@ -67,12 +98,27 @@ export class MonPanierAssoComponent implements OnInit {
 
   updateQuantite(id, i) {
     i = parseInt(i)
-    for (let o = 0; o < this.parsedPanier.length; o++) {
-      if (this.parsedPanier[o].id == id) {
+    if (this.maxArticle != 0) {
 
-        this.parsedPanier[o].nb = i;
-        this.savePanier(this.parsedPanier);
+
+      if (this.maxArticle - i <= 0) {
+        alert("Vous ne pouvez pas mettre autant d'article dans votre panier, car vous il vous reste " + this.maxArticle + " produits cette semaine !");
+        location.reload();
       }
+      else {
+        for (let o = 0; o < this.parsedPanier.length; o++) {
+          if (this.parsedPanier[o].id == id) {
+
+            this.parsedPanier[o].nb = i;
+            this.savePanier(this.parsedPanier);
+          }
+        }
+      }
+    }
+    else {
+
+      alert("Vous ne pouvez plus mettre d'article dans votre panier, car vous avez atteind la limite de " + this.maxArticleFixe + " produits par semaine !");
+      location.reload();
     }
   }
 

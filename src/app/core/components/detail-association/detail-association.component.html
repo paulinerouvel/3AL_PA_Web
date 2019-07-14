@@ -11,7 +11,7 @@
         </div>
         <div class="half-div">
           <div class="floatR">
-            //IMG
+            <img [src]="imageToShow" width="200px"/>
 
 
           </div>
@@ -22,8 +22,12 @@
           <p> <b>{{curAsso.adresse}} {{curAsso.cp}} {{curAsso.ville}}</b></p>
         </div>
 
+        <div *ngIf="don == true ">
+            <button class="btn btn-primary" style="margin: 10px;" (click)="donAsso()">Faire un Don</button>
+          </div>
       </div>
       <div class="col-4 floatL">
+        
       </div>
 
     </div>

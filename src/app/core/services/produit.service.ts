@@ -43,6 +43,55 @@ export class ProduitService {
     return this.http.get<Produit>(this._url + "/enRayon", { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
   }
 
+
+
+  getProductByCategorieAndDest(idCategorie, dest): Observable<any> {
+    let reqHeader = new HttpHeaders({
+      'accept': 'application/json',
+      'content-type': 'application/json'
+    });
+
+    let params = new HttpParams();
+    params = params.append('dest', dest);
+    params = params.append('idCategorie', idCategorie);
+
+    return this.http.get<Produit>(this._url + "/enRayon", { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
+  }
+
+    
+
+  getProductByNameAndDest(name, dest): Observable<any> {
+    let reqHeader = new HttpHeaders({
+      'accept': 'application/json',
+      'content-type': 'application/json'
+    });
+
+    let params = new HttpParams();
+    params = params.append('dest', dest);
+    params = params.append('name', name);
+
+    return this.http.get<Produit>(this._url + "/enRayon", { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
+  }
+
+
+     
+    getProductByPrixAndDest(prixMin, prixMax, dest): Observable<any> {
+    let reqHeader = new HttpHeaders({
+      'accept': 'application/json',
+      'content-type': 'application/json'
+    });
+
+    let params = new HttpParams();
+    params = params.append('dest', dest);
+    params = params.append('prixMin', prixMin);
+    params = params.append('prixMax', prixMax);
+
+    return this.http.get<Produit>(this._url + "/enRayon", { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
+  }
+
+
+
+
   updateProduct(produit): Observable<any> {
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',

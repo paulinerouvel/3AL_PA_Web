@@ -1,8 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Options } from 'ng5-slider';
+
+import { Inject }  from '@angular/core';
+import { DOCUMENT } from '@angular/common'; 
 
 import { faShoppingBasket, faFileAlt, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { CookieService } from 'ngx-cookie-service';
 import { ProduitService } from 'src/app/core/services/produit.service';
+import { ImageService } from 'src/app/core/services/image.service';
 
 @Component({
   selector: 'app-boutique-parti',
@@ -11,20 +16,53 @@ import { ProduitService } from 'src/app/core/services/produit.service';
 })
 export class BoutiquePartiComponent implements OnInit {
 
+  value: number = 0;
+  highValue: number = 100;
+  options: Options = {
+    floor: 0,
+    ceil: 100
+  };
+
   produits;
   parsedPanier = [];
   totalPanier = 0;
+  motCle = "";
+
 
 
   faShoppingBasket = faShoppingBasket;
   faFileAlt = faFileAlt;
   faTimesCircle = faTimesCircle;
 
-  constructor(private _produitService: ProduitService, private _cookieService: CookieService) { }
+  imageToShow=[];
+
+  constructor(  private _produitService: ProduitService, private _cookieService: CookieService, private _imageService : ImageService) {
+    
+
+  }
+
+  createImageFromBlob(image: Blob, id) {
+    let reader = new FileReader();
+    reader.addEventListener("load", () => {
+      this.imageToShow[id] = reader.result;
+    }, false);
+
+    if (image) {
+      reader.readAsDataURL(image);
+    }
+  }
 
   async ngOnInit() {
 
     this.produits = await this._produitService.getAllProductEnRayonByDest("3").toPromise();
+
+    this.produits.forEach(element => {
+      this._imageService.getImage(element.photo).subscribe(res => {
+        this.createImageFromBlob(res, element.id);
+      }, err => {
+        //console.log(err)
+      });
+    });
 
 
 
@@ -117,4 +155,23 @@ export class BoutiquePartiComponent implements OnInit {
     }
   }
 
+
+  async filtrePrix(){
+    this.produits = await this._produitService.getProductByPrixAndDest(this.value, this.highValue, "3").toPromise();
+  }
+
+  async filtreMotCle(){
+
+    console.log(this.motCle)
+    //this.produits = await this._produitService.getProductByNameAndDest(event, "3");
+
+  }
+
+  motCleChange(e)
+  {
+
+    document.getElementById('motCle').innerText = "ouou";
+    console.log(document.getElementById('motCle'));
+
+  }
 }
