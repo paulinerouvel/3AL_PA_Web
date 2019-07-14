@@ -91,6 +91,17 @@ export class ProduitService {
 
 
 
+  getAllProductsCategorie(){
+    let reqHeader = new HttpHeaders({
+      'accept': 'application/json',
+      'content-type': 'application/json'
+    });
+
+
+    return this.http.get<any>(this._url + "/category", {  headers: reqHeader }).pipe(catchError(this.handleError));
+  
+  }
+
 
   updateProduct(produit): Observable<any> {
     let reqHeader = new HttpHeaders({

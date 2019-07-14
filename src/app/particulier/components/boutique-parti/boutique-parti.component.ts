@@ -36,6 +36,9 @@ export class BoutiquePartiComponent implements OnInit {
 
   imageToShow=[];
 
+
+  optionSelect = []
+
   constructor(  private _produitService: ProduitService, private _cookieService: CookieService, private _imageService : ImageService) {
     
 
@@ -62,6 +65,13 @@ export class BoutiquePartiComponent implements OnInit {
       }, err => {
         //console.log(err)
       });
+    });
+
+
+
+    let categoriesProduit = await this._produitService.getAllProductsCategorie().toPromise();
+    categoriesProduit.forEach(element => {
+      this.optionSelect.push(element)
     });
 
 
@@ -156,22 +166,23 @@ export class BoutiquePartiComponent implements OnInit {
   }
 
 
+  async filtreCategorie(id){
+    this.produits = await this._produitService.getProductByCategorieAndDest(id, "3").toPromise();
+  }
+
   async filtrePrix(){
     this.produits = await this._produitService.getProductByPrixAndDest(this.value, this.highValue, "3").toPromise();
   }
 
   async filtreMotCle(){
 
-    console.log(this.motCle)
-    //this.produits = await this._produitService.getProductByNameAndDest(event, "3");
+    this.produits = await this._produitService.getProductByNameAndDest(this.motCle, "3").toPromise();
 
   }
 
   motCleChange(e)
   {
-
-    document.getElementById('motCle').innerText = "ouou";
-    console.log(document.getElementById('motCle'));
+    this.motCle = e.target.value;
 
   }
 }

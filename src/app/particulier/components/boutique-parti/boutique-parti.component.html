@@ -16,8 +16,7 @@
         <div class="third-div">
 
           <p>Mot clé </p>
-          <input id="motCle" type="text" value="" (keyup.enter)="motCleChange($event)"
-          (blur)="motCleChange()"/>
+          <input class="btn" id="motCle" type="text" value="" (keyup)="motCleChange($event)"/>
           <button (click)="filtreMotCle()" class="btn btn-primary">Ok</button>
         </div>
 
@@ -29,10 +28,9 @@
 
         <div class="third-div">
           <p>Catégorie</p>
-          <Select>
-            <option>coucou</option>
+          <Select class="btn" (change)="filtreCategorie($event.target.value)">
+            <option *ngFor="let o of optionSelect" value="{{o.id}}" id="{{o.id}}">{{o.libelle}}</option>
           </Select>
-          <button class="btn btn-primary">Ok</button>
         </div>
 
       </div>

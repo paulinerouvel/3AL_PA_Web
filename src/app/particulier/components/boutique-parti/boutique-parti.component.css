@@ -134,3 +134,7 @@ hr{
 .button-panier:hover{
     background: #A71F49;
 }
+
+.input{
+    height: 35px;
+}
