@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
         if (token_decoded["type"] == 1) {
           this._router.navigateByUrl('/boutique-asso');
         }
-        if (token_decoded["type"] == 3) {
+        else if (token_decoded["type"] == 3) {
           this._router.navigateByUrl('/boutique-part');
         }
         else {
