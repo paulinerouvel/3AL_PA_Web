@@ -22,17 +22,13 @@
           <div class="floatR">
 
             <button class="btn" (click)="addPanier(item)">
-              <fa-icon [icon]="faShoppingBasket"></fa-icon>
+              <!--icon basket-->
             </button>
             <div class="full-div">
               DLC : {{item.dlc | date}}
             </div>
           </div>
         </div>
-
-
-
-
       </div>
 
 
@@ -54,7 +50,7 @@
             <option *ngFor="let i of counter(p.quantite)" [selected]="i == p.nb" value="{{i}}">{{i}}</option>
           </select>
           <button class="btn-delete floatR" (click)="deletePanier(p.id)">
-            <fa-icon [icon]="faTimesCircle"></fa-icon>
+            <!--icon times circle-->
           </button>
           <div class="floatR prix-panier">
             {{p.prix * p.nb}}€

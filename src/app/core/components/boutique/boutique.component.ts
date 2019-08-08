@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ProduitService } from '../../services/produit.service';
-import { faShoppingBasket, faFileAlt, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { CookieService } from 'ngx-cookie-service';
 import { ImageService } from '../../services/image.service';
 
@@ -18,9 +17,6 @@ export class BoutiqueComponent implements OnInit {
   isEmpty = false;
 
 
-  faShoppingBasket = faShoppingBasket;
-  faFileAlt = faFileAlt;
-  faTimesCircle = faTimesCircle;
 
   imageToShow=[];
 

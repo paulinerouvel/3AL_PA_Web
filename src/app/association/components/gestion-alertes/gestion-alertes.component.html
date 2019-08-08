@@ -1,6 +1,7 @@
 <div class="marge"></div>
 <button class="btn add" [routerLink]="['add']">
-  <fa-icon [icon]="faPlus"></fa-icon> Ajouter une alerte
+  <!--icon plus-->
+  Ajouter une alerte
 </button>
 <table class="table">
   <thead>
@@ -16,7 +17,7 @@
       <td>{{item.date | date}}</td>
       <td>
         <button class="btn" (click)="deleteAlert(item.id)">
-          <fa-icon [icon]="faTimesCircle"></fa-icon>
+          <!--times cirle-->
         </button></td>
     </tr>
   </tbody>

@@ -4,7 +4,7 @@ import { Options } from 'ng5-slider';
 import { Inject }  from '@angular/core';
 import { DOCUMENT } from '@angular/common'; 
 
-import { faShoppingBasket, faFileAlt, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+
 import { CookieService } from 'ngx-cookie-service';
 import { ProduitService } from 'src/app/core/services/produit.service';
 import { ImageService } from 'src/app/core/services/image.service';
@@ -28,11 +28,6 @@ export class BoutiquePartiComponent implements OnInit {
   totalPanier = 0;
   motCle = "";
 
-
-
-  faShoppingBasket = faShoppingBasket;
-  faFileAlt = faFileAlt;
-  faTimesCircle = faTimesCircle;
 
   imageToShow=[];
 

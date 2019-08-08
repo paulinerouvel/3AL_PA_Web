@@ -8,7 +8,6 @@ import { HistoriqueDonsComponent } from './components/historique-dons/historique
 import { GestionAlertesComponent } from './components/gestion-alertes/gestion-alertes.component';
 import { AddAlerteComponent } from './components/add-alerte/add-alerte.component';
 import { FormsModule } from '@angular/forms';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MonPanierPartComponent } from './components/mon-panier-part/mon-panier-part.component';
 import { PaiementComponent } from './components/paiement/paiement.component';
 import { Ng5SliderModule } from 'ng5-slider';
@@ -20,7 +19,6 @@ import { DonAssoComponent } from './components/don-asso/don-asso.component';
     CommonModule,
     ParticulierRoutingModule,
     FormsModule,
-    FontAwesomeModule,
     Ng5SliderModule
   ]
 })

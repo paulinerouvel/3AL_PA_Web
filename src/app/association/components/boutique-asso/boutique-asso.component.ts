@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { faShoppingBasket, faFileAlt, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { CookieService } from 'ngx-cookie-service';
 import { ProduitService } from 'src/app/core/services/produit.service';
 import { CommandeService } from 'src/app/core/services/commande.service';
@@ -21,10 +20,6 @@ export class BoutiqueAssoComponent implements OnInit {
   maxArticle = 50;
   maxArticleFixe = 50;
 
-
-  faShoppingBasket = faShoppingBasket;
-  faFileAlt = faFileAlt;
-  faTimesCircle = faTimesCircle;
 
   imageToShow=[];
 

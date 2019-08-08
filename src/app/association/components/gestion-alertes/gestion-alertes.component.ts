@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AlerteService } from 'src/app/core/services/alerte.service';
 import { StorageService } from 'src/app/core/services/storage.service';
 import * as jwt_decode from 'jwt-decode';
-import { faTimesCircle, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Alerte } from 'src/app/core/models/alerte';
 
 @Component({
@@ -13,9 +12,6 @@ import { Alerte } from 'src/app/core/models/alerte';
 export class GestionAlertesComponent implements OnInit {
 
   alerts: Alerte[];
-  faTimesCircle = faTimesCircle;
-
-  faPlus = faPlus;
 
   constructor(private _alertService: AlerteService, private _storageService: StorageService) { }
 

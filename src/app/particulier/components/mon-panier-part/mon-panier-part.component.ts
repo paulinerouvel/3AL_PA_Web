@@ -5,7 +5,6 @@ import { MailService } from 'src/app/core/services/mail.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { ProduitService } from 'src/app/core/services/produit.service';
 import { CookieService } from 'ngx-cookie-service';
-import { faShoppingBasket, faFileAlt, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import * as jwt_decode from 'jwt-decode';
 import { Commande } from 'src/app/core/models/commande';
 import { Commande_has_produit } from 'src/app/core/models/commande_has_produit';
@@ -24,9 +23,6 @@ export class MonPanierPartComponent implements OnInit {
   constructor(private _cookieService: CookieService,private _route : Router, private storageService : StorageService, private userService : UserService) { }
 
   parsedPanier = [];
-  faShoppingBasket = faShoppingBasket;
-  faFileAlt = faFileAlt;
-  faTimesCircle = faTimesCircle;
   isEmpty = true;
   totalPanier = 0;
   reduction = false;

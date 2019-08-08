@@ -14,7 +14,6 @@ import { LoginComponent } from './core/components/login/login.component';
 import { AssociationsPartenairesComponent } from './core/components/associations-partenaires/associations-partenaires.component';
 import { EntreprisesPartenairesComponent } from './core/components/entreprises-partenaires/entreprises-partenaires.component';
 import { BoutiqueComponent } from './core/components/boutique/boutique.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CookieService } from 'ngx-cookie-service';
 import { DetailAssociationComponent } from './core/components/detail-association/detail-association.component';
 
@@ -51,8 +50,7 @@ registerLocaleData(localeFr);
     FormsModule,                               
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule,
-    FontAwesomeModule
+    RouterModule
 
   ],
   providers: [CookieService,

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import * as jwt_decode from 'jwt-decode';
-import { faShoppingBasket, faFileAlt, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { Commande } from 'src/app/core/models/commande';
 import { StorageService } from 'src/app/core/services/storage.service';
 import { CommandeService } from 'src/app/core/services/commande.service';
@@ -21,9 +20,6 @@ export class MonPanierAssoComponent implements OnInit {
 
   constructor(private _cookieService: CookieService, private _produitService: ProduitService, private _userService: UserService, private _mailService: MailService, private _storageService: StorageService, private _commandeService: CommandeService) { }
   parsedPanier = [];
-  faShoppingBasket = faShoppingBasket;
-  faFileAlt = faFileAlt;
-  faTimesCircle = faTimesCircle;
   isEmpty = true;
 
   maxArticle = 50;
