@@ -26,18 +26,6 @@ export class UserService {
   }
 
 
-  addCategoryAssociation(CategorieAssociation_id, Utilisateur_id): Observable<any> {
-
-    let reqHeader = new HttpHeaders({
-      'accept': 'application/json',
-      'content-type': 'application/json'
-    });
-
-
-
-    return this.http.post<any>(this._url + '/categorieAssociation', { "CategorieAssociation_id": CategorieAssociation_id, "Utilisateur_id": Utilisateur_id }, { headers: reqHeader }).pipe(catchError(this.handleError));
-
-  }
 
 
 
@@ -87,14 +75,6 @@ export class UserService {
   }
 
 
-  getAllCategoryAssociation(): Observable<any> {
-    let reqHeader = new HttpHeaders({
-      'accept': 'application/json',
-      'content-type': 'application/json'
-    });
-
-    return this.http.get<Utilisateur>(this._url + "/categorieAssociation", { headers: reqHeader }).pipe(catchError(this.handleError));
-  }
 
   updateUser(user: Utilisateur): Observable<any> {
     let reqHeader = new HttpHeaders({

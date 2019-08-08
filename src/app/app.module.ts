@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AgmCoreModule } from '@agm/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,7 +21,6 @@ import { DetailAssociationComponent } from './core/components/detail-association
 import { LOCALE_ID } from '@angular/core';
 
 import { registerLocaleData } from '@angular/common';
-import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 import localeFr from '@angular/common/locales/fr';
 import { ContactComponent } from './core/components/contact/contact.component';
@@ -54,8 +52,7 @@ registerLocaleData(localeFr);
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
-    FontAwesomeModule,
-    NgMultiSelectDropDownModule.forRoot()
+    FontAwesomeModule
 
   ],
   providers: [CookieService,

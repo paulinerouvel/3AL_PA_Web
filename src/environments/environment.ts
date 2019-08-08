@@ -4,7 +4,7 @@
 
 export const environment = {
   UrlAPI: 'https://wastemart-api.herokuapp.com',
-  UrlIMG: 'http://51.75.143.205:9876',
+  UrlIMG: 'http://51.75.143.205:8080/images',
   //UrlAPI: 'http://localhost:5000',
   production: false
 };

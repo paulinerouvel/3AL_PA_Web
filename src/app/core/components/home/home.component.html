@@ -189,14 +189,6 @@
                             placeholder="Decrivez-vous..."></textarea>
                     </div>
 
-                    <ng-multiselect-dropdown required [placeholder]="'Catégorie association'" [data]="dropdownList"
-                        [(ngModel)]="selectedItems" [settings]="dropdownSettings" [ngModelOptions]="{standalone: true}"
-                        (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)"
-                        (onDeSelect)="onDeSelect($event)">
-                    </ng-multiselect-dropdown>
-
-
-
                     <button [disabled]="inscriptionAsso.form.invalid" type="submit" class="btn float-right text-white"
                         style="background:#3db4b4;">Valider</button>
 

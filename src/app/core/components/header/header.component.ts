@@ -8,7 +8,6 @@ import { UserService } from '../../services/user.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { ImageService } from '../../services/image.service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-header',
@@ -52,7 +51,7 @@ export class HeaderComponent implements OnInit {
 
   async ngOnInit() {
 
-    let token = this._storageService.getItem('token');
+    let token = undefined;//this._storageService.getItem('token');
     if (token != undefined) {
       this.isConnected = true;
       let token_decoded = jwt_decode(token);
