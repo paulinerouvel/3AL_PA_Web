@@ -5,13 +5,14 @@ import { Observable, throwError } from 'rxjs';
 import { Utilisateur } from '../models/utilisateur';
 import { catchError } from 'rxjs/operators';
 import * as jwt_decode from 'jwt-decode';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private http: HttpClient/*, private storageService :StorageService*/) { }
+  constructor(private http: HttpClient, private storageService :StorageService) { }
 
 
   private _url: string = environment.UrlAPI + "/user";
@@ -77,10 +78,11 @@ export class UserService {
 
 
 
-  updateUser(user: Utilisateur): Observable<any> {
+  updateUser(user: Utilisateur, token): Observable<any> {
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
-      'content-type': 'application/json'
+      'content-type': 'application/json',
+      'Authorization': 'Bearer ' + token
     });
     return this.http.put<any>(this._url, user, { headers: reqHeader }).pipe(catchError(this.handleError));
 
@@ -94,11 +96,11 @@ export class UserService {
     let iat = token_decoded['iat'];
 
 
-    // if(exp - iat >= 0){
-    //   //le token a expiré => deconnextion + redirection vers la page d'accueil
-    //   this.storageService.removeItem('token');
-    //   location.replace('/');
-    // }
+    if(exp - iat >= 0){
+      //le token a expiré => deconnextion + redirection vers la page d'accueil
+      this.storageService.removeItem('token');
+      location.replace('/');
+    }
 
   }
 

@@ -11,11 +11,7 @@ import { Produit } from '../models/produit';
 })
 export class ProduitService {
 
-
-
   constructor(private http: HttpClient) { }
-
-
 
   private _url: string = environment.UrlAPI + "/product";
 
@@ -74,7 +70,7 @@ export class ProduitService {
 
 
      
-    getProductByPrixAndDest(prixMin, prixMax, dest): Observable<any> {
+  getProductByPrixAndDest(prixMin, prixMax, dest): Observable<any> {
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
       'content-type': 'application/json'
@@ -102,10 +98,11 @@ export class ProduitService {
   }
 
 
-  updateProduct(produit): Observable<any> {
+  updateProduct(produit, token): Observable<any> {
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
-      'content-type': 'application/json'
+      'content-type': 'application/json',
+      'Authorization': 'Bearer ' + token
     });
 
 

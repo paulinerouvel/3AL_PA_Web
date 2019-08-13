@@ -43,7 +43,7 @@ export class MonPanierAssoComponent implements OnInit {
 
 
     let maxInit = await this._commandeService.getSumOfProductsOrderByUserAndDate(this.formatDate(oneSemaineLeft.toISOString()),
-      this.formatDate(now.toISOString()), this._userService.decodeTokenId(token)).toPromise();
+      this.formatDate(now.toISOString()), this._userService.decodeTokenId(token), token).toPromise();
 
 
     if (maxInit != 0) {
@@ -121,14 +121,14 @@ export class MonPanierAssoComponent implements OnInit {
     let idUser = this._userService.decodeTokenId(token);
     let now = new Date(Date.now());
     let c = new Commande(-1, now.toISOString(), idUser);
-    let res = await this._commandeService.addCommande(c).toPromise();
+    let res = await this._commandeService.addCommande(c, token).toPromise();
     if (res == null) {
-      let curCommande: Commande = await this._commandeService.getLastOrderByIdUser(idUser).toPromise();
+      let curCommande: Commande = await this._commandeService.getLastOrderByIdUser(idUser, token).toPromise();
 
 
       for (let p of this.parsedPanier) {
         let commande_has_produit = new Commande_has_produit(p["id"], curCommande[0].id, p["nb"]);
-        await this._commandeService.addProductInCommande(commande_has_produit).toPromise();
+        await this._commandeService.addProductInCommande(commande_has_produit, token).toPromise();
 
 
 
@@ -136,7 +136,7 @@ export class MonPanierAssoComponent implements OnInit {
         let upProduit = new Produit(p["id"], p["libelle"], p["desc"], p["photo"], p["prix"], p["prixInitial"], parseInt(p["quantite"]) - parseInt(p['nb']),
           p["dlc"], p["codeBarre"], p["enRayon"], p["dateMiseEnRayon"], p["categorieProduit_id"], p["listProduct_id"], p["entrepotwm_id"], p["destinataire"]);
 
-        await this._produitService.updateProduct(upProduit).toPromise();
+        await this._produitService.updateProduct(upProduit, token).toPromise();
 
       }
 

@@ -15,10 +15,11 @@ export class CommandeService {
   constructor(private http: HttpClient) { }
 
 
-  addCommande(commande: Commande) {
+  addCommande(commande: Commande, token) {
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
-      'content-type': 'application/json'
+      'content-type': 'application/json',
+      'Authorization': 'Bearer ' + token
     });
 
 
@@ -28,11 +29,12 @@ export class CommandeService {
   }
 
 
-  addProductInCommande(commande_has_produit) {
+  addProductInCommande(commande_has_produit, token) {
 
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
-      'content-type': 'application/json'
+      'content-type': 'application/json',
+      'Authorization': 'Bearer ' + token
     });
 
 
@@ -41,10 +43,11 @@ export class CommandeService {
 
   }
 
-  getAllCommandeByIdUser(idUser: string) {
+  getAllCommandeByIdUser(idUser: string, token) {
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
-      'content-type': 'application/json'
+      'content-type': 'application/json',
+      'Authorization': 'Bearer ' + token
     });
 
 
@@ -55,10 +58,11 @@ export class CommandeService {
     return this.http.get<any>(this._url, { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
   }
 
-  getAllProductByOrder(idOrder) {
+  getAllProductByOrder(idOrder, token) {
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
-      'content-type': 'application/json'
+      'content-type': 'application/json',
+      'Authorization': 'Bearer ' + token
     });
 
 
@@ -70,10 +74,11 @@ export class CommandeService {
 
   }
 
-  getSumOfProductsOrderByUserAndDate(dateDebut, dateFin, idUser) {
+  getSumOfProductsOrderByUserAndDate(dateDebut, dateFin, idUser, token) {
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
-      'content-type': 'application/json'
+      'content-type': 'application/json',
+      'Authorization': 'Bearer ' + token
     });
 
 
@@ -87,10 +92,11 @@ export class CommandeService {
 
   }
 
-  getLastOrderByIdUser(idUser) {
+  getLastOrderByIdUser(idUser, token) {
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
-      'content-type': 'application/json'
+      'content-type': 'application/json',
+      'Authorization': 'Bearer ' + token
     });
 
 

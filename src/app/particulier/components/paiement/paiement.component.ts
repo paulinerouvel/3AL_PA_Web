@@ -58,15 +58,15 @@ export class PaiementComponent implements OnInit {
 
     let now = new Date(Date.now());
     let c = new Commande(-1, now.toISOString(), userId);
-    let res = await this._commandeService.addCommande(c).toPromise();
+    let res = await this._commandeService.addCommande(c, token).toPromise();
     if (res == null) {
-      let curCommande: Commande = await this._commandeService.getLastOrderByIdUser(userId).toPromise();
+      let curCommande: Commande = await this._commandeService.getLastOrderByIdUser(userId, token).toPromise();
 
 
       for (let p of this.parsedPanier) {
         let commande_has_produit = new Commande_has_produit(p["id"], curCommande[0].id, p["nb"]);
 
-        await this._commandeService.addProductInCommande(commande_has_produit).toPromise();
+        await this._commandeService.addProductInCommande(commande_has_produit, token).toPromise();
 
 
 
@@ -74,7 +74,7 @@ export class PaiementComponent implements OnInit {
         let upProduit = new Produit(p["id"], p["libelle"], p["desc"], p["photo"], p["prix"], p["prixInitial"], parseInt(p["quantite"]) - parseInt(p['nb']),
           p["dlc"], p["codeBarre"], p["enRayon"], p["dateMiseEnRayon"], p["categorieProduit_id"], p["listProduct_id"], p["entrepotwm_id"], p["destinataire"]);
 
-        await this._produitService.updateProduct(upProduit).toPromise();
+        await this._produitService.updateProduct(upProduit, token).toPromise();
 
       }
 
@@ -89,7 +89,7 @@ export class PaiementComponent implements OnInit {
       if(this.ptSouriresReduction != 0){
         curUser.nbPointsSourire -= (this.ptSouriresReduction * 10);
       }
-      await this._userService.updateUser(curUser).toPromise();
+      await this._userService.updateUser(curUser, token).toPromise();
 
       let mail = new Mail("wastemart.company@gmail.com", curUser.mail, "Votre Commande",
         "Vous avez commandé des produits chez WasteMart ! <br/> Votre commande sera à votre porte d'ici un jour ouvré.<br/>Cordialement,<br/>L'équipe WasteMart");

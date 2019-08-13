@@ -33,7 +33,7 @@ export class AddAlerteComponent implements OnInit {
 
     this.alerte.date = date.toISOString();
 
-    this._alerteService.addAlert(this.alerte).toPromise();
+    this._alerteService.addAlert(this.alerte, token).toPromise();
     this._router.navigateByUrl('/gestion-alertes-part');
   }
 

@@ -22,7 +22,8 @@ export class ModifProfilComponent implements OnInit {
 
   onSubmit() {
 
-    this._userService.updateUser(this.userModel).toPromise();
+    let data = this._storageService.getItem("token");
+    this._userService.updateUser(this.userModel, data).toPromise();
     window.location.reload();
   }
 

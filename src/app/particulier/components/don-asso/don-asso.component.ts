@@ -37,7 +37,7 @@ export class DonAssoComponent implements OnInit {
     this.don.date = date.toISOString();
 
 
-    await this._donService.addDon(this.don).toPromise();
+    await this._donService.addDon(this.don, token).toPromise();
 
     let curUser : Utilisateur= await this._userService.getUserById(userId).toPromise();
 
@@ -45,7 +45,7 @@ export class DonAssoComponent implements OnInit {
 
     curUser.nbPointsSourire += ptsSourires;
     
-    await this._userService.updateUser(curUser).toPromise();
+    await this._userService.updateUser(curUser, token).toPromise();
 
 
 

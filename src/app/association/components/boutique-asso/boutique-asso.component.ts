@@ -53,8 +53,8 @@ export class BoutiqueAssoComponent implements OnInit {
     let token = this._storageService.getItem('token');
 
 
-    let maxInit = await this._commandeService.getSumOfProductsOrderByUserAndDate(this.formatDate(oneSemaineLeft.toISOString()),
-      this.formatDate(now.toISOString()), this.userService.decodeTokenId(token)).toPromise();
+    let maxInit = await this._commandeService.getSumOfProductsOrderByUserAndDate(this.formatDate(oneSemaineLeft.toISOString(), ),
+      this.formatDate(now.toISOString()), this.userService.decodeTokenId(token), token).toPromise();
 
 
     if (maxInit != 0) {

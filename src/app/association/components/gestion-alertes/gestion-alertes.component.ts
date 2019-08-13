@@ -21,14 +21,15 @@ export class GestionAlertesComponent implements OnInit {
 
     if (data) {
 
-      this.alerts = await this._alertService.getAllAlertByUserId(this.userService.decodeTokenId(data)).toPromise();
+      this.alerts = await this._alertService.getAllAlertByUserId(this.userService.decodeTokenId(data), data).toPromise();
     }
 
   }
 
 
   deleteAlert(id) {
-    this._alertService.deleteAlertById(id).toPromise();
+    let data = this._storageService.getItem('token');
+    this._alertService.deleteAlertById(id, data).toPromise();
     location.reload();
   }
 

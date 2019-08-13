@@ -16,10 +16,11 @@ export class DonService {
   constructor(private http: HttpClient) { }
 
 
-  addDon(don){
+  addDon(don, token){
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
-      'content-type': 'application/json'
+      'content-type': 'application/json',
+      'Authorization': 'Bearer ' + token
     });
 
 
@@ -27,10 +28,11 @@ export class DonService {
     return this.http.post<any>(this._url, don, {  headers: reqHeader }).pipe(catchError(this.handleError));
   }
 
-  getAllDonByIdReceveur(idR: string) {
+  getAllDonByIdReceveur(idR: string, token) {
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
-      'content-type': 'application/json'
+      'content-type': 'application/json',
+      'Authorization': 'Bearer ' + token
     });
 
     let params = new HttpParams();
@@ -41,10 +43,11 @@ export class DonService {
 
   }
 
-  getAllDonByIdDonneur(idD: string) {
+  getAllDonByIdDonneur(idD: string, token) {
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
-      'content-type': 'application/json'
+      'content-type': 'application/json',
+      'Authorization': 'Bearer ' + token
     });
 
     let params = new HttpParams();

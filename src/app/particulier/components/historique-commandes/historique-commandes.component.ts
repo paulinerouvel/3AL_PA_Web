@@ -18,9 +18,9 @@ export class HistoriqueCommandesComponent implements OnInit {
 
     let token = this._storageService.getItem('token');
 
-    this.commandes = await this._commandeService.getAllCommandeByIdUser(this.userService.decodeTokenId(token)).toPromise();
+    this.commandes = await this._commandeService.getAllCommandeByIdUser(this.userService.decodeTokenId(token), token).toPromise();
     this.commandes.forEach(async element => {
-      element.produits = await this._commandeService.getAllProductByOrder(element.id).toPromise();
+      element.produits = await this._commandeService.getAllProductByOrder(element.id, token).toPromise();
       let t = 0;
       for (let p of element.produits) {
         t += p.prix * p.quantite;

@@ -16,20 +16,22 @@ export class AlerteService {
 
 
 
-  addAlert(alert: Alerte) {
+  addAlert(alert: Alerte, token) {
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
-      'content-type': 'application/json'
+      'content-type': 'application/json',
+      'Authorization': 'Bearer ' + token
     });
 
     return this.http.post<Alerte>(this._url, alert, { headers: reqHeader }).pipe(catchError(this.handleError));
 
   }
 
-  getAllAlertByUserId(id: string): Observable<any> {
+  getAllAlertByUserId(id: string, token): Observable<any> {
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
-      'content-type': 'application/json'
+      'content-type': 'application/json',
+      'Authorization': 'Bearer ' + token
     });
 
     let params = new HttpParams();
@@ -40,10 +42,11 @@ export class AlerteService {
   }
 
 
-  deleteAlertById(id: string) {
+  deleteAlertById(id: string, token) {
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
-      'content-type': 'application/json'
+      'content-type': 'application/json',
+      'Authorization': 'Bearer ' + token
     });
 
     let params = new HttpParams();

@@ -17,7 +17,7 @@ export class HistoriqueDonsComponent implements OnInit {
   async ngOnInit() {
 
     let token = this._storageService.getItem('token');
-    this.dons = await this._donService.getAllDonByIdReceveur(this._userService.decodeTokenId(token)).toPromise();
+    this.dons = await this._donService.getAllDonByIdReceveur(this._userService.decodeTokenId(token), token).toPromise();
 
 
     this.dons.forEach(async element => {
