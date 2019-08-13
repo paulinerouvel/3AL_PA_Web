@@ -1,8 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import * as $ from 'jquery';
-import { Observable, Subject } from 'rxjs';
+import { Component, OnInit} from '@angular/core';
 import { StorageService } from '../../services/storage.service';
-import * as jwt_decode from 'jwt-decode';
 import { Utilisateur } from '../../models/utilisateur';
 import { UserService } from '../../services/user.service';
 import { CookieService } from 'ngx-cookie-service';
@@ -35,14 +32,18 @@ export class HeaderComponent implements OnInit {
   }
 
 
-  constructor(private _storageService: StorageService,private _imageService : ImageService, private _userService: UserService, private _cookieService: CookieService
-    , private _router: Router) {
+  constructor(private _storageService: StorageService, private _imageService : ImageService, private _userService: UserService, 
+    private _cookieService: CookieService, private _router: Router) {
       let token = this._storageService.getItem('token');
+
+      
       if (token != undefined) {
+
         this.isConnected = true;
-        let token_decoded = jwt_decode(token);
-        this.type = token_decoded['type'];
-        this._userService.getUserById(token_decoded["id"]).subscribe(res=>{
+        this._userService.decodeTokenType(token);
+        this.type = this._userService.decodeTokenType(token);
+
+        this._userService.getUserById(this._userService.decodeTokenId(token)).subscribe(res=>{
           this.curUser = res
         })
       }
@@ -51,33 +52,29 @@ export class HeaderComponent implements OnInit {
 
   async ngOnInit() {
 
-    let token = undefined;//this._storageService.getItem('token');
+    let token =this._storageService.getItem('token');
     if (token != undefined) {
       this.isConnected = true;
-      let token_decoded = jwt_decode(token);
-      this.type = token_decoded['type'];
-      this.curUser = await this._userService.getUserById(token_decoded["id"]).toPromise();
+
+      this.type = this._userService.decodeTokenType(token);
+      this.curUser = await this._userService.getUserById(this._userService.decodeTokenId(token)).toPromise();
+
+      this._imageService.getImage(this.curUser.photo).subscribe(res => {
+        this.createImageFromBlob(res);
+      }, err => {
+        console.log(err)
+      });
     }
 
-    this._imageService.getImage(this.curUser.photo).subscribe(res => {
-      this.createImageFromBlob(res);
-    }, err => {
-      //console.log(err)
-    });
 
-
-
-
-    //this._imageService.postImage("couco", "cojj").toPromise();
 
     //regarde si le localStorage change pour le token 
     this._storageService.watchStorage().subscribe(async (data: string) => {
 
       if (data != "remove") {
         this.isConnected = true;
-        let token_decoded = jwt_decode(data);
-        this.type = token_decoded['type'];
-        this.curUser = await this._userService.getUserById(token_decoded["id"]).toPromise();
+        this.type = this._userService.decodeTokenType(token);
+        this.curUser = await this._userService.getUserById(this._userService.decodeTokenId(token)).toPromise();
       }
       else {
         this.isConnected = false;

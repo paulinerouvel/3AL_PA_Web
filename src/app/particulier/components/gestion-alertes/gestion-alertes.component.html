@@ -1,6 +1,6 @@
 <div class="marge"></div>
 <button class="btn add" [routerLink]="['add']">
-  <!--icon plus--> Ajouter une alerte
+  <img src="../../../../assets/images/add.svg"> Ajouter une alerte
 </button>
 <table class="table">
   <thead>
@@ -16,7 +16,7 @@
       <td>{{item.date | date}}</td>
       <td>
         <button class="btn" (click)="deleteAlert(item.id)">
-          <!--times icon-->
+          <img src="../../../../assets/images/clear.svg">
         </button></td>
     </tr>
   </tbody>

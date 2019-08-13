@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AlerteService } from 'src/app/core/services/alerte.service';
 import { StorageService } from 'src/app/core/services/storage.service';
-import * as jwt_decode from 'jwt-decode';
 import { Alerte } from 'src/app/core/models/alerte';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-gestion-alertes',
@@ -13,16 +13,15 @@ export class GestionAlertesComponent implements OnInit {
 
   alerts: Alerte[];
 
-  constructor(private _alertService: AlerteService, private _storageService: StorageService) { }
+  constructor(private _alertService: AlerteService, private _storageService: StorageService, private userService : UserService) { }
 
   async ngOnInit() {
 
     let data = this._storageService.getItem('token');
 
     if (data) {
-      let token_decoded = jwt_decode(data);
 
-      this.alerts = await this._alertService.getAllAlertByUserId(token_decoded["id"]).toPromise();
+      this.alerts = await this._alertService.getAllAlertByUserId(this.userService.decodeTokenId(data)).toPromise();
     }
 
   }

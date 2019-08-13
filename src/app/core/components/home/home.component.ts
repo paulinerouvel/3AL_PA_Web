@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
 
 
 
-  constructor(private authentificationService: AuthentificationService, private router: Router, private _userService: UserService) { }
+  constructor(private authentificationService: AuthentificationService, private _userService: UserService) { }
 
   async ngOnInit() {
     this.userModel.photo = "img_profil.png";

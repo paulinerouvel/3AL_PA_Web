@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { Utilisateur } from '../../models/utilisateur';
 import { ImageService } from '../../services/image.service';
 import { StorageService } from '../../services/storage.service';
-import * as jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-detail-association',
@@ -19,7 +18,8 @@ export class DetailAssociationComponent implements OnInit {
 
 
 
-  constructor(private _userService: UserService, private router : Router,private _storageService: StorageService, private route: ActivatedRoute, private _imageService : ImageService) { }
+  constructor(private _userService: UserService, private router : Router,private _storageService: StorageService, 
+    private route: ActivatedRoute, private _imageService : ImageService) { }
 
   createImageFromBlob(image: Blob) {
     let reader = new FileReader();
@@ -49,8 +49,7 @@ export class DetailAssociationComponent implements OnInit {
     let token = this._storageService.getItem('token');
 
     if(token != null){
-      let token_decoded = jwt_decode(token);
-      if(token_decoded['type'] == 3){
+      if(this._userService.decodeTokenType(token) == 3){
         this.don = true;
       }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommandeService } from 'src/app/core/services/commande.service';
-import * as jwt_decode from 'jwt-decode';
 import { StorageService } from 'src/app/core/services/storage.service';
+import { UserService } from 'src/app/core/services/user.service';
 
 
 @Component({
@@ -13,15 +13,15 @@ export class HistoriqueCommandesComponent implements OnInit {
 
   commandes;
 
-  constructor(private _storageService: StorageService, private _commandeService: CommandeService) { }
+  constructor(private _storageService: StorageService, private _commandeService: CommandeService, private userService : UserService) { }
 
   async ngOnInit() {
 
     let token = this._storageService.getItem('token');
 
-    let token_decoded = jwt_decode(token);
 
-    this.commandes = await this._commandeService.getAllCommandeByIdUser(token_decoded['id']).toPromise();
+
+    this.commandes = await this._commandeService.getAllCommandeByIdUser(this.userService.decodeTokenId(token)).toPromise();
     this.commandes.forEach(async element => {
       element.produits = await this._commandeService.getAllProductByOrder(element.id).toPromise();
       let t = 0;

@@ -8,7 +8,7 @@
 
       <div class="item" *ngFor="let item of produits;">
         <div class="third-div">
-          <img [src]="imageToShow[item.id]" width="250px"/>
+          <img [src]="imageToShow[item.id]" width="250px" />
         </div>
         <div class="third-div">
           <span class="title">{{item.libelle}}</span>
@@ -19,7 +19,7 @@
           <div class="floatR">
 
             <button class="btn" (click)="addPanier(item)">
-              <!--icon basket-->
+              <img src="../../../../assets/images/shopping_basket.svg">
             </button>
             <div class="full-div">
               DLC : {{item.dlc | date}}
@@ -47,7 +47,8 @@
             <option *ngFor="let i of counter(p.quantite)" [selected]="i == p.nb" value="{{i}}">{{i}}</option>
           </select>
           <button class="btn-delete floatR" (click)="deletePanier(p.id)">
-            <!--time circle-->
+
+            <img src="../../../../assets/images/clear.svg">
           </button>
           <div class="floatR prix-panier">
           </div>

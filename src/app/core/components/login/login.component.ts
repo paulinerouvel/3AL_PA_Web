@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Utilisateur } from '../../models/utilisateur';
 import { AuthentificationService } from '../../services/authentification.service';
 import { StorageService } from '../../services/storage.service';
-import * as jwt_decode from 'jwt-decode';
 import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,8 @@ export class LoginComponent implements OnInit {
   errorConnection: string = "";
   userModel: Utilisateur = new Utilisateur(-1, "", "", "", "", "", "", "", "", "", "", "", "", 0, 0, "", "", "", 0);
 
-  constructor(private _authService: AuthentificationService, private _storageService: StorageService, private _router: Router) { }
+  constructor(private _authService: AuthentificationService, private storageService : StorageService, 
+    private userService : UserService, private _router: Router) { }
 
 
 
@@ -25,23 +26,27 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this._authService.login(this.userModel).subscribe(res => {
-      let token_decoded = jwt_decode(res.token);
 
-      if (token_decoded["type"] == 1 || token_decoded["type"] == 3 || token_decoded["type"] == 4 || token_decoded["type"] == 5) {
+      let type = this.userService.decodeTokenType(res.token)
 
-        this._storageService.setItem("token", res.token);
-        if (token_decoded["type"] == 1) {
+      if (type == 1 || type == 3 || type == 4 || type == 5) {
+
+        this.storageService.setItem("token", res.token);
+        if (type == 1) {
           this._router.navigateByUrl('/boutique-asso');
         }
-        else if (token_decoded["type"] == 3) {
+        else if (type == 3) {
           this._router.navigateByUrl('/boutique-part');
+        }
+        else if (type == 4 || type == 5 ){
+          //compte admin/employé
         }
         else {
           this._router.navigateByUrl('/boutique');
         }
       }
       else {
-        this.errorConnection = "Vous n'êtes pas autorisé à accéder au site car vous avez un compte professionnel "
+        this.errorConnection = "Vous n'êtes pas autorisé à accéder au site car vous avez un compte professionnel."
       }
 
 

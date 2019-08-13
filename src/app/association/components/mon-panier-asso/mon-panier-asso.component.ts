@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import * as jwt_decode from 'jwt-decode';
 import { Commande } from 'src/app/core/models/commande';
 import { StorageService } from 'src/app/core/services/storage.service';
 import { CommandeService } from 'src/app/core/services/commande.service';
@@ -41,11 +40,10 @@ export class MonPanierAssoComponent implements OnInit {
 
 
     let token = this._storageService.getItem('token');
-    let token_decoded = jwt_decode(token);
 
 
     let maxInit = await this._commandeService.getSumOfProductsOrderByUserAndDate(this.formatDate(oneSemaineLeft.toISOString()),
-      this.formatDate(now.toISOString()), token_decoded['id']).toPromise();
+      this.formatDate(now.toISOString()), this._userService.decodeTokenId(token)).toPromise();
 
 
     if (maxInit != 0) {
@@ -120,12 +118,12 @@ export class MonPanierAssoComponent implements OnInit {
 
   async validatePanier() {
     let token = this._storageService.getItem('token');
-    let token_decoded = jwt_decode(token);
+    let idUser = this._userService.decodeTokenId(token);
     let now = new Date(Date.now());
-    let c = new Commande(-1, now.toISOString(), token_decoded['id']);
+    let c = new Commande(-1, now.toISOString(), idUser);
     let res = await this._commandeService.addCommande(c).toPromise();
     if (res == null) {
-      let curCommande: Commande = await this._commandeService.getLastOrderByIdUser(token_decoded['id']).toPromise();
+      let curCommande: Commande = await this._commandeService.getLastOrderByIdUser(idUser).toPromise();
 
 
       for (let p of this.parsedPanier) {
@@ -144,7 +142,7 @@ export class MonPanierAssoComponent implements OnInit {
 
       this._cookieService.delete('produitPanier');
 
-      let curUser = await this._userService.getUserById(token_decoded['id']).toPromise();
+      let curUser = await this._userService.getUserById(idUser).toPromise();
 
       let mail = new Mail("wastemart.company@gmail.com", curUser.mail, "Votre Commande",
         "Vous avez commandé des produits chez WasteMart ! <br/> Votre commande sera à votre porte d'ici un jour ouvré.<br/>Cordialement,<br/>L'équipe WasteMart");

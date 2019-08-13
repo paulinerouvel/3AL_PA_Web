@@ -1,10 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Options } from 'ng5-slider';
-
-import { Inject }  from '@angular/core';
-import { DOCUMENT } from '@angular/common'; 
-
-
 import { CookieService } from 'ngx-cookie-service';
 import { ProduitService } from 'src/app/core/services/produit.service';
 import { ImageService } from 'src/app/core/services/image.service';
@@ -34,7 +29,8 @@ export class BoutiquePartiComponent implements OnInit {
 
   optionSelect = []
 
-  constructor(  private _produitService: ProduitService, private _cookieService: CookieService, private _imageService : ImageService) {
+  constructor(  private _produitService: ProduitService, private _cookieService: CookieService, 
+    private _imageService : ImageService) {
     
 
   }

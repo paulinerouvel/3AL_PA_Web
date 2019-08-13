@@ -3,9 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { ProduitService } from 'src/app/core/services/produit.service';
 import { CommandeService } from 'src/app/core/services/commande.service';
-import * as jwt_decode from 'jwt-decode';
 import { StorageService } from 'src/app/core/services/storage.service';
 import { ImageService } from 'src/app/core/services/image.service';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-boutique-asso',
@@ -23,7 +23,8 @@ export class BoutiqueAssoComponent implements OnInit {
 
   imageToShow=[];
 
-  constructor(private _produitService: ProduitService, private _imageService : ImageService, private _storageService: StorageService, private _cookieService: CookieService, private _commandeService: CommandeService) { }
+  constructor(private _produitService: ProduitService, private _imageService : ImageService, private _storageService: StorageService, 
+    private _cookieService: CookieService, private _commandeService: CommandeService, private userService : UserService) { }
 
 
   createImageFromBlob(image: Blob, id) {
@@ -50,11 +51,10 @@ export class BoutiqueAssoComponent implements OnInit {
 
 
     let token = this._storageService.getItem('token');
-    let token_decoded = jwt_decode(token);
 
 
     let maxInit = await this._commandeService.getSumOfProductsOrderByUserAndDate(this.formatDate(oneSemaineLeft.toISOString()),
-      this.formatDate(now.toISOString()), token_decoded['id']).toPromise();
+      this.formatDate(now.toISOString()), this.userService.decodeTokenId(token)).toPromise();
 
 
     if (maxInit != 0) {

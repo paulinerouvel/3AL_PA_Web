@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import * as jwt_decode from 'jwt-decode';
 import { DonService } from 'src/app/core/services/don.service';
 import { StorageService } from 'src/app/core/services/storage.service';
 import { UserService } from 'src/app/core/services/user.service';
@@ -18,8 +17,7 @@ export class HistoriqueDonsComponent implements OnInit {
 
     let token = this._storageService.getItem('token');
 
-    let token_decoded = jwt_decode(token);
-    this.dons = await this._donService.getAllDonByIdDonneur(token_decoded['id']).toPromise();
+    this.dons = await this._donService.getAllDonByIdDonneur(this._userService.decodeTokenId(token)).toPromise();
 
 
     this.dons.forEach(async element => {

@@ -4,13 +4,14 @@ import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular
 import { Observable, throwError } from 'rxjs';
 import { Utilisateur } from '../models/utilisateur';
 import { catchError } from 'rxjs/operators';
+import * as jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient/*, private storageService :StorageService*/) { }
 
 
   private _url: string = environment.UrlAPI + "/user";
@@ -83,6 +84,34 @@ export class UserService {
     });
     return this.http.put<any>(this._url, user, { headers: reqHeader }).pipe(catchError(this.handleError));
 
+  }
+
+  verifyTokenValidity(token){
+    let token_decoded = jwt_decode(token);
+
+
+    let exp = token_decoded['exp'];
+    let iat = token_decoded['iat'];
+
+
+    // if(exp - iat >= 0){
+    //   //le token a expiré => deconnextion + redirection vers la page d'accueil
+    //   this.storageService.removeItem('token');
+    //   location.replace('/');
+    // }
+
+  }
+
+  decodeTokenId(token){
+
+    let token_decoded = jwt_decode(token);
+    return token_decoded['id'];
+
+  }
+
+  decodeTokenType(token){
+    let token_decoded = jwt_decode(token);
+    return token_decoded['type'];
   }
 
   private handleError(error: HttpErrorResponse) {

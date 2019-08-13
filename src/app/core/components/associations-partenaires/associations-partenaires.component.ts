@@ -38,7 +38,7 @@ export class AssociationsPartenairesComponent implements OnInit {
 
         this.createImageFromBlob(res, element.Utilisateur_id);
       }, err => {
-        //console.log(err)
+        console.log(err)
       });
     });
 

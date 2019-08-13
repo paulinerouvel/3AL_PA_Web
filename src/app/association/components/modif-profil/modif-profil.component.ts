@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Utilisateur } from 'src/app/core/models/utilisateur';
 import { UserService } from 'src/app/core/services/user.service';
-import * as jwt_decode from 'jwt-decode';
 import { StorageService } from 'src/app/core/services/storage.service';
 
 @Component({
@@ -17,8 +16,7 @@ export class ModifProfilComponent implements OnInit {
 
   async ngOnInit() {
     let data = this._storageService.getItem("token");
-    let token_decoded = jwt_decode(data);
-    this.userModel = await this._userService.getUserById(token_decoded['id']).toPromise();
+    this.userModel = await this._userService.getUserById(this._userService.decodeTokenId(data)).toPromise();
 
   }
 

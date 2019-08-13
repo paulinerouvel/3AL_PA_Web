@@ -6,7 +6,6 @@ import { UserService } from 'src/app/core/services/user.service';
 import { MailService } from 'src/app/core/services/mail.service';
 import { StorageService } from 'src/app/core/services/storage.service';
 import { CommandeService } from 'src/app/core/services/commande.service';
-import * as jwt_decode from 'jwt-decode';
 import { Commande } from 'src/app/core/models/commande';
 import { Commande_has_produit } from 'src/app/core/models/commande_has_produit';
 import { Produit } from 'src/app/core/models/produit';
@@ -24,7 +23,9 @@ export class PaiementComponent implements OnInit {
   parsedPanier;
   ptSouriresReduction = 0;
 
-  constructor(private _aroute: ActivatedRoute, private route : Router,private _cookieService : CookieService, private _produitService: ProduitService, private _userService: UserService, private _mailService: MailService, private _storageService: StorageService, private _commandeService: CommandeService) {
+  constructor(private _aroute: ActivatedRoute, private route : Router,private _cookieService : CookieService, 
+    private _produitService: ProduitService, private _userService: UserService, 
+    private _mailService: MailService, private _storageService: StorageService, private _commandeService: CommandeService) {
 
    }
 
@@ -52,12 +53,14 @@ export class PaiementComponent implements OnInit {
 
   async validatePanier(){
     let token = this._storageService.getItem('token');
-    let token_decoded = jwt_decode(token);
+
+    let userId = this._userService.decodeTokenId(token);
+
     let now = new Date(Date.now());
-    let c = new Commande(-1, now.toISOString(), token_decoded['id']);
+    let c = new Commande(-1, now.toISOString(), userId);
     let res = await this._commandeService.addCommande(c).toPromise();
     if (res == null) {
-      let curCommande: Commande = await this._commandeService.getLastOrderByIdUser(token_decoded['id']).toPromise();
+      let curCommande: Commande = await this._commandeService.getLastOrderByIdUser(userId).toPromise();
 
 
       for (let p of this.parsedPanier) {
@@ -77,7 +80,7 @@ export class PaiementComponent implements OnInit {
 
       this._cookieService.delete('produitPanier');
 
-      let curUser : Utilisateur = await this._userService.getUserById(token_decoded['id']).toPromise();
+      let curUser : Utilisateur = await this._userService.getUserById(userId).toPromise();
 
       let ptSourires = Math.trunc( this.total );
       curUser.nbPointsSourire += ptSourires;

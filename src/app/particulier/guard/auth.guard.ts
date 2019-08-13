@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
-
+import { ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { CanActivate } from '@angular/router';
 import { StorageService } from 'src/app/core/services/storage.service';
-import * as jwt_decode from 'jwt-decode';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  constructor(private _storageService: StorageService, private _router: Router) {
+  constructor(private _storageService: StorageService, private _router: Router, private userService : UserService) {
 
   }
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
@@ -17,8 +16,7 @@ export class AuthGuard implements CanActivate {
     let data = this._storageService.getItem("token");
 
     if (data != undefined) {
-      let token_decoded = jwt_decode(data);
-      if (token_decoded["type"] == 3) {
+      if (this.userService.decodeTokenType(data) == 3) {
         return true;
       }
     }
