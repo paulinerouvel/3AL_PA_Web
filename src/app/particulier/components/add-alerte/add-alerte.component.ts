@@ -28,10 +28,13 @@ export class AddAlerteComponent implements OnInit {
 
 
 
-    let d = Date.now();
-    let date: Date = new Date(d);
+    let now = new Date(Date.now())
 
-    this.alerte.date = date.toISOString();
+    let n = now.toISOString().split('T');
+
+    let date = n[0] + "T" + now.toLocaleTimeString();
+    
+    this.alerte.date = date;
 
     this._alerteService.addAlert(this.alerte, token).toPromise();
     this._router.navigateByUrl('/gestion-alertes-part');

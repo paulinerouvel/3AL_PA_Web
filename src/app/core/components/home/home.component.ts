@@ -3,6 +3,7 @@ import { Utilisateur } from '../../models/utilisateur';
 import { AuthentificationService } from 'src/app/core/services/authentification.service';
 import { Router } from '@angular/router'
 import { UserService } from '../../services/user.service';
+import { StorageService } from '../../services/storage.service';
 
 @Component({
   selector: 'app-home',
@@ -20,10 +21,24 @@ export class HomeComponent implements OnInit {
 
 
 
-  constructor(private authentificationService: AuthentificationService, private _userService: UserService) { }
+  constructor(private authentificationService: AuthentificationService, private _userService: UserService,
+    private storageService : StorageService) { }
 
   async ngOnInit() {
     this.userModel.photo = "img_profil.png";
+
+
+    let token = await this.storageService.getItem('token');
+
+    if(token != undefined){
+      let valid = this._userService.verifyTokenValidity(token);
+      if(valid == false){
+        location.reload();
+      }
+
+    }
+
+    
   }
 
 
@@ -73,7 +88,8 @@ export class HomeComponent implements OnInit {
 
 
       this.errorMsg = "";
-      this.infoMsg = "Vous êtes désormais inscrit ! Connectez vous !";
+      this.infoMsg = "Vous êtes désormais inscrit ! Votre compte devra être validé par un administrateur WasteMart avant qu'il soit valide."+
+      "Vous recevrez un mail lorsque la validation aura été effectuée !";
       window.scrollTo(0, 0);
     }
     else {

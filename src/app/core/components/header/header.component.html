@@ -51,12 +51,12 @@
             {{curUser.pseudo}}
           </button>
           <div [ngClass]="{ 'show': isShownBis }" class="dropdown-menu">
-            <a class="dropdown-item" [routerLink]="['/panier-part']">Mon panier</a>
-            <a class="dropdown-item" [routerLink]="['/modif-profil-part']">Mon profil</a>
-            <a class="dropdown-item" [routerLink]="['/modif-photo-part']">Ma photo</a>
-            <a class="dropdown-item" [routerLink]="['/dons-part']">Historiques de mes dons</a>
-            <a class="dropdown-item" [routerLink]="['/commandes-part']">Historiques de mes commandes</a>
-            <a class="dropdown-item" [routerLink]="['/gestion-alertes-part']">Gérer mes alertes</a>
+            <a class="dropdown-item" (click)="isShownBis = !isShownBis" [routerLink]="['/panier-part']">Mon panier</a>
+            <a class="dropdown-item" (click)="isShownBis = !isShownBis" [routerLink]="['/modif-profil-part']">Mon profil</a>
+            <a class="dropdown-item" (click)="isShownBis = !isShownBis" [routerLink]="['/modif-photo-part']">Ma photo</a>
+            <a class="dropdown-item" (click)="isShownBis = !isShownBis" [routerLink]="['/dons-part']">Historiques de mes dons</a>
+            <a class="dropdown-item" (click)="isShownBis = !isShownBis" [routerLink]="['/commandes-part']">Historiques de mes commandes</a>
+            <a class="dropdown-item" (click)="isShownBis = !isShownBis" [routerLink]="['/gestion-alertes-part']">Gérer mes alertes</a>
           </div>
         </div>
 
@@ -66,11 +66,11 @@
             {{curUser.pseudo}}
           </button>
           <div [ngClass]="{ 'show': isShownBis }" class="dropdown-menu">
-            <a class="dropdown-item" [routerLink]="['/panier-asso']">Mon panier</a>
-            <a class="dropdown-item" [routerLink]="['/modif-profil-asso']">Mon profil</a>
-            <a class="dropdown-item" [routerLink]="['/dons-asso']">Historiques de mes dons reçus</a>
-            <a class="dropdown-item" [routerLink]="['/commandes-asso']">Historiques de mes commandes</a>
-            <a class="dropdown-item" [routerLink]="['/gestion-alertes-asso']">Gérer mes alertes</a>
+            <a class="dropdown-item" (click)="isShownBis = !isShownBis" [routerLink]="['/panier-asso']">Mon panier</a>
+            <a class="dropdown-item" (click)="isShownBis = !isShownBis" [routerLink]="['/modif-profil-asso']">Mon profil</a>
+            <a class="dropdown-item" (click)="isShownBis = !isShownBis" [routerLink]="['/dons-asso']">Historiques de mes dons reçus</a>
+            <a class="dropdown-item" (click)="isShownBis = !isShownBis" [routerLink]="['/commandes-asso']">Historiques de mes commandes</a>
+            <a class="dropdown-item" (click)="isShownBis = !isShownBis" [routerLink]="['/gestion-alertes-asso']">Gérer mes alertes</a>
           </div>
         </div>
 
