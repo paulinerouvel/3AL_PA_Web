@@ -1,41 +1,137 @@
 <div class="container-fluid" style="background:#383838;">
-  <div class="row">
-      <div class="col"></div>
-      <div class="col-6" style="background:white; ">
-          <div class="marge"></div>
 
-          <form novalidate>
+    <form #validateCommande="ngForm" (ngSubmit)="onSubmit()" novalidate >
+        <div class="row">
 
-              <h2 class="text-center">Procéder au payement de ma commande de {{total}}€</h2>
+            <div class="col" style="background:white; ">
+                <div class="marge"></div>
 
-              <div *ngIf="errorConnection" class="alert alert-danger">
-                  {{errorConnection}}
-              </div>
+                <div class="row">
 
-              <div class="form-group">
-                  <label for="emailLabel">Numéro de carte</label>
-                  <input />
-              </div>
+                    <div class="col-8">
 
-              <div class="form-group">
-                  <label for="mdpLabel">Titulaire de la carte</label>
-                  <input />
-              </div>
+                        <h3 class="text-center">Mes informations de payement </h3>
 
-              <div class="form-group">
-                <label for="mdpLabel">Cryptogramme</label>
-                <input />
+                        <div *ngIf="errorConnection" class="alert alert-danger">
+                            {{errorConnection}}
+                        </div>
+
+                        <div class="form-group">
+                            Montant de ma commande <div class="floatR bold">{{total}}€</div>
+                        </div>
+
+                        <div class="form-group">
+                            Numéro de carte
+                            <input class="floatR" #numero="ngModel" [class.is-invalid]="numero.invalid && numero.touched" required
+                            type="text" class="form-control" name="numero" [(ngModel)]="payementModel.numero"/>
+                        </div>
+
+                        <div class="form-group">
+                            Titulaire de la carte
+                            <input class="floatR" #titulaire="ngModel" [class.is-invalid]="titulaire.invalid && titulaire.touched" required
+                            type="text" class="form-control" name="titulaire" [(ngModel)]="payementModel.titulaire"/>
+                        </div>
+
+                        <div class="form-group">
+                            Cryptogramme
+                            <input class="floatR" #crypto="ngModel" [class.is-invalid]="crypto.invalid && crypto.touched" required
+                            type="text" class="form-control" name="crypto" [(ngModel)]="payementModel.cryptogramme"/>
+                        </div>
+
+
+                        <h5>Adresse de facturation</h5>
+
+                        <div class="form-group">
+                            N° et rue
+                            <input class="floatR" #adresse_facturation="ngModel" [class.is-invalid]="adresse_facturation.invalid && adresse_facturation.touched" required
+                            type="text" class="form-control" name="adresse_facturation" [(ngModel)]="payementModel.adresse_facturation"/>
+                        </div>
+
+                        <div class="form-group">
+                            Ville
+                            <input class="floatR" #ville_facturation="ngModel" [class.is-invalid]="ville_facturation.invalid && ville_facturation.touched" required
+                            type="text" class="form-control" name="ville_facturation" [(ngModel)]="payementModel.ville_facturation"/>
+                        </div>
+
+                        <div class="form-group">
+                            Code Postal
+                            <input class="floatR" #cp_facturation="ngModel" [class.is-invalid]="cp_facturation.invalid && cp_facturation.touched" required
+                            type="text" class="form-control" name="cp_facturation" [(ngModel)]="payementModel.cp_facturation"/>
+                        </div>
+
+
+                        <div class="marge_50"></div>
+
+                    </div>
+                    <div class="col-4"></div>
+                </div>
             </div>
 
+            <div class="col " style="background:lightgrey; ">
+                <div class="marge"></div>
+                <div class="row">
+                    <div class="col-8">
 
-              <button  type="submit" (click)="validatePanier()" class="btn float-right text-white"
-                  style="background: #3db4b4;">Valider</button>
+                        <h3 class="text-center">Mon mode de livraison</h3>
 
-              <div class="marge_50"></div>
-          </form>
-      </div>
-      <div class="col"></div>
+                        <div *ngIf="errorConnection" class="alert alert-danger">
+                            {{errorConnection}}
+                        </div>
+
+                        <h5><input type="checkbox" [(ngModel)]="livrerChezMoi" [ngModelOptions]="{standalone: true}" (change)="selectLivraisonChezMoi()"/><span class="title">Me faire livrer chez moi</span></h5>
+
+                        <div *ngIf="livrerChezMoi == true" class="form-group padding20">
+                            N° et rue
+                            <input class="floatR " #adresse_livraison="ngModel" [class.is-invalid]="adresse_livraison.invalid && adresse_livraison.touched" required
+                            type="text" class="form-control" name="adresse_livraison" [(ngModel)]="commandeModel.adresse_livraison"/>
+                        </div>
+
+                        <div *ngIf="livrerChezMoi == true" class="form-group padding20" >
+                            Ville
+                            <input class="floatR" #ville_livraison="ngModel" [class.is-invalid]="ville_livraison.invalid && ville_livraison.touched" required
+                            type="text" class="form-control" name="ville_livraison" [(ngModel)]="commandeModel.ville_livraison"/>
+                        </div>
+
+                        <div *ngIf="livrerChezMoi == true" class="form-group padding20">
+                            Code Postal
+                            <input class="floatR" #cp_livraison="ngModel" [class.is-invalid]="cp_livraison.invalid && cp_livraison.touched" required
+                            type="text" class="form-control" name="cp_livraison" [(ngModel)]="commandeModel.cp_livraison"/>
+                        </div>
 
 
-  </div>
+                        <div class="marge_50"></div>
+
+                    </div>
+                    <div class="col-4"></div>
+                </div>
+                <div class="row">
+                    <div class="col-8">
+
+                        <h5> <input type="checkbox" [(ngModel)]="livrerEntrepot" [ngModelOptions]="{standalone: true}" (change)="selectLivraisonEntrepot()"><span class="title">Récupérer ma commande dans un entrepôt
+                                WasteMart</span></h5>
+                        <div   id="frugalmap"></div>
+                    </div>
+                    <div class="col-4">
+                        <div class="marge"></div>
+                        <div class="form-group" *ngIf="livrerChezMoi == false" >
+                            <select class="custom-select my-1 mr-sm-2"   #entrepot="ngModel" [class.is-invalid]="entrepot.invalid && entrepot.touched" required
+                            type="text" class="form-control" name="entrepot" [(ngModel)]="commandeModel.entrepot" > 
+                                <option *ngFor="let e of entrepots" [ngValue]="e">{{e.libelle}} - {{e.ville}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+
+            <div class="col-8 divBtnPayement"></div>
+            <div class="col-4 divBtnPayement">
+                <button [disabled]="validateCommande.form.invalid" type="submit" class="floatR btn btn-success">Valider ma commande</button>
+            </div>
+        </div>
+    </form>
+    <div class="marge30"></div>
 </div>

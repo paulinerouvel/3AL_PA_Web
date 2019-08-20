@@ -12,7 +12,7 @@ import { StorageService } from '../../services/storage.service';
 })
 export class DetailAssociationComponent implements OnInit {
 
-  curAsso = new Utilisateur(0, "", "", "", "", "", "", "", "", "", "", "", "", 0, 0, "", "", "", 0);
+  curAsso = new Utilisateur(0, "", "", "", "", "", "", "", "", "", "", "", "", 0, 0, "", "", 0);
   imageToShow  ;
   don = false;
 

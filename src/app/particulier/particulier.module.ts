@@ -7,19 +7,21 @@ import { HistoriqueCommandesComponent } from './components/historique-commandes/
 import { HistoriqueDonsComponent } from './components/historique-dons/historique-dons.component';
 import { GestionAlertesComponent } from './components/gestion-alertes/gestion-alertes.component';
 import { AddAlerteComponent } from './components/add-alerte/add-alerte.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MonPanierPartComponent } from './components/mon-panier-part/mon-panier-part.component';
 import { PaiementComponent } from './components/paiement/paiement.component';
 import { Ng5SliderModule } from 'ng5-slider';
 import { DonAssoComponent } from './components/don-asso/don-asso.component';
+import { ModifyPhotoComponent } from './components/modify-photo/modify-photo.component';
 
 @NgModule({
-  declarations: [BoutiquePartiComponent, ModifProfilComponent, HistoriqueCommandesComponent, HistoriqueDonsComponent, GestionAlertesComponent, AddAlerteComponent, MonPanierPartComponent, PaiementComponent, DonAssoComponent],
+  declarations: [BoutiquePartiComponent, ModifProfilComponent, HistoriqueCommandesComponent, HistoriqueDonsComponent, GestionAlertesComponent, AddAlerteComponent, MonPanierPartComponent, PaiementComponent, DonAssoComponent, ModifyPhotoComponent],
   imports: [
     CommonModule,
     ParticulierRoutingModule,
     FormsModule,
-    Ng5SliderModule
+    Ng5SliderModule,
+    ReactiveFormsModule
   ]
 })
 export class ParticulierModule { }

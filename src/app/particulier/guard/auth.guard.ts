@@ -11,17 +11,21 @@ export class AuthGuard implements CanActivate {
   constructor(private _storageService: StorageService, private _router: Router, private userService : UserService) {
 
   }
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  canActivate() {
 
-    let data = this._storageService.getItem("token");
+    let token = this._storageService.getItem("token");
 
-    if (data != undefined) {
-      if (this.userService.decodeTokenType(data) == 3) {
+
+    if (token != undefined) {
+
+
+      if (this.userService.decodeTokenType(token) == 3 && this.userService.verifyTokenValidity(token)) {
         return true;
       }
     }
 
     this._router.navigateByUrl('/home');
+    location.reload();
     return false;
   }
 }

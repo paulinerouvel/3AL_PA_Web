@@ -6,7 +6,7 @@ import { ModifProfilComponent } from './components/modif-profil/modif-profil.com
 import { HistoriqueCommandesComponent } from './components/historique-commandes/historique-commandes.component';
 import { HistoriqueDonsComponent } from './components/historique-dons/historique-dons.component';
 import { GestionAlertesComponent } from './components/gestion-alertes/gestion-alertes.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddAlerteComponent } from './components/add-alerte/add-alerte.component';
 import { MonPanierAssoComponent } from './components/mon-panier-asso/mon-panier-asso.component';
 
@@ -15,7 +15,8 @@ import { MonPanierAssoComponent } from './components/mon-panier-asso/mon-panier-
   imports: [
     CommonModule,
     FormsModule,
-    AssociationRoutingModule
+    AssociationRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class AssociationModule { }

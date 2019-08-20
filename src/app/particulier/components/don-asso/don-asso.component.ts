@@ -15,7 +15,7 @@ export class DonAssoComponent implements OnInit {
 
   constructor(private _aRoute : ActivatedRoute, private _storageService : StorageService, private _donService : DonService, 
     private _userService : UserService) { }
-  don = new Don(0, "", 0, "", 0, 0);
+  don = new Don(0, "", 0, 0, 0);
 
   ngOnInit() {
 
@@ -33,7 +33,6 @@ export class DonAssoComponent implements OnInit {
 
     this.don.donneur_id = userId;
     this.don.receveur_id = this._aRoute.snapshot.params.idAsso;
-    this.don.type = "Argent";
     this.don.date = date.toISOString();
 
 

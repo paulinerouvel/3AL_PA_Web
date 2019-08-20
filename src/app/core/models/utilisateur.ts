@@ -16,7 +16,6 @@ export class Utilisateur {
         public desc: string,
         public tailleOrganisme: number,
         public estValide: number,
-        public statut: string,
         public siret: string,
         public dateDeNaissance: string,
         public nbPointsSourire: number

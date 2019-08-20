@@ -13,7 +13,7 @@ import { UserService } from '../../services/user.service';
 export class LoginComponent implements OnInit {
 
   errorConnection: string = "";
-  userModel: Utilisateur = new Utilisateur(-1, "", "", "", "", "", "", "", "", "", "", "", "", 0, 0, "", "", "", 0);
+  userModel: Utilisateur = new Utilisateur(-1, "", "", "", "", "", "", "", "", "", "", "", "", 0, 0, "", "", 0);
 
   constructor(private _authService: AuthentificationService, private storageService : StorageService, 
     private userService : UserService, private _router: Router) { }

@@ -10,6 +10,7 @@ import { HistoriqueDonsComponent } from './components/historique-dons/historique
 import { MonPanierPartComponent } from './components/mon-panier-part/mon-panier-part.component';
 import { PaiementComponent } from './components/paiement/paiement.component';
 import { DonAssoComponent } from './components/don-asso/don-asso.component';
+import { ModifyPhotoComponent } from './components/modify-photo/modify-photo.component';
 
 
 const partRoutes: Routes = [
@@ -21,7 +22,8 @@ const partRoutes: Routes = [
   { path: 'commandes-part',  component: HistoriqueCommandesComponent, canActivate : [AuthGuard]},
   { path: 'panier-part',  component: MonPanierPartComponent, canActivate : [AuthGuard]},
   { path: 'paiement',  component: PaiementComponent, canActivate : [AuthGuard]},
-  { path: 'donAsso',  component: DonAssoComponent, canActivate : [AuthGuard]}
+  { path: 'donAsso',  component: DonAssoComponent, canActivate : [AuthGuard]},
+  { path: 'modif-photo-part',  component: ModifyPhotoComponent, canActivate : [AuthGuard]}
 ];
 
 @NgModule({

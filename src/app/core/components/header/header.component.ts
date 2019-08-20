@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
   isConnected = false;
   type;
   imageToShow;
-  curUser: Utilisateur = new Utilisateur(0, "", "", "", "", "", "", "", "", "", "", "", "", 0, 0, "", "", "", 0);
+  curUser: Utilisateur = new Utilisateur(0, "", "", "", "", "", "", "", "", "", "", "", "", 0, 0, "", "", 0);
 
   createImageFromBlob(image: Blob) {
     let reader = new FileReader();
@@ -36,6 +36,7 @@ export class HeaderComponent implements OnInit {
     private _cookieService: CookieService, private _router: Router) {
       let token = this._storageService.getItem('token');
 
+
       
       if (token != undefined) {
 
@@ -52,6 +53,7 @@ export class HeaderComponent implements OnInit {
 
   async ngOnInit() {
 
+
     let token =this._storageService.getItem('token');
     if (token != undefined) {
       this.isConnected = true;
@@ -59,6 +61,8 @@ export class HeaderComponent implements OnInit {
       this.type = this._userService.decodeTokenType(token);
       this.curUser = await this._userService.getUserById(this._userService.decodeTokenId(token)).toPromise();
 
+
+      
       this._imageService.getImage(this.curUser.photo).subscribe(res => {
         this.createImageFromBlob(res);
       }, err => {
@@ -69,9 +73,10 @@ export class HeaderComponent implements OnInit {
 
 
     //regarde si le localStorage change pour le token 
-    this._storageService.watchStorage().subscribe(async (data: string) => {
+    this._storageService.watchStorage().subscribe(async (token: string) => {
 
-      if (data != "remove") {
+
+      if (token != "remove") {
         this.isConnected = true;
         this.type = this._userService.decodeTokenType(token);
         this.curUser = await this._userService.getUserById(this._userService.decodeTokenId(token)).toPromise();

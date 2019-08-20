@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   infoMsg = '';
   submitted = false;
   userType = "particulier"
-  userModel = new Utilisateur(-1, "", "", "", "", "", "", "", "", "", "", "", "", 0, 0, "", "", "", 0);
+  userModel = new Utilisateur(-1, "", "", "", "", "", "", "", "", "", "", "", "", 0, 0, "", "", 0);
 
 
 

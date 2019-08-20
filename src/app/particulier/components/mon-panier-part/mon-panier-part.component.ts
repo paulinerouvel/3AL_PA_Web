@@ -19,7 +19,7 @@ export class MonPanierPartComponent implements OnInit {
   isEmpty = true;
   totalPanier = 0;
   reduction = false;
-  curUser = new Utilisateur(0,"","","","","","","","","","","","",0,0,"","","",0)
+  curUser = new Utilisateur(0,"","","","","","","","","","","","",0,0,"","",0)
   ptSourires = 0;
 
 

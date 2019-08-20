@@ -84,6 +84,7 @@ export class UserService {
       'content-type': 'application/json',
       'Authorization': 'Bearer ' + token
     });
+
     return this.http.put<any>(this._url, user, { headers: reqHeader }).pipe(catchError(this.handleError));
 
   }
@@ -95,12 +96,16 @@ export class UserService {
     let exp = token_decoded['exp'];
     let iat = token_decoded['iat'];
 
+    let now = parseInt(Date.now().toString().substring(0, 10));
 
-    if(exp - iat >= 0){
+    if(now > exp){
+
       //le token a expiré => deconnextion + redirection vers la page d'accueil
       this.storageService.removeItem('token');
-      location.replace('/');
+      return false;
     }
+
+    return true;
 
   }
 

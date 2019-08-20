@@ -1,4 +1,4 @@
-<!--Main Navigation-->
+
 <header>
 
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark pink scrolling-navbar">
@@ -12,6 +12,7 @@
       <ul class="navbar-nav mr-auto bandeau">
         <li><a [routerLink]="['/home']" (click)="isShown = false" style="padding: 0px;"><img id="logo"
               src="..\..\..\assets\images\logo.PNG"></a></li>
+              
         <li><a id="title" (click)="isShown = false" [routerLink]="['/home']">WasteMart</a></li>
         <li id="item item_long"><a href="#" [routerLink]="['/associationsPartenaires']" (click)="isShown = false">
             <div>Associations <br />Partenaires</div>
@@ -45,13 +46,14 @@
 
           <img class="img_profil" [src]="imageToShow" width="50px">
 
-          <button class="btn pseudo dropdown-toggle" (click)="isShownBis = !isShownBis" type="button"
+          <button *ngIf="curUser" class="btn pseudo dropdown-toggle" (click)="isShownBis = !isShownBis" type="button"
             data-toggle="dropdown">
             {{curUser.pseudo}}
           </button>
           <div [ngClass]="{ 'show': isShownBis }" class="dropdown-menu">
             <a class="dropdown-item" [routerLink]="['/panier-part']">Mon panier</a>
             <a class="dropdown-item" [routerLink]="['/modif-profil-part']">Mon profil</a>
+            <a class="dropdown-item" [routerLink]="['/modif-photo-part']">Ma photo</a>
             <a class="dropdown-item" [routerLink]="['/dons-part']">Historiques de mes dons</a>
             <a class="dropdown-item" [routerLink]="['/commandes-part']">Historiques de mes commandes</a>
             <a class="dropdown-item" [routerLink]="['/gestion-alertes-part']">Gérer mes alertes</a>
@@ -59,7 +61,7 @@
         </div>
 
         <div *ngIf="type == 1 && isConnected == true" class="dropdown">
-          <button class="btn pseudo dropdown-toggle" (click)="isShownBis = !isShownBis" type="button"
+          <button *ngIf="curUser" class="btn pseudo dropdown-toggle" (click)="isShownBis = !isShownBis" type="button"
             data-toggle="dropdown">
             {{curUser.pseudo}}
           </button>
@@ -82,5 +84,4 @@
     </div>
   </nav>
 
-</header>
-<!--Main Navigation-->
+</header> 

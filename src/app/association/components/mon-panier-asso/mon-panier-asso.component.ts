@@ -120,7 +120,7 @@ export class MonPanierAssoComponent implements OnInit {
     let token = this._storageService.getItem('token');
     let idUser = this._userService.decodeTokenId(token);
     let now = new Date(Date.now());
-    let c = new Commande(-1, now.toISOString(), idUser);
+    let c = new Commande(-1, now.toISOString(), idUser, "", "", "", null);
     let res = await this._commandeService.addCommande(c, token).toPromise();
     if (res == null) {
       let curCommande: Commande = await this._commandeService.getLastOrderByIdUser(idUser, token).toPromise();

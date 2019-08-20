@@ -10,7 +10,7 @@ import { StorageService } from 'src/app/core/services/storage.service';
 })
 export class ModifProfilComponent implements OnInit {
 
-  userModel = new Utilisateur(0, "", "", "", "", "", "", "", "", "", "", "", "", 0, 0, "", "", "", 0);
+  userModel = new Utilisateur(0, "", "", "", "", "", "", "", "", "", "", "", "", 0, 0, "", "", 0);
 
   constructor(private _userService: UserService, private _storageService: StorageService) { }
 

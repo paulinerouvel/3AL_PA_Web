@@ -66,11 +66,15 @@
             [(ngModel)]="userModel.mdp" type="password" class="form-control" name="mot_de_passe" placeholder="">
         </div>
 
+        
+
         <button [disabled]="modifProfil.form.invalid" type="submit" class="btn float-right text-white"
           style="background:#3db4b4;">Valider</button>
       </form>
 
       <p>*100 points sourires = 10 € de réduction</p>
+
+      <a  [routerLink]="['/modif-photo-part']">Modifier ma photo</a>
       <div class="marge"></div>
     </div>
     <div class="col"></div>

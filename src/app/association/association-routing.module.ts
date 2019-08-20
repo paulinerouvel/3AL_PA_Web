@@ -2,7 +2,6 @@ import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guard/auth.guard';
 import { BoutiqueAssoComponent } from './components/boutique-asso/boutique-asso.component';
-import { PageNotFoundComponent } from '../core/components/page-not-found/page-not-found.component';
 import { ModifProfilComponent } from './components/modif-profil/modif-profil.component';
 import { GestionAlertesComponent } from './components/gestion-alertes/gestion-alertes.component';
 import { AddAlerteComponent } from './components/add-alerte/add-alerte.component';
@@ -19,7 +18,6 @@ const assoRoutes: Routes = [
   { path: 'dons-asso',  component: HistoriqueDonsComponent, canActivate : [AuthGuard]},
   { path: 'commandes-asso',  component: HistoriqueCommandesComponent, canActivate : [AuthGuard]},
   { path: 'panier-asso',  component: MonPanierAssoComponent, canActivate : [AuthGuard]}
- // { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
