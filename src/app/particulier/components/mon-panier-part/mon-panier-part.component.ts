@@ -12,14 +12,14 @@ import { Utilisateur } from 'src/app/core/models/utilisateur';
 })
 export class MonPanierPartComponent implements OnInit {
 
-  constructor(private _cookieService: CookieService,private _route : Router, private storageService : StorageService, 
-    private userService : UserService) { }
+  constructor(private _cookieService: CookieService, private _route: Router, private storageService: StorageService,
+    private userService: UserService) { }
 
   parsedPanier = [];
   isEmpty = true;
   totalPanier = 0;
   reduction = false;
-  curUser = new Utilisateur(0,"","","","","","","","","","","","",0,0,"","",0)
+  curUser = new Utilisateur(0, "", "", "", "", "", "", "", "", "", "", "", "", 0, 0, "", "", 0)
   ptSourires = 0;
 
 
@@ -48,7 +48,7 @@ export class MonPanierPartComponent implements OnInit {
     }
   }
 
-   savePanier(produitPanier) {
+  savePanier(produitPanier) {
     this._cookieService.delete('produitPanier', '/panier-part');
     this._cookieService.set('produitPanier', JSON.stringify(produitPanier), 5);//expire dans 5 jours
     this.calculTotalPanier();
@@ -85,20 +85,20 @@ export class MonPanierPartComponent implements OnInit {
   }
 
   async validatePanier() {
-    this._route.navigate(['paiement'], {queryParams : {parsedPanier : this.parsedPanier, ptSourires : this.ptSourires ,total : encodeURIComponent(JSON.stringify({type: 'float', value: this.totalPanier.toString()}))}});
+    this._route.navigate(['paiement'], { queryParams: { parsedPanier: this.parsedPanier, ptSourires: this.ptSourires, total: encodeURIComponent(JSON.stringify({ type: 'float', value: this.totalPanier.toString() })) } });
 
   }
 
-  addReduction(){
+  addReduction() {
     this.reduction = true;
-    this.ptSourires = this.curUser.nbPointsSourire /10;
+    this.ptSourires = this.curUser.nbPointsSourire / 10;
     this.totalPanier = this.totalPanier - this.ptSourires;
 
-    
+
 
   }
 
-  deleteReduction(){
+  deleteReduction() {
     this.reduction = false;
     this.totalPanier = this.totalPanier + this.ptSourires;
     this.ptSourires = 0;

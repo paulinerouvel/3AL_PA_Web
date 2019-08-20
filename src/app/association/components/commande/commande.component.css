@@ -1,0 +1,72 @@
+.marge{
+    height: 150px;
+}
+
+.marge_50{
+    height: 50px;
+}
+
+.padding20{
+    padding-left: 20px;
+}
+
+.divBtnPayement{
+    margin-bottom: 30px;
+    background:white;
+    padding: 20px;
+}
+
+h3{
+    padding-bottom: 20px;
+}
+
+h5{
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.title{
+    padding-left: 10px; 
+}
+.floatR{
+    float: right;
+}
+
+.bold{
+    font-weight: bold;
+    font-size: 22px;
+}
+
+#frugalmap {
+    height: 300px;
+    width: 80%;
+    z-index: 1;
+    margin-left: 20px; 
+}
+
+input[type="checkbox"]{
+    -webkit-appearance: none;
+	background-color: #fafafa;
+	border: 1px solid #cacece;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+	padding: 9px;
+	border-radius: 3px;
+	display: inline-block;
+    position: relative;
+}
+
+input[type="checkbox"]:checked{
+    background-color: #e9ecee;
+	border: 1px solid #adb8c0;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+	color: #99a1a7;
+}
+
+input[type="checkbox"]:checked:after{
+    content: '\2714';
+	font-size: 14px;
+	position: absolute;
+	top: 0px;
+	left: 3px;
+	color: #99a1a7;
+}

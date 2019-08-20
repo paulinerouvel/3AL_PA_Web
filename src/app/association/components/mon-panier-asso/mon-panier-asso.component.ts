@@ -1,14 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { Commande } from 'src/app/core/models/commande';
 import { StorageService } from 'src/app/core/services/storage.service';
 import { CommandeService } from 'src/app/core/services/commande.service';
-import { Commande_has_produit } from 'src/app/core/models/commande_has_produit';
-import { MailService } from 'src/app/core/services/mail.service';
-import { Mail } from 'src/app/core/models/mail';
 import { UserService } from 'src/app/core/services/user.service';
-import { ProduitService } from 'src/app/core/services/produit.service';
-import { Produit } from 'src/app/core/models/produit';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mon-panier-asso',
@@ -17,7 +12,9 @@ import { Produit } from 'src/app/core/models/produit';
 })
 export class MonPanierAssoComponent implements OnInit {
 
-  constructor(private _cookieService: CookieService, private _produitService: ProduitService, private _userService: UserService, private _mailService: MailService, private _storageService: StorageService, private _commandeService: CommandeService) { }
+  constructor(private _cookieService: CookieService,  private _userService: UserService, 
+     private _storageService: StorageService, private _commandeService: CommandeService,
+    private _route : Router) { }
   parsedPanier = [];
   isEmpty = true;
 
@@ -116,46 +113,13 @@ export class MonPanierAssoComponent implements OnInit {
     }
   }
 
+
   async validatePanier() {
-    let token = this._storageService.getItem('token');
-    let idUser = this._userService.decodeTokenId(token);
-    let now = new Date(Date.now());
-    let c = new Commande(-1, now.toISOString(), idUser, "", "", "", null);
-    let res = await this._commandeService.addCommande(c, token).toPromise();
-    if (res == null) {
-      let curCommande: Commande = await this._commandeService.getLastOrderByIdUser(idUser, token).toPromise();
+    this._route.navigate(['commande-asso'], { queryParams: { parsedPanier: this.parsedPanier  } });
 
-
-      for (let p of this.parsedPanier) {
-        let commande_has_produit = new Commande_has_produit(p["id"], curCommande[0].id, p["nb"]);
-        await this._commandeService.addProductInCommande(commande_has_produit, token).toPromise();
-
-
-
-
-        let upProduit = new Produit(p["id"], p["libelle"], p["desc"], p["photo"], p["prix"], p["prixInitial"], parseInt(p["quantite"]) - parseInt(p['nb']),
-          p["dlc"], p["codeBarre"], p["enRayon"], p["dateMiseEnRayon"], p["categorieProduit_id"], p["listProduct_id"], p["entrepotwm_id"], p["destinataire"]);
-
-        await this._produitService.updateProduct(upProduit, token).toPromise();
-
-      }
-
-      this._cookieService.delete('produitPanier');
-
-      let curUser = await this._userService.getUserById(idUser).toPromise();
-
-      let mail = new Mail("wastemart.company@gmail.com", curUser.mail, "Votre Commande",
-        "Vous avez commandé des produits chez WasteMart ! <br/> Votre commande sera à votre porte d'ici un jour ouvré.<br/>Cordialement,<br/>L'équipe WasteMart");
-
-      await this._mailService.sendMail(mail).toPromise();
-
-    }
-
-    this.isEmpty = true;
-
-    alert("Votre commande à bien été prise en compte, vous allez recevoir un mail de confirmation de votre achat !");
-    location.reload();
   }
+
+  
 
 
 }

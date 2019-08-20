@@ -1,0 +1,73 @@
+<div class="container-fluid" style="background:#383838;">
+
+  <form #validateCommande="ngForm" (ngSubmit)="onSubmit()" novalidate >
+      <div class="row">
+          <div class="col " style="background:lightgrey; ">
+              <div class="marge"></div>
+              <div class="row">
+                  <div class="col-8">
+
+                      <h3 class="text-center">Mon mode de livraison</h3>
+
+                      <div *ngIf="errorConnection" class="alert alert-danger">
+                          {{errorConnection}}
+                      </div>
+
+                      <h5><input type="checkbox" [(ngModel)]="livrerChezMoi" [ngModelOptions]="{standalone: true}" (change)="selectLivraisonChezMoi()"/><span class="title">Livrer la marchandise à l'adresse de mon association</span></h5>
+
+                      <div *ngIf="livrerChezMoi == true" class="form-group padding20">
+                          N° et rue
+                          <input class="floatR " #adresse_livraison="ngModel" [class.is-invalid]="adresse_livraison.invalid && adresse_livraison.touched" required
+                          type="text" class="form-control" name="adresse_livraison" [(ngModel)]="commandeModel.adresse_livraison"/>
+                      </div>
+
+                      <div *ngIf="livrerChezMoi == true" class="form-group padding20" >
+                          Ville
+                          <input class="floatR" #ville_livraison="ngModel" [class.is-invalid]="ville_livraison.invalid && ville_livraison.touched" required
+                          type="text" class="form-control" name="ville_livraison" [(ngModel)]="commandeModel.ville_livraison"/>
+                      </div>
+
+                      <div *ngIf="livrerChezMoi == true" class="form-group padding20">
+                          Code Postal
+                          <input class="floatR" #cp_livraison="ngModel" [class.is-invalid]="cp_livraison.invalid && cp_livraison.touched" required
+                          type="text" class="form-control" name="cp_livraison" [(ngModel)]="commandeModel.cp_livraison"/>
+                      </div>
+
+
+                      <div class="marge_50"></div>
+
+                  </div>
+                  <div class="col-4"></div>
+              </div>
+              <div class="row">
+                  <div class="col-8">
+
+                      <h5> <input type="checkbox" [(ngModel)]="livrerEntrepot" [ngModelOptions]="{standalone: true}" (change)="selectLivraisonEntrepot()"><span class="title">Récupérer ma commande dans un entrepôt
+                              WasteMart</span></h5>
+                      <div   id="frugalmap"></div>
+                      <div class="marge"></div>
+                  </div>
+                  <div class="col-4">
+                      <div class="marge"></div>
+                      <div class="form-group" *ngIf="livrerChezMoi == false" >
+                          <select class="custom-select my-1 mr-sm-2"   #entrepot="ngModel" [class.is-invalid]="entrepot.invalid && entrepot.touched" required
+                          type="text" class="form-control" name="entrepot" [(ngModel)]="commandeModel.entrepot" > 
+                              <option *ngFor="let e of entrepots" [ngValue]="e">{{e.libelle}} - {{e.ville}}</option>
+                          </select>
+                      </div>
+                  </div>
+
+              </div>
+          </div>
+
+      </div>
+      <div class="row">
+
+          <div class="col-8 divBtnPayement"></div>
+          <div class="col-4 divBtnPayement">
+              <button [disabled]="validateCommande.form.invalid" type="submit" class="floatR btn btn-success">Valider ma commande</button>
+          </div>
+      </div>
+  </form>
+  <div class="marge30"></div>
+</div>
