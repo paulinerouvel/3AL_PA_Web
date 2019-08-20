@@ -23,7 +23,7 @@
                         <div class="form-group">
                             Numéro de carte
                             <input class="floatR" #numero="ngModel" [class.is-invalid]="numero.invalid && numero.touched" required
-                            type="text" class="form-control" name="numero" [(ngModel)]="payementModel.numero"/>
+                            type="number" class="form-control" name="numero" [(ngModel)]="payementModel.numero"/>
                         </div>
 
                         <div class="form-group">
@@ -35,7 +35,7 @@
                         <div class="form-group">
                             Cryptogramme
                             <input class="floatR" #crypto="ngModel" [class.is-invalid]="crypto.invalid && crypto.touched" required
-                            type="text" class="form-control" name="crypto" [(ngModel)]="payementModel.cryptogramme"/>
+                            type="number" class="form-control" name="crypto" [(ngModel)]="payementModel.cryptogramme"/>
                         </div>
 
 

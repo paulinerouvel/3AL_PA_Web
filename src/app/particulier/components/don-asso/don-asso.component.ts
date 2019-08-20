@@ -5,6 +5,11 @@ import { StorageService } from 'src/app/core/services/storage.service';
 import { DonService } from 'src/app/core/services/don.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { Utilisateur } from 'src/app/core/models/utilisateur';
+import { Payement } from 'src/app/core/models/payement';
+import { ImageService } from 'src/app/core/services/image.service';
+import { PayementService } from 'src/app/core/services/payement.service';
+import { Mail } from 'src/app/core/models/mail';
+import { MailService } from 'src/app/core/services/mail.service';
 
 @Component({
   selector: 'app-don-asso',
@@ -13,38 +18,98 @@ import { Utilisateur } from 'src/app/core/models/utilisateur';
 })
 export class DonAssoComponent implements OnInit {
 
-  constructor(private _aRoute : ActivatedRoute, private _storageService : StorageService, private _donService : DonService, 
-    private _userService : UserService) { }
-  don = new Don(0, "", 0, 0, 0);
+  constructor(private _aRoute: ActivatedRoute, private _storageService: StorageService, private _donService: DonService,
+    private _userService: UserService, private imageService: ImageService, private payementService: PayementService,
+    private mailService: MailService) { }
 
-  ngOnInit() {
 
-    console.log(this._aRoute.snapshot.params.idAsso);
+  idAsso = this._aRoute.snapshot.params.idAsso;
+  donModel = new Don(0, "", 0, 0, 0);
+  payementModel = new Payement(0, "", "", "", "", null, null, "", 0);
 
+  imageToShow;
+
+
+  createImageFromBlob(image: Blob) {
+    let reader = new FileReader();
+    reader.addEventListener("load", () => {
+      this.imageToShow = reader.result;
+    }, false);
+
+    if (image) {
+      reader.readAsDataURL(image);
+    }
   }
 
-  async onSubmit(){
-    console.log(this.don)
-    let token = this._storageService.getItem('token');
+  async ngOnInit() {
+    let asso = await this._userService.getUserById(this.idAsso).toPromise();
 
-    let userId = this._userService.decodeTokenId(token);
-
-    let date = new Date(Date.now());
-
-    this.don.donneur_id = userId;
-    this.don.receveur_id = this._aRoute.snapshot.params.idAsso;
-    this.don.date = date.toISOString();
+    this.imageService.getImage(asso.photo).subscribe(res => {
+      this.createImageFromBlob(res);
+    }, err => {
+      //console.log(err)
+    });
+  }
 
 
-    await this._donService.addDon(this.don, token).toPromise();
 
-    let curUser : Utilisateur= await this._userService.getUserById(userId).toPromise();
+  async onSubmit() {
 
-    let ptsSourires = Math.trunc(this.don.montant) *2;
+    this.donModel.montant = this.payementModel.montant;
 
-    curUser.nbPointsSourire += ptsSourires;
-    
-    await this._userService.updateUser(curUser, token).toPromise();
+    console.log(this.payementModel, this.donModel);
+
+    if (this.donModel.montant > 0) {
+      let token = this._storageService.getItem('token');
+
+      let userId = this._userService.decodeTokenId(token);
+
+      let now = new Date(Date.now())
+
+      let n = now.toISOString().split('T');
+  
+      let date = n[0] + "T" + now.toLocaleTimeString();
+
+      this.donModel.donneur_id = userId;
+      this.donModel.receveur_id = this.idAsso;
+      this.donModel.date = date;
+
+
+
+
+
+      await this._donService.addDon(this.donModel, token).toPromise();
+
+      let lastDon: Don = await this._donService.getLastDonByIdDonneur(userId, token).toPromise();
+
+      this.payementModel.id_don = lastDon[0].id;
+
+      await this.payementService.addPayement(this.payementModel, token).toPromise();
+
+      let curUser: Utilisateur = await this._userService.getUserById(userId).toPromise();
+
+      let ptsSourires = Math.trunc(this.donModel.montant) * 2;
+
+      curUser.nbPointsSourire += ptsSourires;
+
+      await this._userService.updateUser(curUser, token).toPromise();
+
+
+      let mail = new Mail("wastemart.company@gmail.com", curUser.mail, "Votre Don",
+        "Vous avez effectué un don à ... ! <br/> .<br/>Cordialement,<br/>L'équipe WasteMart");
+
+      await this.mailService.sendMail(mail).toPromise();
+
+
+
+
+      alert("Votre don à bien été pris en compte, vous allez recevoir un mail de confirmation de votre don !");
+      location.replace('/');
+
+    }
+    else{
+      alert("Vous ne pouvez pas faire un don négatif ou nul ! ");
+    }
 
 
 

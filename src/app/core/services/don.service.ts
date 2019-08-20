@@ -58,6 +58,21 @@ export class DonService {
 
   }
 
+  getLastDonByIdDonneur(idD: string, token) {
+    let reqHeader = new HttpHeaders({
+      'accept': 'application/json',
+      'content-type': 'application/json',
+      'Authorization': 'Bearer ' + token
+    });
+
+    let params = new HttpParams();
+    params = params.append('idD', idD);
+
+
+    return this.http.get<any>(this._url + "/last", { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
+
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

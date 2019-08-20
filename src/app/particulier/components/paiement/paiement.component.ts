@@ -165,7 +165,7 @@ export class PaiementComponent implements OnInit {
       }
       await this._userService.updateUser(curUser, token).toPromise();
 
-      console.log(curUser.mail)
+
 
       let mail = new Mail("wastemart.company@gmail.com", curUser.mail, "Votre Commande",
         "Vous avez commandé des produits chez WasteMart ! <br/> Votre commande sera à votre porte d'ici un jour ouvré.<br/>Cordialement,<br/>L'équipe WasteMart");
@@ -176,7 +176,7 @@ export class PaiementComponent implements OnInit {
 
 
     alert("Votre commande à bien été prise en compte, vous allez recevoir un mail de confirmation de votre achat !");
-    //location.reload();
+    location.reload();
   }
 
   
