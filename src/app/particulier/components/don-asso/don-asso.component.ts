@@ -8,8 +8,6 @@ import { Utilisateur } from 'src/app/core/models/utilisateur';
 import { Payement } from 'src/app/core/models/payement';
 import { ImageService } from 'src/app/core/services/image.service';
 import { PayementService } from 'src/app/core/services/payement.service';
-import { Mail } from 'src/app/core/models/mail';
-import { MailService } from 'src/app/core/services/mail.service';
 
 @Component({
   selector: 'app-don-asso',
@@ -19,8 +17,7 @@ import { MailService } from 'src/app/core/services/mail.service';
 export class DonAssoComponent implements OnInit {
 
   constructor(private _aRoute: ActivatedRoute, private _storageService: StorageService, private _donService: DonService,
-    private _userService: UserService, private imageService: ImageService, private payementService: PayementService,
-    private mailService: MailService) { }
+    private _userService: UserService, private imageService: ImageService, private payementService: PayementService) { }
 
 
   idAsso = this._aRoute.snapshot.params.idAsso;
@@ -57,7 +54,6 @@ export class DonAssoComponent implements OnInit {
 
     this.donModel.montant = this.payementModel.montant;
 
-    console.log(this.payementModel, this.donModel);
 
     if (this.donModel.montant > 0) {
       let token = this._storageService.getItem('token');
@@ -93,13 +89,6 @@ export class DonAssoComponent implements OnInit {
       curUser.nbPointsSourire += ptsSourires;
 
       await this._userService.updateUser(curUser, token).toPromise();
-
-
-      let mail = new Mail("wastemart.company@gmail.com", curUser.mail, "Votre Don",
-        "Vous avez effectué un don à ... ! <br/> .<br/>Cordialement,<br/>L'équipe WasteMart");
-
-      await this.mailService.sendMail(mail).toPromise();
-
 
 
 

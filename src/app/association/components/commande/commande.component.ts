@@ -9,9 +9,7 @@ import { CommandeService } from 'src/app/core/services/commande.service';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Commande_has_produit } from 'src/app/core/models/commande_has_produit';
-import { Mail } from 'src/app/core/models/mail';
 import { Produit } from 'src/app/core/models/produit';
-import { MailService } from 'src/app/core/services/mail.service';
 import { ProduitService } from 'src/app/core/services/produit.service';
 import { Utilisateur } from 'src/app/core/models/utilisateur';
 
@@ -33,7 +31,7 @@ export class CommandeComponent implements OnInit {
 
   constructor(private entrepotService : EntrepotService, private storageService : StorageService, private userService : UserService,
     private commandeService : CommandeService, private route : Router, private cookieService : CookieService, 
-    private mailService : MailService, private produitService : ProduitService) { }
+    private produitService : ProduitService) { }
 
   async ngOnInit() {
 
@@ -119,12 +117,7 @@ export class CommandeComponent implements OnInit {
 
       this.cookieService.delete('produitPanier');
 
-      
 
-      let mail = new Mail("wastemart.company@gmail.com", curUser.mail, "Votre Commande",
-        "Vous avez commandé des produits chez WasteMart ! <br/> Votre commande sera à votre porte d'ici un jour ouvré.<br/>Cordialement,<br/>L'équipe WasteMart");
-
-      await this.mailService.sendMail(mail).toPromise();
 
     }
 

@@ -3,13 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { ProduitService } from 'src/app/core/services/produit.service';
 import { UserService } from 'src/app/core/services/user.service';
-import { MailService } from 'src/app/core/services/mail.service';
 import { StorageService } from 'src/app/core/services/storage.service';
 import { CommandeService } from 'src/app/core/services/commande.service';
 import { Commande } from 'src/app/core/models/commande';
 import { Commande_has_produit } from 'src/app/core/models/commande_has_produit';
 import { Produit } from 'src/app/core/models/produit';
-import { Mail } from 'src/app/core/models/mail';
 import { Utilisateur } from 'src/app/core/models/utilisateur';
 
 import * as L from 'leaflet';
@@ -39,7 +37,7 @@ export class PaiementComponent implements OnInit {
 
   constructor(private _aroute: ActivatedRoute, private route : Router,private _cookieService : CookieService, 
     private _produitService: ProduitService, private _userService: UserService, 
-    private _mailService: MailService, private _storageService: StorageService, private _commandeService: CommandeService,
+    private _storageService: StorageService, private _commandeService: CommandeService,
     private entrepotService : EntrepotService, private payementService : PayementService) {
 
    }
@@ -165,12 +163,6 @@ export class PaiementComponent implements OnInit {
       }
       await this._userService.updateUser(curUser, token).toPromise();
 
-
-
-      let mail = new Mail("wastemart.company@gmail.com", curUser.mail, "Votre Commande",
-        "Vous avez commandé des produits chez WasteMart ! <br/> Votre commande sera à votre porte d'ici un jour ouvré.<br/>Cordialement,<br/>L'équipe WasteMart");
-
-      await this._mailService.sendMail(mail).toPromise();
 
     }
 
