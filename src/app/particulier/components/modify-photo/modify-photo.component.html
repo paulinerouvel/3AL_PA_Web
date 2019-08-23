@@ -4,7 +4,18 @@
     <div class="col" style="background: white;">
       <div class="marge"></div>
 
-      <div class="row "><div class="col center"><h2>Modifier ma photo</h2></div></div>
+      <div class="row ">
+        <div class="col center">
+
+          
+          
+          <h2>Modifier ma photo</h2>
+
+          <h5>Mon image actuelle</h5>
+        
+          <img [src]="imageToShow" width="150px;"/>
+        
+        </div></div>
 
       <form [formGroup]="formGroup" novalidate (ngSubmit)="onSubmit()">
 

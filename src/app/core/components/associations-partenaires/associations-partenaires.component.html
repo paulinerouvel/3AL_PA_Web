@@ -1,50 +1,46 @@
 <div class="container-fluid" style="background:#383838;">
   <div class="row">
 
-    <div class="col"></div>
+    <div class="div_10"></div>
 
-    <div class="col-6">
+    <div class="div_80" style="border : 1px solid white">
       <div class="marge"></div>
       <div *ngIf="isEmpty == true" class="titre_page"> Aucune Association</div>
-      <div *ngIf="isEmpty == false" class="titre_page">Associations Partenaires</div>
-      <div class="item" [routerLink]="['/detailAssociation', item.Utilisateur_id]" *ngFor="let item of listeAssos">
-
-        <div class="third-div">
-          <img [src]="imageToShow[item.Utilisateur_id]" width="150px"/>
-        </div>
-        <div class="third-div">
-          <span class="title">{{item.Libelle}}</span>
-          <div class="contact">Contact : <b>{{item.tel}} / {{item.mail}}</b></div>
-        </div>
-        <div class="third-div">
-          <div class="floatR">
+      <div *ngIf="isEmpty == false" class="titre_page"> Nos Associations Partenaires</div>
+      <div class="item" *ngFor="let item of listeAssos">
 
 
+          <div class="third-div">
+            <img [src]="imageToShow[item.Utilisateur_id]" width="150px" />
           </div>
+          <div class="third-div">
+            <span class="title">{{item.Libelle}}</span>
+            <div class="contact">Contact : <b>{{item.tel}} <p> {{item.mail}}</p></b></div>
+          </div>
+          <div class="third-div">
+            <div class="floatR">
+              <div class="contact">SIRET : <b>{{item.siret}}</b>
+                <p> Effectifs : <b>{{item.tailleOrganisme}}</b></p>
+              </div>
+
+            </div>
+          </div>
+
+        <div class="full" >
+            {{item.desc}}
+          
+        </div>
+
+        <div *ngIf="don == true">
+            <button class="btn btn-primary" style="margin: 10px;" (click)="donAsso(item.Utilisateur_id)">Faire un Don</button>
         </div>
 
       </div>
 
 
     </div>
-    <div class="col"></div>
-    <!--
+    <div class="div_10"></div>
 
-      tel: "01 89 77 41 06"
-      mail: "nunc.est.mollis@suscipit.org"
-      photo: null
-
-
-ville: "Hope"
-adresse: "718-4196 Libero. Avenue"
-codePostal: 5932
-
-desc: "aliquet. Phasellus fermentum convallis ligula. Donec luctus aliquet odio. Etiam"
-siret: ""
-tailleOrganisme: 204
-
-
--->
 
   </div>
 </div>

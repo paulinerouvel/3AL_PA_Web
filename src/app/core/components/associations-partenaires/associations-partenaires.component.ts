@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { ImageService } from '../../services/image.service';
+import { Router } from '@angular/router';
+import { StorageService } from '../../services/storage.service';
 
 @Component({
   selector: 'app-associations-partenaires',
@@ -12,8 +14,10 @@ export class AssociationsPartenairesComponent implements OnInit {
   listeAssos;
   isEmpty = false;
   imageToShow = [];
+  don =false;
 
-  constructor(private userService: UserService, private _imageService: ImageService) { }
+  constructor(private userService: UserService, private _imageService: ImageService, 
+    private router : Router, private storageService: StorageService) { }
 
   createImageFromBlob(image: Blob, id ) {
     let reader = new FileReader();
@@ -33,6 +37,15 @@ export class AssociationsPartenairesComponent implements OnInit {
       this.isEmpty = true;
     }
 
+    let token = this.storageService.getItem('token');
+
+    if(token != null){
+      if(this.userService.decodeTokenType(token) == 3){
+        this.don = true;
+      }
+
+    }
+
     this.listeAssos.forEach(element => {
       this._imageService.getImage(element.photo).subscribe(async res => {
 
@@ -43,6 +56,11 @@ export class AssociationsPartenairesComponent implements OnInit {
     });
 
 
+  }
+
+  donAsso(id){
+
+    this.router.navigate(['/donAsso', { idAsso: id }]);
   }
 
 

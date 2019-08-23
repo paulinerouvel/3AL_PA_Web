@@ -2,7 +2,9 @@
 <button *ngIf="isEmpty == false" class="btn btn-success" (click)="validatePanier()">
   Valider mon panier
 </button>
-<table class="table">
+
+<div class="alert alert-secondary text-center" *ngIf="isEmpty == true">Vous n'avez aucun produit dans votre panier</div>
+<table  *ngIf="isEmpty == false" class="table">
   <thead>
     <tr>
       <th scope="col">Produit</th>
@@ -24,7 +26,7 @@
       <td>{{item.dlc | date}}</td>
       <td>
 
-        <button class="btn-delete floatR" (click)="deletePanier(item.id)">
+        <button class="btn_panier floatR" (click)="deletePanier(item.id)">
           <img src="../../../../assets/images/clear.svg">
         </button>
 

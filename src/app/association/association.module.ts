@@ -11,6 +11,7 @@ import { AddAlerteComponent } from './components/add-alerte/add-alerte.component
 import { MonPanierAssoComponent } from './components/mon-panier-asso/mon-panier-asso.component';
 import { CommandeComponent } from './components/commande/commande.component';
 import { ModifPhotoComponent } from './components/modif-photo/modif-photo.component';
+import { Ng5SliderModule } from 'ng5-slider';
 
 @NgModule({
   declarations: [BoutiqueAssoComponent, ModifProfilComponent, HistoriqueCommandesComponent, HistoriqueDonsComponent, GestionAlertesComponent, AddAlerteComponent, MonPanierAssoComponent, CommandeComponent, ModifPhotoComponent],
@@ -18,7 +19,8 @@ import { ModifPhotoComponent } from './components/modif-photo/modif-photo.compon
     CommonModule,
     FormsModule,
     AssociationRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    Ng5SliderModule
   ]
 })
 export class AssociationModule { }

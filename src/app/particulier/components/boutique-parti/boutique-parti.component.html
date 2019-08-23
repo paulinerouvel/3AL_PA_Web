@@ -1,17 +1,9 @@
 <div class="container-fluid" style="background:#383838;">
-
-
   <div class="row">
-
-    <!-- <div class="col"></div> -->
-
-
-
-
-
 
     <div class="left75">
       <div class="marge"></div>
+      
       <h1>Boutique WasteMart</h1>
 
       <div class="full div_filtre">
@@ -38,7 +30,7 @@
           </Select>
         </div>
 
-        <input type="submit" class="btn_panier floatR" (click)="ngOnInit()" value="Reset">
+        <input type="submit" class="btn_panier floatR" (click)="ngOnInit()" value="Réinitialiser">
 
       </div>
 
@@ -46,10 +38,11 @@
 
       <div *ngIf="produits == null" class="text-center">
         
-        Aucun produit ne correspond à votre recherche !
+        Aucun produit ne correspond à votre recherche ! Nous vous conseillons de réinitialiser vos filtres.
       </div>
+
       <div class="item" *ngFor="let item of produits;">
-        <div class="row">
+        <div class="row" style="min-height: 150px;">
           <div class="half_div">
             <img class="img_item" [src]="imageToShow[item.id]" width="100px" />
 
@@ -87,7 +80,7 @@
 
         <div class="item-panier" *ngFor="let p of parsedPanier">
 
-          {{p.libelle}}
+          {{p.libelle}}<br/>
 
 
           <select selected="p.nb" (change)="updateQuantite(p.id, $event.target.value)">

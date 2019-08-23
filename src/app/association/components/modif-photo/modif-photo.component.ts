@@ -25,8 +25,30 @@ export class ModifPhotoComponent implements OnInit {
 
   err: string;
   selectedFile: File;
+  imageToShow;
 
-  ngOnInit() {
+  createImageFromBlob(image: Blob) {
+    let reader = new FileReader();
+    reader.addEventListener("load", () => {
+      this.imageToShow = reader.result;
+    }, false);
+
+    if (image) {
+      reader.readAsDataURL(image);
+    }
+  }
+
+  async ngOnInit() {
+
+    let token = this.storageService.getItem('token');
+    let id = this.userService.decodeTokenId(token);
+    let curUser = await this.userService.getUserById(id).toPromise();
+
+    this.imageService.getImage(curUser.photo).subscribe(res => {
+      this.createImageFromBlob(res);
+    }, err => {
+      console.log(err)
+    });
   }
 
   async onFileChange(imageInput) {

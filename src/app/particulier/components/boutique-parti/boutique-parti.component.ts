@@ -28,7 +28,7 @@ export class BoutiquePartiComponent implements OnInit {
   imageToShow=[];
 
 
-  optionSelect = []
+  optionSelect = [];
 
   constructor(  private _produitService: ProduitService, private _cookieService: CookieService, 
     private _imageService : ImageService) {
@@ -48,6 +48,7 @@ export class BoutiquePartiComponent implements OnInit {
   }
 
   async ngOnInit() {
+
 
     this.produits = await this._produitService.getAllProductEnRayonByDest("3").toPromise();
 
@@ -161,12 +162,8 @@ export class BoutiquePartiComponent implements OnInit {
   async filtreCategorie(id){
     let produitDeBase;
 
-    if(this.produits == null /*&& this.lastFilter == "filtreCategorie"*/){
-      produitDeBase = await this._produitService.getAllProductEnRayonByDest("3").toPromise();
-    }
-    else{
-      produitDeBase = this.produits;
-    }
+    produitDeBase = this.produits;
+
 
     
     this.produits= [];
@@ -189,19 +186,16 @@ export class BoutiquePartiComponent implements OnInit {
       this.produits = null;
     }
 
-    this.filter.push("filtreCategorie");
+
   }
 
   async filtrePrix(){
 
     let produitDeBase;
 
-    if(this.produits == null /*&& this.lastFilter == "filtrePrix"*/){
-      produitDeBase = await this._produitService.getAllProductEnRayonByDest("3").toPromise();
-    }
-    else{
-      produitDeBase = this.produits;
-    }
+ 
+    produitDeBase = this.produits;
+
 
     
     this.produits= [];
@@ -222,18 +216,15 @@ export class BoutiquePartiComponent implements OnInit {
     if(this.produits.length == 0){
       this.produits = null;
     }
-    this.filter.push("filtrePrix");
+
   }
 
   async filtreMotCle(){
     let produitDeBase;
 
-    if(this.produits == null /*&& this.lastFilter == "filtreMotCle"*/){
-      produitDeBase = await this._produitService.getAllProductEnRayonByDest("3").toPromise();
-    }
-    else{
-      produitDeBase = this.produits;
-    }
+
+    produitDeBase = this.produits;
+    
 
     
     this.produits= [];
@@ -255,7 +246,7 @@ export class BoutiquePartiComponent implements OnInit {
       this.produits = null;
     }
 
-    this.filter.push("filtreMotCle");
+
 
   }
 

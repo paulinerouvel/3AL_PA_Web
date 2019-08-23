@@ -1,34 +1,73 @@
 <div class="container-fluid" style="background:#383838;">
   <div class="row">
-    <!-- <div class="col"></div> -->
 
-    <div class="col-8">
+    <div class="left75">
       <div class="marge"></div>
 
-      <div *ngIf="isEmpty == true">Aucun Produit</div>
+      <h1>Boutique WasteMart</h1>
 
 
-      <div class="item" *ngFor="let item of produits">
+      <div class="full div_filtre">
+
         <div class="third-div">
-          <img [src]="imageToShow[item.id]" width="250px"/>
+
+          <p>Mot clé </p>
+          <input class="btn" id="motCle" type="text" value="" (keyup)="motCleChange($event)" />
+          <button (click)="filtreMotCle()" class="btn btn-primary">Ok</button>
         </div>
-        <div class="third-div">
-          <span class="title">{{item.libelle}}</span>
-          <p>{{item.desc}}</p>
-          <p class="prix">{{item.prix}}€</p>
-          <span>Quantité disponible : <b>{{item.quantite}}</b></span>
-        </div>
-        <div class="third-div">
-          <div class="floatR">
 
-            <button class="btn" (click)="addPanier(item)">
-              <img src="../../../../assets/images/shopping_basket.svg">
-            </button>
-            <div class="full-div">
-              DLC : {{item.dlc | date}}
-            </div>
+        <div class="third-div">
+          <p>Prix </p>
+          <ng5-slider style="color:white;" [(value)]="value" [(highValue)]="highValue" [options]="options"
+            (click)="filtrePrix()"></ng5-slider>
+
+        </div>
+
+        <div class="third-div">
+          <p>Catégorie</p>
+          <Select class="btn" (change)="filtreCategorie($event.target.value)">
+            <option value="" selected></option>
+            <option *ngFor="let o of optionSelect" value="{{o.id}}" id="{{o.id}}">{{o.libelle}}</option>
+          </Select>
+        </div>
+
+        <input type="submit" class="btn_panier floatR" (click)="ngOnInit()" value="Réinitialiser">
+
+      </div>
+
+
+      <div *ngIf="produits == null" class="text-center">
+
+        Aucun produit ne correspond à votre recherche ! Nous vous conseillons de réinitialiser vos filtres.
+      </div>
+
+
+
+      <div class="item" *ngFor="let item of produits;">
+        <div class="row" style="min-height: 150px;">
+          <div class="half_div">
+            <img class="img_item" [src]="imageToShow[item.id]" width="100px" />
+
+          </div>
+          <div class="half_div">
+            <span class="title_product">{{item.libelle}}</span>
+
           </div>
         </div>
+        <div class="row">
+          <div class="half_div date">
+            <p>Date limite de consomation:</p> {{item.dlc | date}}
+          </div>
+          <div class="half_div ">
+            <p class="prix floatR">{{item.prix}}€</p>
+            <button class="btn_panier" (click)="addPanier(item)">
+              <img src="../../../../assets/images/shopping_basket.svg">
+            </button>
+          </div>
+        </div>
+
+
+
       </div>
 
 
@@ -43,13 +82,13 @@
 
         <div class="item-panier" *ngFor="let p of parsedPanier">
 
-          {{p.libelle}}
+          {{p.libelle}}<br/>
 
 
           <select selected="p.nb" (change)="updateQuantite(p.id, $event.target.value)">
             <option *ngFor="let i of counter(p.quantite)" [selected]="i == p.nb" value="{{i}}">{{i}}</option>
           </select>
-          <button class="btn-delete floatR" (click)="deletePanier(p.id)">
+          <button class="btn_panier floatR" (click)="deletePanier(p.id)">
             <img src="../../../../assets/images/clear.svg">
           </button>
           <div class="floatR prix-panier">
@@ -57,10 +96,13 @@
           </div>
         </div>
 
-        <hr>
-        TOTAL : <div class="floatR">{{totalPanier}} €</div>
-        <div class="div-button-panier"><input type="button" [routerLink]="['/login']" class="btn button-panier"
-            value="Valider mon panier"></div>
+        <div *ngIf="totalPanier != 0">
+          <hr>
+          TOTAL : <div class="floatR">{{totalPanier}} €</div>
+          <div class="div-button-panier"><input type="button" [routerLink]="['/login']" class="btn button-panier"
+              value="Valider mon panier"></div>
+
+        </div>
 
 
       </div>

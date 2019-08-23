@@ -15,7 +15,6 @@ import { AssociationsPartenairesComponent } from './core/components/associations
 import { EntreprisesPartenairesComponent } from './core/components/entreprises-partenaires/entreprises-partenaires.component';
 import { BoutiqueComponent } from './core/components/boutique/boutique.component';
 import { CookieService } from 'ngx-cookie-service';
-import { DetailAssociationComponent } from './core/components/detail-association/detail-association.component';
 
 import { LOCALE_ID } from '@angular/core';
 
@@ -25,6 +24,7 @@ import localeFr from '@angular/common/locales/fr';
 import { ContactComponent } from './core/components/contact/contact.component';
 import { AssociationModule } from './association/association.module';
 import { ParticulierModule } from './particulier/particulier.module';
+import { Ng5SliderModule } from 'ng5-slider';
 
 registerLocaleData(localeFr);
 
@@ -39,8 +39,8 @@ registerLocaleData(localeFr);
     EntreprisesPartenairesComponent,
     BoutiqueComponent,
     FooterComponent,
-    DetailAssociationComponent,
     ContactComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -50,7 +50,8 @@ registerLocaleData(localeFr);
     FormsModule,                               
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    Ng5SliderModule
 
   ],
   providers: [CookieService,

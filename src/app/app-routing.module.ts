@@ -7,7 +7,6 @@ import { LoginComponent } from './core/components/login/login.component';
 import { AssociationsPartenairesComponent } from './core/components/associations-partenaires/associations-partenaires.component';
 import { EntreprisesPartenairesComponent } from './core/components/entreprises-partenaires/entreprises-partenaires.component';
 import { BoutiqueComponent } from './core/components/boutique/boutique.component';
-import { DetailAssociationComponent } from './core/components/detail-association/detail-association.component';
 import { ContactComponent } from './core/components/contact/contact.component';
 
 const routes: Routes = [
@@ -15,7 +14,6 @@ const routes: Routes = [
   {path:"home", component: HomeComponent},
   {path:"login", component: LoginComponent},
   {path:"associationsPartenaires", component: AssociationsPartenairesComponent},
-  {path:"detailAssociation/:id", component: DetailAssociationComponent},
   {path:"entreprisesPartenaires", component: EntreprisesPartenairesComponent},
   {path:"boutique", component: BoutiqueComponent},
   {path:"contact", component: ContactComponent},

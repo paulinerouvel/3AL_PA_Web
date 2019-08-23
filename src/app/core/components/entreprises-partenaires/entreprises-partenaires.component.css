@@ -9,20 +9,26 @@
     margin-bottom: 30px;
     display: block;
     overflow: auto;
-    margin-left:30px;
-    border-radius: 5px;
+
+    
+    /* border: 1px solid grey; */
+    
+}
+
+.full{
+    display: block;
+    padding: 20px;
+    float: left;
+    border: 1px solid #c8295a;
+    margin : 20px;
+    width: 95%;
 }
 
 
 
-.item:hover{
-    /*background: lightgray;*/
-    cursor : pointer;
-    box-shadow: -1px 2px 10px 3px rgba(0, 0, 0, 0.3) inset;
-}
 
 .titre_page{
-    color: white;
+    color: black;
     font-size: 30px;
     text-align: center;
     padding-left: 50px;
@@ -55,4 +61,15 @@
     float: left;
     display: block;
     
+}
+
+
+.div_10{
+    width: 10%;
+    
+}
+
+.div_80{
+    width: 80%;
+    background: whitesmoke;
 }

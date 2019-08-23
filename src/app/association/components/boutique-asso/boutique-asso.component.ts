@@ -23,6 +23,10 @@ export class BoutiqueAssoComponent implements OnInit {
 
   imageToShow=[];
 
+  motCle="";
+
+  optionSelect = [];
+
   constructor(private _produitService: ProduitService, private _imageService : ImageService, private _storageService: StorageService, 
     private _cookieService: CookieService, private _commandeService: CommandeService, private userService : UserService) { }
 
@@ -73,6 +77,11 @@ export class BoutiqueAssoComponent implements OnInit {
       });
     });
 
+
+    let categoriesProduit = await this._produitService.getAllProductsCategorie().toPromise();
+    categoriesProduit.forEach(element => {
+      this.optionSelect.push(element)
+    });
 
 
     //recupération du contenu du panier
@@ -187,6 +196,74 @@ export class BoutiqueAssoComponent implements OnInit {
       alert("Vous ne pouvez plus mettre d'article dans votre panier, car vous avez atteind la limite de " + this.maxArticleFixe + " produits par semaine !");
       location.reload();
     }
+
+  }
+
+  async filtreCategorie(id){
+    let produitDeBase;
+
+    produitDeBase = this.produits;
+
+
+    
+    this.produits= [];
+    
+    let produitsFiltre = await this._produitService.getProductByCategorieAndDest(id, "1").toPromise();
+
+
+    if(produitDeBase != null){
+      for (const p of produitDeBase) {
+        for (const p2 of produitsFiltre) {
+          if(p.id == p2.id){
+            this.produits.push(p);
+          }
+        }
+      }
+    }
+
+  
+    if(this.produits.length == 0){
+      this.produits = null;
+    }
+
+
+  }
+
+
+  async filtreMotCle(){
+    let produitDeBase;
+
+
+    produitDeBase = this.produits;
+    
+
+    
+    this.produits= [];
+
+    let produitsFiltre = await this._produitService.getProductByNameAndDest(this.motCle, "1").toPromise();
+
+    if(produitDeBase != null){
+      for (const p of produitDeBase) {
+        for (const p2 of produitsFiltre) {
+          if(p.id == p2.id){
+            this.produits.push(p);
+          }
+        }
+      }
+    }
+
+
+    if(this.produits.length == 0){
+      this.produits = null;
+    }
+
+
+
+  }
+
+  motCleChange(e)
+  {
+    this.motCle = e.target.value;
 
   }
 

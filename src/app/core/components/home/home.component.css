@@ -5,6 +5,11 @@
     height: 50px;
 }
 
+.full{
+  background: black;
+  width: 100%;
+}
+
 .circular--landscape {
     display: inline-block;
     position: relative;

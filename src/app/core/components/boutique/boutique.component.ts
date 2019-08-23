@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Options } from 'ng5-slider';
+
 import { ProduitService } from '../../services/produit.service';
 import { CookieService } from 'ngx-cookie-service';
 import { ImageService } from '../../services/image.service';
@@ -11,15 +13,25 @@ import { ImageService } from '../../services/image.service';
 export class BoutiqueComponent implements OnInit {
 
 
+  value: number = 0;
+  highValue: number = 100;
+  options: Options = {
+    floor: 0,
+    ceil: 100
+  };
+
   produits;
   parsedPanier = [];
   totalPanier = 0;
   isEmpty = false;
+  filter=[];
 
 
+  motCle ="";
 
   imageToShow=[];
 
+  optionSelect = []
   
 
   constructor(private _produitService: ProduitService, private _cookieService: CookieService, private _imageService : ImageService) { }
@@ -38,10 +50,7 @@ export class BoutiqueComponent implements OnInit {
   async ngOnInit() {
 
     this.produits = await this._produitService.getAllProductEnRayonByDest("3").toPromise();
-    if (this.produits == []) {
-      this.isEmpty = true;
 
-    }
 
     this.produits.forEach(element => {
       this._imageService.getImage(element.photo).subscribe(res => {
@@ -51,6 +60,11 @@ export class BoutiqueComponent implements OnInit {
       });
     });
 
+
+    let categoriesProduit = await this._produitService.getAllProductsCategorie().toPromise();
+    categoriesProduit.forEach(element => {
+      this.optionSelect.push(element)
+    });
 
 
     //recupération du contenu du panier
@@ -143,5 +157,102 @@ export class BoutiqueComponent implements OnInit {
   }
 
 
+
+  async filtreCategorie(id){
+    let produitDeBase;
+
+    produitDeBase = this.produits;
+
+
+    
+    this.produits= [];
+    
+    let produitsFiltre = await this._produitService.getProductByCategorieAndDest(id, "3").toPromise();
+
+
+    if(produitDeBase != null){
+      for (const p of produitDeBase) {
+        for (const p2 of produitsFiltre) {
+          if(p.id == p2.id){
+            this.produits.push(p);
+          }
+        }
+      }
+    }
+
+  
+    if(this.produits.length == 0){
+      this.produits = null;
+    }
+
+
+  }
+
+  async filtrePrix(){
+
+    let produitDeBase;
+
+ 
+    produitDeBase = this.produits;
+
+
+    
+    this.produits= [];
+    
+    let produitsFiltre = await this._produitService.getProductByPrixAndDest(this.value, this.highValue, "3").toPromise();
+  
+
+    if(produitDeBase != null){
+      for (const p of produitDeBase) {
+        for (const p2 of produitsFiltre) {
+          if(p.id == p2.id){
+            this.produits.push(p);
+          }
+        }
+      }
+    }
+
+    if(this.produits.length == 0){
+      this.produits = null;
+    }
+
+  }
+
+  async filtreMotCle(){
+    let produitDeBase;
+
+
+    produitDeBase = this.produits;
+    
+
+    
+    this.produits= [];
+
+    let produitsFiltre = await this._produitService.getProductByNameAndDest(this.motCle, "3").toPromise();
+
+    if(produitDeBase != null){
+      for (const p of produitDeBase) {
+        for (const p2 of produitsFiltre) {
+          if(p.id == p2.id){
+            this.produits.push(p);
+          }
+        }
+      }
+    }
+
+
+    if(this.produits.length == 0){
+      this.produits = null;
+    }
+
+
+
+  }
+
+  motCleChange(e)
+  {
+    this.motCle = e.target.value;
+
+  }
 
 }
