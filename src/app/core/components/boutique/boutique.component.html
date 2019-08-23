@@ -96,6 +96,10 @@
           </div>
         </div>
 
+        <div *ngIf="totalPanier == 0">
+          Votre panier est vide !
+        </div>
+        
         <div *ngIf="totalPanier != 0">
           <hr>
           TOTAL : <div class="floatR">{{totalPanier}} €</div>

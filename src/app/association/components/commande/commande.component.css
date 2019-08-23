@@ -70,3 +70,11 @@ input[type="checkbox"]:checked:after{
 	left: 3px;
 	color: #99a1a7;
 }
+
+.titre_page{
+    color: black;
+    font-size: 30px;
+    text-align: center;
+    padding-left: 50px;
+    margin-bottom: 50px;
+}

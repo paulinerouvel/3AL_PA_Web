@@ -19,7 +19,7 @@
 
         <div class="third-div">
           <p>Catégorie</p>
-          <Select class="btn"  (change)="filtreCategorie($event.target.value)">
+          <Select class="btn" (change)="filtreCategorie($event.target.value)">
             <option value="" selected></option>
             <option *ngFor="let o of optionSelect" value="{{o.id}}" id="{{o.id}}">{{o.libelle}}</option>
           </Select>
@@ -32,7 +32,7 @@
 
 
       <div *ngIf="produits == null" class="text-center">
-        
+
         Aucun produit ne correspond à votre recherche ! Nous vous conseillons de réinitialiser vos filtres.
       </div>
 
@@ -89,9 +89,16 @@
           </div>
         </div>
 
-        <hr>
-        <div class="div-button-panier"><input type="button" [routerLink]="['/panier-asso']" class="btn button-panier"
-            value="Valider mon panier"></div>
+
+        <div *ngIf="totalPanier == 0">
+          Votre panier est vide !
+        </div>
+
+        <div *ngIf="totalPanier != 0">
+          <hr>
+          <div class="div-button-panier"><input type="button" [routerLink]="['/panier-asso']" class="btn button-panier"
+              value="Valider mon panier"></div>
+        </div>
 
 
       </div>

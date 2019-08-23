@@ -28,3 +28,21 @@
     border: 1px solid #A71F49;
     background: pink;
 }
+
+.titre_page{
+    color: black;
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.div_10{
+    width: 10%;
+    
+}
+
+.div_80{
+    width: 80%;
+    background: whitesmoke;
+    padding: 20px;
+}

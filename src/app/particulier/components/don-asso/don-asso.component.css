@@ -9,3 +9,11 @@
 input{
     margin: 10px;
 }
+
+.titre_page{
+    color: black;
+    font-size: 30px;
+    text-align: center;
+    padding-left: 50px;
+    margin-bottom: 50px;
+}

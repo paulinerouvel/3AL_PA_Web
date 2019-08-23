@@ -108,4 +108,8 @@ export class MonPanierPartComponent implements OnInit {
     this.ptSourires = 0;
   }
 
+  
+
 }
+
+

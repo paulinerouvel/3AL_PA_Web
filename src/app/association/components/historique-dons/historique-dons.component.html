@@ -1,30 +1,36 @@
 <div class="container-fluid" style="background:#383838;">
   <div class="row">
-    <div class="col"></div>
+    <div class="div_10"></div>
 
-    <div class="col-6">
+    <div class="div_80">
       <div class="marge"></div>
+      <div class="titre_page">Historique des dons reçus</div>
+
+      <div *ngIf="dons.length == 0" class="alert alert-secondary text-center">Vous n'avez reçu aucun don !</div>
 
 
       <div class="item" *ngFor="let item of dons;">
         <div class="third-div">
-          //IMG
+          <img  [src]="imageToShow[item.id]" width="100px" />
         </div>
         <div class="third-div">
-          <span class="title">De {{item.donneur}}</span>
           <p class="prix">{{item.montant}}€</p>
+          <span class="title">De {{item.donneur}}</span>
+          
         </div>
         <div class="third-div">
           <div class="floatR">
 
             <div class="full-div">
-              Date du don : {{item.date | date}}
+              <p>Date du don : {{item.date | date}}</p>
+
+              <p>Contact : <b>{{item.contact}}</b></p>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="marge"></div>
-    <div class="col"></div>
+    <div class="div_10"></div>
   </div>
 </div>

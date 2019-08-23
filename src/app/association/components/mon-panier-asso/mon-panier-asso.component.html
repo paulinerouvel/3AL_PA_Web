@@ -1,36 +1,51 @@
-<div class="marge"></div>
-<button *ngIf="isEmpty == false" class="btn btn-success" (click)="validatePanier()">
-  Valider mon panier
-</button>
+<div class="container-fluid" style="background:#383838;">
+  <div class="row">
+    <div class="div_10"></div>
 
-<div class="alert alert-secondary text-center" *ngIf="isEmpty == true">Vous n'avez aucun produit dans votre panier</div>
-<table  *ngIf="isEmpty == false" class="table">
-  <thead>
-    <tr>
-      <th scope="col">Produit</th>
-      <th scope="col">Description</th>
-      <th scope="col ">Quantité</th>
-      <th scope="col ">DLC</th>
-      <th scope="col ">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of parsedPanier">
-      <td>{{item.libelle}}</td>
-      <td>{{item.desc}}</td>
-      <td>
-        <select selected="item.nb" (change)="updateQuantite(item.id, $event.target.value)">
-          <option *ngFor="let i of counter(item.quantite)" [selected]="i == item.nb" value="{{i}}">{{i}}</option>
-        </select>
-      </td>
-      <td>{{item.dlc | date}}</td>
-      <td>
 
-        <button class="btn_panier floatR" (click)="deletePanier(item.id)">
-          <img src="../../../../assets/images/clear.svg">
-        </button>
+    <div class="div_80">
+    <div class="marge"></div>
 
-      </td>
-    </tr>
-  </tbody>
-</table>
+    <div class="titre_page text-center">Mon Panier</div>
+
+    <button *ngIf="isEmpty == false" class="btn btn-success" (click)="validatePanier()">
+      Valider mon panier
+    </button>
+
+    <div class="alert alert-secondary text-center" *ngIf="isEmpty == true">Vous n'avez aucun produit dans votre panier
+    </div>
+    <table *ngIf="isEmpty == false" class="table">
+      <thead>
+        <tr>
+          <th scope="col">Produit</th>
+          <th scope="col">Description</th>
+          <th scope="col ">Quantité</th>
+          <th scope="col ">DLC</th>
+          <th scope="col ">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of parsedPanier">
+          <td>{{item.libelle}}</td>
+          <td>{{item.desc}}</td>
+          <td>
+            <select selected="item.nb" (change)="updateQuantite(item.id, $event.target.value)">
+              <option *ngFor="let i of counter(item.quantite)" [selected]="i == item.nb" value="{{i}}">{{i}}</option>
+            </select>
+          </td>
+          <td>{{item.dlc | date}}</td>
+          <td>
+
+            <button class="btn_panier floatR" (click)="deletePanier(item.id)">
+              <img src="../../../../assets/images/clear.svg">
+            </button>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+  <div class="div_10"></div>
+
+  </div>

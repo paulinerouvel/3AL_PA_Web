@@ -1,24 +1,40 @@
-<div class="marge"></div>
-<button class="btn add" [routerLink]="['add']">
-  <!--icon plus-->
-  Ajouter une alerte
-</button>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Libelle</th>
-      <th scope="col">Date</th>
-      <th scope="col ">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of alerts">
-      <td>{{item.libelle}}</td>
-      <td>{{item.date | date}}</td>
-      <td>
-        <button class="btn" (click)="deleteAlert(item.id)">
-          <img src="../../../../assets/images/clear.svg">
-        </button></td>
-    </tr>
-  </tbody>
-</table>
+<div class="container-fluid" style="background:#383838;">
+  <div class="row">
+    <div class="div_10"></div>
+
+
+    <div class="div_80">
+
+        
+
+      <div class="marge"></div>
+
+      <div class="titre_page text-center">Gérer mes alertes</div>
+      <button class="btn btn-success" [routerLink]="['add']">
+        Ajouter une alerte
+      </button>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Libelle</th>
+            <th scope="col">Date</th>
+            <th scope="col ">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of alerts">
+            <td>{{item.libelle}}</td>
+            <td>{{item.date | date}}</td>
+            <td>
+              <button class="btn_panier" (click)="deleteAlert(item.id)">
+                <img src="../../../../assets/images/clear.svg">
+              </button></td>
+          </tr>
+        </tbody>
+      </table>
+
+
+
+    </div>
+    <div class="div_10"></div>
+  </div>

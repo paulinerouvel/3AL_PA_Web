@@ -1,14 +1,20 @@
 <div class="container-fluid" style="background:#383838;">
   <div class="row">
-    <div class="col"></div>
+    <div class="div_10"></div>
 
-    <div class="col-6">
+    <div class="div_80">
       <div class="marge"></div>
+
+      <div class="titre_page">Historique de mes commandes</div>
+
+      <div *ngIf="commandes.length == 0" class="alert alert-secondary text-center">Vous n'avez effectué aucune commande !</div>
+
+
 
 
       <div class="item" *ngFor="let item of commandes;">
         <div class="third-div">
-          <span class="title">Achat du {{item.date | date}}</span>
+          <span class="title">Commande du {{item.date | date}}</span>
         </div>
         <div class="third-div">
           <ul>
@@ -21,12 +27,13 @@
 
             <div class="full-div">
               <p class="prix">Total {{item.total}}€</p>
+              <p class="prix">BTN Facture</p>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="marge"></div>
-    <div class="col"></div>
+    <div class="div_10"></div>
   </div>
 </div>

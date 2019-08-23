@@ -6,6 +6,19 @@
     color : lightgray;
 }
 
+.btn-delete{
+    background: #383838;
+    /* color:#c8295a; */
+    color: white;
+    border: 1px solid black;
+}
+
+.btn-delete:hover{
+    background: #8cfedc;
+    border : 1px solid white;
+    color : white;
+}
+
 .btn_panier{
     border: 1px solid black;
     border-radius : 5px;
@@ -14,4 +27,22 @@
 .btn_panier:hover{
     border: 1px solid #A71F49;
     background: pink;
+}
+
+.titre_page{
+    color: black;
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.div_10{
+    width: 10%;
+    
+}
+
+.div_80{
+    width: 80%;
+    background: whitesmoke;
+    padding: 20px;
 }
