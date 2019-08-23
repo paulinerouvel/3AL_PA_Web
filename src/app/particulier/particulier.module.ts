@@ -13,9 +13,10 @@ import { PaiementComponent } from './components/paiement/paiement.component';
 import { Ng5SliderModule } from 'ng5-slider';
 import { DonAssoComponent } from './components/don-asso/don-asso.component';
 import { ModifyPhotoComponent } from './components/modify-photo/modify-photo.component';
+import { DetailProduitComponent } from './components/detail-produit/detail-produit.component';
 
 @NgModule({
-  declarations: [BoutiquePartiComponent, ModifProfilComponent, HistoriqueCommandesComponent, HistoriqueDonsComponent, GestionAlertesComponent, AddAlerteComponent, MonPanierPartComponent, PaiementComponent, DonAssoComponent, ModifyPhotoComponent],
+  declarations: [BoutiquePartiComponent, ModifProfilComponent, HistoriqueCommandesComponent, HistoriqueDonsComponent, GestionAlertesComponent, AddAlerteComponent, MonPanierPartComponent, PaiementComponent, DonAssoComponent, ModifyPhotoComponent, DetailProduitComponent],
   imports: [
     CommonModule,
     ParticulierRoutingModule,

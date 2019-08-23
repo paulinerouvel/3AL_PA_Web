@@ -6,7 +6,7 @@
       <div class="titre">Modification de mes informations</div>
       <form #modifProfil="ngForm" class="text-left" (ngSubmit)="onSubmit()" novalidate class="text-left">
 
-        <p><b>Nombre de points sourires* : {{userModel.nbPointsSourire}}</b></p>
+        <div class="alert alert-success">Nombre de points sourires* : {{userModel.nbPointsSourire}}</div>
 
 
         <div class="form-group">

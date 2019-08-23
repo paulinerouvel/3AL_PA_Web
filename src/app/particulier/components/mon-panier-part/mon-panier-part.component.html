@@ -8,7 +8,8 @@
 <button *ngIf="isEmpty == false && reduction == true" class="btn btn-warning" (click)="deleteReduction()">
   Retirer la réduction
 </button>
-<table class="table">
+<div class="alert alert-secondary text-center" *ngIf="isEmpty == true">Vous n'avez aucun produit dans votre panier</div>
+<table *ngIf="isEmpty == false" class="table">
   <thead>
     <tr>
       <th scope="col">Produit</th>
@@ -32,7 +33,7 @@
       <td>{{item.prix * item.nb}} €</td>
       <td>
 
-        <button class="btn-delete floatR" (click)="deletePanier(item.id)">
+        <button class="btn_panier floatR" (click)="deletePanier(item.id)">
           <img src="../../../../assets/images/clear.svg">
         </button>
 

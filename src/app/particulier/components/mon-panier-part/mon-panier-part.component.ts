@@ -25,16 +25,15 @@ export class MonPanierPartComponent implements OnInit {
 
   async ngOnInit() {
     let cookie = this._cookieService.get("produitPanier");
-    if (cookie) {
+    if (cookie != "[]") {
       this.parsedPanier = JSON.parse(cookie);
       this.isEmpty = false;
-
-
     }
     this.calculTotalPanier();
 
     let token = this.storageService.getItem('token');
     this.curUser = await this.userService.getUserById(this.userService.decodeTokenId(token)).toPromise();
+
   }
 
 
@@ -52,6 +51,11 @@ export class MonPanierPartComponent implements OnInit {
     this._cookieService.delete('produitPanier', '/panier-part');
     this._cookieService.set('produitPanier', JSON.stringify(produitPanier), 5);//expire dans 5 jours
     this.calculTotalPanier();
+
+
+    if(produitPanier.length == 0){
+      this.isEmpty = true;
+    }
   }
 
 

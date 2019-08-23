@@ -22,6 +22,7 @@ export class BoutiquePartiComponent implements OnInit {
   parsedPanier = [];
   totalPanier = 0;
   motCle = "";
+  filter = [];
 
 
   imageToShow=[];
@@ -158,16 +159,103 @@ export class BoutiquePartiComponent implements OnInit {
 
 
   async filtreCategorie(id){
-    this.produits = await this._produitService.getProductByCategorieAndDest(id, "3").toPromise();
+    let produitDeBase;
+
+    if(this.produits == null /*&& this.lastFilter == "filtreCategorie"*/){
+      produitDeBase = await this._produitService.getAllProductEnRayonByDest("3").toPromise();
+    }
+    else{
+      produitDeBase = this.produits;
+    }
+
+    
+    this.produits= [];
+    
+    let produitsFiltre = await this._produitService.getProductByCategorieAndDest(id, "3").toPromise();
+
+
+    if(produitDeBase != null){
+      for (const p of produitDeBase) {
+        for (const p2 of produitsFiltre) {
+          if(p.id == p2.id){
+            this.produits.push(p);
+          }
+        }
+      }
+    }
+
+  
+    if(this.produits.length == 0){
+      this.produits = null;
+    }
+
+    this.filter.push("filtreCategorie");
   }
 
   async filtrePrix(){
-    this.produits = await this._produitService.getProductByPrixAndDest(this.value, this.highValue, "3").toPromise();
+
+    let produitDeBase;
+
+    if(this.produits == null /*&& this.lastFilter == "filtrePrix"*/){
+      produitDeBase = await this._produitService.getAllProductEnRayonByDest("3").toPromise();
+    }
+    else{
+      produitDeBase = this.produits;
+    }
+
+    
+    this.produits= [];
+    
+    let produitsFiltre = await this._produitService.getProductByPrixAndDest(this.value, this.highValue, "3").toPromise();
+  
+
+    if(produitDeBase != null){
+      for (const p of produitDeBase) {
+        for (const p2 of produitsFiltre) {
+          if(p.id == p2.id){
+            this.produits.push(p);
+          }
+        }
+      }
+    }
+
+    if(this.produits.length == 0){
+      this.produits = null;
+    }
+    this.filter.push("filtrePrix");
   }
 
   async filtreMotCle(){
+    let produitDeBase;
 
-    this.produits = await this._produitService.getProductByNameAndDest(this.motCle, "3").toPromise();
+    if(this.produits == null /*&& this.lastFilter == "filtreMotCle"*/){
+      produitDeBase = await this._produitService.getAllProductEnRayonByDest("3").toPromise();
+    }
+    else{
+      produitDeBase = this.produits;
+    }
+
+    
+    this.produits= [];
+
+    let produitsFiltre = await this._produitService.getProductByNameAndDest(this.motCle, "3").toPromise();
+
+    if(produitDeBase != null){
+      for (const p of produitDeBase) {
+        for (const p2 of produitsFiltre) {
+          if(p.id == p2.id){
+            this.produits.push(p);
+          }
+        }
+      }
+    }
+
+
+    if(this.produits.length == 0){
+      this.produits = null;
+    }
+
+    this.filter.push("filtreMotCle");
 
   }
 

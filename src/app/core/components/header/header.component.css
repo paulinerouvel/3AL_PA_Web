@@ -1,6 +1,7 @@
 .navbar{
     background : #000000;
-    border : none;
+    border-bottom : 1px solid lightgray;
+
 }
 
 .bandeau a{
@@ -67,4 +68,5 @@ li{
 
 .img_profil{
     border-radius: 50px;
+    border: 2px solid whitesmoke;
 }

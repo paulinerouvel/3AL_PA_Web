@@ -5,3 +5,13 @@
 .add:hover{
     color : lightgray;
 }
+
+.btn_panier{
+    border: 1px solid black;
+    border-radius : 5px;
+    background: white;
+}
+.btn_panier:hover{
+    border: 1px solid #A71F49;
+    background: pink;
+}
