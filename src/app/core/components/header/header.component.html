@@ -10,10 +10,19 @@
     </button>
     <div class="collapse navbar-collapse" [ngClass]="{ 'show': isShown }" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto bandeau">
-        <li><a [routerLink]="['/home']" (click)="isShown = false" style="padding: 0px;"><img id="logo"
+
+
+        <li *ngIf="isConnected == false"><a [routerLink]="['/home']" (click)="isShown = false" style="padding: 0px;"><img id="logo"
               src="..\..\..\assets\images\logo.PNG"></a></li>
+
+        <li *ngIf="isConnected == false"><a id="title" (click)="isShown = false" [routerLink]="['/home']">WasteMart</a></li>
+        
+        <li *ngIf="isConnected == true"><a (click)="isShown = false" style="padding: 0px;"><img id="logo"
+          src="..\..\..\assets\images\logo.PNG"></a></li>
+
+        <li *ngIf="isConnected == true"><a id="title" (click)="isShown = false" >WasteMart</a></li>
               
-        <li><a id="title" (click)="isShown = false" [routerLink]="['/home']">WasteMart</a></li>
+        
         <li id="item item_long"><a href="#" [routerLink]="['/associationsPartenaires']" (click)="isShown = false">
             <div>Associations <br />Partenaires</div>
           </a></li>
@@ -61,6 +70,9 @@
         </div>
 
         <div *ngIf="type == 1 && isConnected == true" class="dropdown">
+
+            <img class="img_profil" [src]="imageToShow" width="50px">
+
           <button *ngIf="curUser" class="btn pseudo dropdown-toggle" (click)="isShownBis = !isShownBis" type="button"
             data-toggle="dropdown">
             {{curUser.pseudo}}
@@ -68,6 +80,7 @@
           <div [ngClass]="{ 'show': isShownBis }" class="dropdown-menu">
             <a class="dropdown-item" (click)="isShownBis = !isShownBis" [routerLink]="['/panier-asso']">Mon panier</a>
             <a class="dropdown-item" (click)="isShownBis = !isShownBis" [routerLink]="['/modif-profil-asso']">Mon profil</a>
+            <a class="dropdown-item" (click)="isShownBis = !isShownBis" [routerLink]="['/modif-photo-asso']">Ma photo</a>
             <a class="dropdown-item" (click)="isShownBis = !isShownBis" [routerLink]="['/dons-asso']">Historiques de mes dons reçus</a>
             <a class="dropdown-item" (click)="isShownBis = !isShownBis" [routerLink]="['/commandes-asso']">Historiques de mes commandes</a>
             <a class="dropdown-item" (click)="isShownBis = !isShownBis" [routerLink]="['/gestion-alertes-asso']">Gérer mes alertes</a>

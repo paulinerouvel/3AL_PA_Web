@@ -9,11 +9,13 @@ import { HistoriqueDonsComponent } from './components/historique-dons/historique
 import { HistoriqueCommandesComponent } from './components/historique-commandes/historique-commandes.component';
 import { MonPanierAssoComponent } from './components/mon-panier-asso/mon-panier-asso.component';
 import { CommandeComponent } from './components/commande/commande.component';
+import { ModifPhotoComponent } from './components/modif-photo/modif-photo.component';
 
 
 const assoRoutes: Routes = [
   { path: 'boutique-asso',  component: BoutiqueAssoComponent, canActivate : [AuthGuard]},
   { path: 'modif-profil-asso',  component: ModifProfilComponent, canActivate : [AuthGuard]},
+  { path: 'modif-photo-asso',  component: ModifPhotoComponent, canActivate : [AuthGuard]},
   { path: 'gestion-alertes-asso',  component: GestionAlertesComponent, canActivate : [AuthGuard]},
   { path: 'gestion-alertes-asso/add',  component: AddAlerteComponent, canActivate : [AuthGuard]},
   { path: 'dons-asso',  component: HistoriqueDonsComponent, canActivate : [AuthGuard]},

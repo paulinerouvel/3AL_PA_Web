@@ -23,19 +23,38 @@ export class ContactComponent implements OnInit {
 
     let token = this._storageService.getItem('token');
 
-    let user = await this._userService.getUserById(this._userService.decodeTokenId(token)).toPromise();
+    if(token != null){
+      let user = await this._userService.getUserById(this._userService.decodeTokenId(token)).toPromise();
 
-    this.mail.sender = user.mail;
-    this.mail.message += "<br/>" + user.mail + " " + user.prenom + " " + user.nom;
+      this.mail.sender = user.mail;
+      this.mail.message += "<br/><br/><br/>" + user.mail + " " + user.prenom + " " + user.nom;
 
-    await this._mailService.sendMail(this.mail).toPromise();
+      await this._mailService.sendMail(this.mail).toPromise();
 
-    this.mail.subject += "-COPIE";
-    this.mail.destination = user.mail;
-    await this._mailService.sendMail(this.mail).toPromise();
+      
+      this.mail.destination = user.mail;
+      this.mail.subject += "-COPIE";
+      await this._mailService.sendMail(this.mail).toPromise();
 
+      if(this._userService.decodeTokenType(token) == 1){
+        this.router.navigateByUrl('/boutique-asso');
+      }
+      else if(this._userService.decodeTokenType(token) == 3){
+        this.router.navigateByUrl('/boutique-part');
+      }
+      else{
+        this.router.navigateByUrl('/boutique');
+      }
 
-    this.router.navigateByUrl('/home');
+      
+    }
+    else{
+      alert("Vous devez être connecté pour contacter l'administration WasteMart ! ");
+    }
+
+    
+
+    
   }
 
 }

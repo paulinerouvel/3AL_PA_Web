@@ -1,0 +1,26 @@
+<div class="container-fluid" style="background:#383838;">
+    <div class="row">
+      <div class="col"></div>
+      <div class="col" style="background: white;">
+        <div class="marge"></div>
+  
+        <div class="row "><div class="col center"><h2>Modifier ma photo</h2></div></div>
+  
+        <form [formGroup]="formGroup" novalidate (ngSubmit)="onSubmit()">
+  
+  
+          <div *ngIf="err" class="alert alert-warning">
+            {{err}}
+          </div>
+  
+  
+          <input class="padding" #imageInput type="file" accept="image/*" (change)="onFileChange(imageInput)">
+  
+          <button type="submit" class="btn btn-success" [disabled]="imageInput.invalid || imageInput.prestine || err">Valider</button>
+        </form>
+  
+        <div class="marge"></div>
+      </div>
+      <div class="col"></div>
+    </div>
+  </div>

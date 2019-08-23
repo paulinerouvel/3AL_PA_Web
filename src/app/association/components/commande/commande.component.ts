@@ -123,7 +123,17 @@ export class CommandeComponent implements OnInit {
 
 
     alert("Votre commande à bien été prise en compte, vous allez recevoir un mail de confirmation de votre achat !");
-    location.replace('/');
+
+
+    if(this.userService.decodeTokenType(token) == 1){
+      this.route.navigateByUrl('/boutique-asso');
+    }
+    else if(this.userService.decodeTokenType(token) == 3){
+      this.route.navigateByUrl('/boutique-part');
+    }
+    else{
+      this.route.navigateByUrl('/boutique');
+    }
   }
 
 }

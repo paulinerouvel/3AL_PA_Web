@@ -1,26 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ImageService } from 'src/app/core/services/image.service';
 import { StorageService } from 'src/app/core/services/storage.service';
 import { UserService } from 'src/app/core/services/user.service';
+import { ImageService } from 'src/app/core/services/image.service';
 import { Utilisateur } from 'src/app/core/models/utilisateur';
 import { Router } from '@angular/router';
 
-
 @Component({
-  selector: 'app-modify-photo',
-  templateUrl: './modify-photo.component.html',
-  styleUrls: ['./modify-photo.component.css']
+  selector: 'app-modif-photo',
+  templateUrl: './modif-photo.component.html',
+  styleUrls: ['./modif-photo.component.css']
 })
+export class ModifPhotoComponent implements OnInit {
 
 
-export class ModifyPhotoComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private storageService: StorageService, private userService: UserService,
-    private imageService: ImageService, private route : Router) { }
+    private imageService: ImageService, private router : Router) { }
 
-
-
+  
   formGroup = this.fb.group({
     file: [null, Validators.required]
   });
@@ -28,11 +26,8 @@ export class ModifyPhotoComponent implements OnInit {
   err: string;
   selectedFile: File;
 
-
   ngOnInit() {
-
   }
-
 
   async onFileChange(imageInput) {
 
@@ -75,13 +70,13 @@ export class ModifyPhotoComponent implements OnInit {
         alert("Votre photo à bien été modifiée");
   
         if(this.userService.decodeTokenType(token) == 1){
-          this.route.navigateByUrl('/boutique-asso');
+          this.router.navigateByUrl('/boutique-asso');
         }
         else if(this.userService.decodeTokenType(token) == 3){
-          this.route.navigateByUrl('/boutique-part');
+          this.router.navigateByUrl('/boutique-part');
         }
         else{
-          this.route.navigateByUrl('/boutique');
+          this.router.navigateByUrl('/boutique');
         }
   
       }, err=>{
@@ -97,3 +92,6 @@ export class ModifyPhotoComponent implements OnInit {
 
   }
 }
+
+
+

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Don } from 'src/app/core/models/don';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StorageService } from 'src/app/core/services/storage.service';
 import { DonService } from 'src/app/core/services/don.service';
 import { UserService } from 'src/app/core/services/user.service';
@@ -17,7 +17,8 @@ import { PayementService } from 'src/app/core/services/payement.service';
 export class DonAssoComponent implements OnInit {
 
   constructor(private _aRoute: ActivatedRoute, private _storageService: StorageService, private _donService: DonService,
-    private _userService: UserService, private imageService: ImageService, private payementService: PayementService) { }
+    private _userService: UserService, private imageService: ImageService, private payementService: PayementService, 
+    private router : Router) { }
 
 
   idAsso = this._aRoute.snapshot.params.idAsso;
@@ -93,7 +94,15 @@ export class DonAssoComponent implements OnInit {
 
 
       alert("Votre don à bien été pris en compte, vous allez recevoir un mail de confirmation de votre don !");
-      location.replace('/');
+      if(this._userService.decodeTokenType(token) == 1){
+        this.router.navigateByUrl('/boutique-asso');
+      }
+      else if(this._userService.decodeTokenType(token) == 3){
+        this.router.navigateByUrl('/boutique-part');
+      }
+      else{
+        this.router.navigateByUrl('/boutique');
+      }
 
     }
     else{
