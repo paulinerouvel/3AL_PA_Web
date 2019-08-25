@@ -7,12 +7,12 @@
 
       <div class="titre_page">Historique des dons émis</div>
 
-      <div *ngIf="dons.length == 0" class="alert alert-secondary text-center">Vous n'avez émis aucun don !</div>
+      <div *ngIf="dons == undefined" class="alert alert-secondary text-center">Vous n'avez émis aucun don !</div>
 
 
       <div class="item" *ngFor="let item of dons;">
         <div class="third-div">
-            <img  [src]="imageToShow[item.id]" width="100px" />
+            <img *ngIf="imageToShow[item.id]" [src]="imageToShow[item.id]" width="100px" />
         </div>
         <div class="third-div">
             <p class="prix">{{item.montant}}€</p>
@@ -25,6 +25,8 @@
             <div class="full-div">
               Date du don : {{item.date | date}}
               <p>Contact : <b>{{item.contact}}</b></p>
+
+              //BTN FACTURE
             </div>
           </div>
         </div>

@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col">
             <div class="marge"></div>
-            <img [src]="imageToShow" width="500px" />
+            <img *ngIf="imageToShow" [src]="imageToShow" width="500px" />
         </div>
         <div class="col-6" style="background:white; ">
             <div class="marge"></div>

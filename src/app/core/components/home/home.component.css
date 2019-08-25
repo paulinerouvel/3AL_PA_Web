@@ -6,8 +6,17 @@
 }
 
 .full{
-  background: black;
+  background: #000000;
   width: 100%;
+  
+}
+
+.yellow_border{
+  border-top: 2px solid yellow;
+}
+
+img {
+  opacity: 0.7;
 }
 
 .circular--landscape {
@@ -99,3 +108,12 @@
   .slider.round:before {
     border-radius: 50%;
   }
+
+  .titre_page{
+    color: white;
+    font-size: 30px;
+    padding-left: 50px;
+    margin-bottom: 50px;
+    margin-top: 50px;
+    margin-left: 360px; 
+}

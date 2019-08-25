@@ -4,13 +4,20 @@ import { AuthentificationService } from 'src/app/core/services/authentification.
 import { Router } from '@angular/router'
 import { UserService } from '../../services/user.service';
 import { StorageService } from '../../services/storage.service';
+import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  providers: [NgbCarouselConfig] 
 })
 export class HomeComponent implements OnInit {
+
+  showNavigationArrows = false;
+  showNavigationIndicators = false;
+
+
 
   errorMsg = '';
   infoMsg = '';
@@ -22,7 +29,12 @@ export class HomeComponent implements OnInit {
 
 
   constructor(private authentificationService: AuthentificationService, private _userService: UserService,
-    private storageService : StorageService) { }
+    private storageService : StorageService, config: NgbCarouselConfig) { 
+      config.showNavigationArrows = true;
+      config.showNavigationIndicators = true;
+    }
+
+
 
   async ngOnInit() {
     this.userModel.photo = "img_profil.png";

@@ -26,6 +26,7 @@ export class PaiementComponent implements OnInit {
   total = 0;
   parsedPanier;
   ptSouriresReduction = 0;
+  
 
   entrepots : Entrepot[];
 
@@ -146,9 +147,13 @@ export class PaiementComponent implements OnInit {
         let upProduit = new Produit(p["id"], p["libelle"], p["desc"], p["photo"], p["prix"], p["prixInitial"], parseInt(p["quantite"]) - parseInt(p['nb']),
           p["dlc"], p["codeBarre"], p["enRayon"], p["dateMiseEnRayon"], p["categorieProduit_id"], p["listProduct_id"], p["entrepotwm_id"], p["destinataire"]);
 
+
+        
         await this._produitService.updateProduct(upProduit, token).toPromise();
 
       }
+
+      await this._commandeService.sendMailAndFacture(curCommande[0].id, token).toPromise();
 
       this._cookieService.delete('produitPanier');
 

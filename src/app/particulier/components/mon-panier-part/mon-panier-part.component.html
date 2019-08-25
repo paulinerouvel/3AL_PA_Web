@@ -7,11 +7,11 @@
       <div class="marge"></div>
 
       <div class="titre_page text-center">Mon Panier</div>
-      <button *ngIf="isEmpty == false" class="btn btn-success" (click)="validatePanier()">
+      <button *ngIf="isEmpty == false" class="btn btn-success" style="margin-right: 10px;" (click)="validatePanier()">
         Valider mon panier
       </button>
       <button *ngIf="isEmpty == false && reduction == false" class="btn btn-success" (click)="addReduction()">
-        Réduction points sourires
+        Réduction points sourires ({{ptSourires}}€)
       </button>
       <button *ngIf="isEmpty == false && reduction == true" class="btn btn-warning" (click)="deleteReduction()">
         Retirer la réduction

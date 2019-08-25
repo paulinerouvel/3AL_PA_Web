@@ -11,7 +11,7 @@
 
       <div class="item" *ngFor="let item of dons;">
         <div class="third-div">
-          <img  [src]="imageToShow[item.id]" width="100px" />
+          <img *ngIf="imageToShow[item.id]" [src]="imageToShow[item.id]" width="100px" />
         </div>
         <div class="third-div">
           <p class="prix">{{item.montant}}€</p>

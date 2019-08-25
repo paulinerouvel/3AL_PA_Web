@@ -43,6 +43,21 @@ export class CommandeService {
 
   }
 
+  sendMailAndFacture(idCmd, token) {
+
+    let reqHeader = new HttpHeaders({
+      'accept': 'application/json',
+      'content-type': 'application/json',
+      'Authorization': 'Bearer ' + token
+    });
+
+
+
+    return this.http.post<any>(this._url,JSON.stringify({
+      "idCmd": idCmd}) ,{headers: reqHeader }).pipe(catchError(this.handleError));
+
+  }
+
   getAllCommandeByIdUser(idUser: string, token) {
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',

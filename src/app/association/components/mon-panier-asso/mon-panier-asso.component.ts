@@ -28,9 +28,7 @@ export class MonPanierAssoComponent implements OnInit {
 
 
   async ngOnInit() {
-
-
-    
+        
     let sevenDays = 604800000;
     let now = new Date(Date.now());
     let oneSemaineLeft = new Date(Date.now() - sevenDays);

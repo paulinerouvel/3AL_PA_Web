@@ -53,7 +53,7 @@
 
         <div *ngIf="type == 3 && isConnected == true" class="dropdown">
 
-          <img class="img_profil" [src]="imageToShow" width="50px">
+          <img *ngIf='imageToShow' class="img_profil" [src]="imageToShow" width="50px">
 
           <button *ngIf="curUser" class="btn pseudo dropdown-toggle" (click)="isShownBis = !isShownBis" type="button"
             data-toggle="dropdown">
@@ -71,7 +71,7 @@
 
         <div *ngIf="type == 1 && isConnected == true" class="dropdown">
 
-            <img class="img_profil" [src]="imageToShow" width="50px">
+            <img *ngIf="imageToShow" class="img_profil" [src]="imageToShow" width="50px">
 
           <button *ngIf="curUser" class="btn pseudo dropdown-toggle" (click)="isShownBis = !isShownBis" type="button"
             data-toggle="dropdown">

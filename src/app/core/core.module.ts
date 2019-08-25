@@ -7,15 +7,38 @@ import { BoutiqueComponent } from './components/boutique/boutique.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Ng5SliderModule } from 'ng5-slider';
+import { HomeComponent } from './components/home/home.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppRoutingModule } from '../app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
-  declarations: [LoginComponent, AssociationsPartenairesComponent, EntreprisesPartenairesComponent, BoutiqueComponent, ContactComponent],
+  declarations: [
+    LoginComponent, 
+    HomeComponent,
+    PageNotFoundComponent,
+    AssociationsPartenairesComponent, 
+    EntreprisesPartenairesComponent,
+    BoutiqueComponent, 
+    ContactComponent],
+
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    Ng5SliderModule
+    Ng5SliderModule,
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,                               
+    ReactiveFormsModule,
+    HttpClientModule,
+    RouterModule,
+    Ng5SliderModule,
+    NgbModule
   ]
 })
 export class CoreModule { }

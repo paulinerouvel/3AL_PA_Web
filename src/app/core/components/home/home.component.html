@@ -1,19 +1,49 @@
 <div class="container-fluid" style="background:#383838;">
     <div class="row">
 
-        <div class="col" style="margin-left: 100px; ">
-            <div class="marge"></div>
-            <div class="circular--landscape"><img src="../../../../assets/images/Fruits.jpg"></div>
-            <div class="accroche">Réduisez le gaspillage</div>
-            <div class="circular--landscape"><img src="../../../../assets/images/legumes.jpg" /></div>
-        </div>
         <div class="col">
-            <div class="marge"></div>
-            <div class="accroche">Economisez sur vos courses</div>
-            <div class="circular--landscape"><img src="../../../../assets/images/Fotolia_72051110_M.jpg"></div>
-            <div class="accroche">Faites des dons à des associations carritatives</div>
 
+
+            <ngb-carousel>
+                <ng-template ngbSlide>
+                    <div class="picsum-img-wrapper">
+                        <img src="../../../../assets/images/Fruits.jpg" height="650px" style="margin-left:10px;" alt="Random first slide">
+                    </div>
+                    <div class="carousel-caption">
+                        <h3>Réduisez le gaspillage</h3>
+                        <p>Nos entreprises partenaires nous permettent de revendre des produits qui approchent de leur date limite de consommation.</p>
+                    </div>
+                </ng-template>
+                <ng-template ngbSlide>
+                    <div class="picsum-img-wrapper">
+                        <img src="../../../../assets/images/fruits-legume-hiver.jpg" height="650px" style="margin-left:50px;"
+                            alt="Random second slide">
+                    </div>
+                    <div class="carousel-caption">
+                        <h3>Economisez sur vos courses</h3>
+                        <p>Faites un panier garni à moindre frais.</p>
+                    </div>
+                </ng-template>
+                <ng-template ngbSlide>
+                    <div class="picsum-img-wrapper">
+                        <img src="../../../../assets/images/Fotolia_72051110_M.jpg" height="650px" 
+                            alt="Random third slide">
+                    </div>
+                    <div class="carousel-caption">
+                        <h3>Faites des dons à des associations carritatives</h3>
+                        <p>Versez le montant de votre choix de manière sécurisée</p>
+                    </div>
+                </ng-template>
+            </ngb-carousel>
+            <div class="row yellow_border">
+
+                <div class="text-center titre_page">Nos Partenaires</div>
+
+            </div>
         </div>
+
+        
+
 
         <div class="col-4" style="background: white; margin-top:50px; padding-bottom: 50px;">
 

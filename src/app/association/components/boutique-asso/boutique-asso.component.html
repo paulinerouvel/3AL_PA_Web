@@ -40,7 +40,7 @@
       <div class="item" *ngFor="let item of produits;">
         <div class="row" style="min-height: 150px;">
           <div class="half_div">
-            <img class="img_item" [src]="imageToShow[item.id]" width="100px" />
+            <img *ngIf="imageToShow[item.id]" class="img_item" [src]="imageToShow[item.id]" width="100px" />
 
           </div>
           <div class="half_div">
