@@ -14,6 +14,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DetailProduitComponent } from './components/detail-produit/detail-produit.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AssociationsPartenairesComponent, 
     EntreprisesPartenairesComponent,
     BoutiqueComponent, 
+    DetailProduitComponent,
     ContactComponent],
 
   imports: [

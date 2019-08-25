@@ -8,6 +8,7 @@ import { AssociationsPartenairesComponent } from './core/components/associations
 import { EntreprisesPartenairesComponent } from './core/components/entreprises-partenaires/entreprises-partenaires.component';
 import { BoutiqueComponent } from './core/components/boutique/boutique.component';
 import { ContactComponent } from './core/components/contact/contact.component';
+import { DetailProduitComponent } from './core/components/detail-produit/detail-produit.component';
 
 const routes: Routes = [
   {path:"", redirectTo:"home", pathMatch:"full"},
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path:"entreprisesPartenaires", component: EntreprisesPartenairesComponent},
   {path:"boutique", component: BoutiqueComponent},
   {path:"contact", component: ContactComponent},
+  {path: 'boutique/detail-produit',  component: DetailProduitComponent},
   {path:"**", component: PageNotFoundComponent}
 ];
 

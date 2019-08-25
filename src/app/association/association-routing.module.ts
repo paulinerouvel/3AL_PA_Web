@@ -10,6 +10,7 @@ import { HistoriqueCommandesComponent } from './components/historique-commandes/
 import { MonPanierAssoComponent } from './components/mon-panier-asso/mon-panier-asso.component';
 import { CommandeComponent } from './components/commande/commande.component';
 import { ModifPhotoComponent } from './components/modif-photo/modif-photo.component';
+import { DetailProduitComponent } from './components/detail-produit/detail-produit.component';
 
 
 const assoRoutes: Routes = [
@@ -21,7 +22,8 @@ const assoRoutes: Routes = [
   { path: 'dons-asso',  component: HistoriqueDonsComponent, canActivate : [AuthGuard]},
   { path: 'commandes-asso',  component: HistoriqueCommandesComponent, canActivate : [AuthGuard]},
   { path: 'panier-asso',  component: MonPanierAssoComponent, canActivate : [AuthGuard]},
-  { path: 'commande-asso',  component: CommandeComponent, canActivate : [AuthGuard]}
+  { path: 'commande-asso',  component: CommandeComponent, canActivate : [AuthGuard]},
+  { path: 'boutique-asso/detail-produit-asso',  component: DetailProduitComponent, canActivate : [AuthGuard]}
 ];
 
 @NgModule({

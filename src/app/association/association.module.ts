@@ -12,9 +12,10 @@ import { MonPanierAssoComponent } from './components/mon-panier-asso/mon-panier-
 import { CommandeComponent } from './components/commande/commande.component';
 import { ModifPhotoComponent } from './components/modif-photo/modif-photo.component';
 import { Ng5SliderModule } from 'ng5-slider';
+import { DetailProduitComponent } from './components/detail-produit/detail-produit.component';
 
 @NgModule({
-  declarations: [BoutiqueAssoComponent, ModifProfilComponent, HistoriqueCommandesComponent, HistoriqueDonsComponent, GestionAlertesComponent, AddAlerteComponent, MonPanierAssoComponent, CommandeComponent, ModifPhotoComponent],
+  declarations: [BoutiqueAssoComponent, ModifProfilComponent, HistoriqueCommandesComponent, HistoriqueDonsComponent, GestionAlertesComponent, AddAlerteComponent, MonPanierAssoComponent, CommandeComponent, ModifPhotoComponent, DetailProduitComponent],
   imports: [
     CommonModule,
     FormsModule,
