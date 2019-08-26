@@ -10,7 +10,7 @@
       <div class="marge"></div>
 
       <div class="titre_page text-center">Gérer les utilisateurs</div>
-      <button class="btn btn-success" [routerLink]="['add']">
+      <button class="btn btn-success" [routerLink]="['/add-user']">
         <img src="../../../../assets/images/add.svg"> Ajouter un utilisateur
       </button>
       <table class="table" >
@@ -57,11 +57,11 @@
             <td>{{item.nbPointsSourire}}</td>
 
             <td>
-              <button class="btn_panier" (click)="deleteAlert(item.id)">
+              <button class="btn_panier" (click)="deleteUser(item.id)">
                 <img src="../../../../assets/images/clear.svg">
               </button>
 
-              <button class="btn_panier" (click)="deleteAlert(item.id)">
+              <button class="btn_panier" [routerLink]="['/modif-user']" [queryParams]="{id: item.id}"> 
                   <img src="../../../../assets/images/edit.svg">
                 </button>
             

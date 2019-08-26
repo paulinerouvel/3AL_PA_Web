@@ -4,6 +4,7 @@ import { Produit } from 'src/app/core/models/produit';
 import { EntrepotService } from 'src/app/core/services/entrepot.service';
 import { Entrepot } from 'src/app/core/models/entrepot';
 import { UserService } from 'src/app/core/services/user.service';
+import { StorageService } from 'src/app/core/services/storage.service';
 
 @Component({
   selector: 'app-gestion-produit',
@@ -12,7 +13,8 @@ import { UserService } from 'src/app/core/services/user.service';
 })
 export class GestionProduitComponent implements OnInit {
 
-  constructor(private produitsService : ProduitService, private entrepotService : EntrepotService, private userService : UserService) { }
+  constructor(private produitsService : ProduitService, private entrepotService : EntrepotService, 
+    private userService : UserService, private storageService : StorageService) { }
 
   produits;
 
@@ -38,4 +40,14 @@ export class GestionProduitComponent implements OnInit {
     }
   }
 
+
+  
+  async deleteProduit(id){
+    let token = this.storageService.getItem('token');
+    await this.produitsService.deleteProduct(id, token).toPromise();
+
+    alert("Produit supprimé !");
+
+    location.reload();
+  }
 }

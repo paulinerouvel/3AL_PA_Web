@@ -15,6 +15,15 @@ export class ProduitService {
 
   private _url: string = environment.UrlAPI + "/product";
 
+  addProduct(product : Produit, token): Observable<any> {
+    let reqHeader = new HttpHeaders({
+      'accept': 'application/json',
+      'content-type': 'application/json',
+      'Authorization': 'Bearer ' + token
+    });
+    return this.http.post<Produit>(this._url + "/", product, {  headers: reqHeader }).pipe(catchError(this.handleError));
+  }
+
 
   getProductById(id): Observable<any> {
     let reqHeader = new HttpHeaders({
@@ -129,6 +138,20 @@ export class ProduitService {
 
 
     return this.http.put<Produit>(this._url, produit, { headers: reqHeader }).pipe(catchError(this.handleError));
+
+  }
+
+  deleteProduct(id, token): Observable<any> {
+    let reqHeader = new HttpHeaders({
+      'accept': 'application/json',
+      'content-type': 'application/json',
+      'Authorization': 'Bearer ' + token
+    });
+
+    let params = new HttpParams();
+    params = params.append('id', id);
+
+    return this.http.delete<Produit>(this._url, { params : params, headers: reqHeader }).pipe(catchError(this.handleError));
 
   }
 

@@ -54,6 +54,19 @@ export class UserService {
   }
 
 
+  getCategoryOfUser(userId): Observable<any> {
+    let reqHeader = new HttpHeaders({
+      'accept': 'application/json',
+      'content-type': 'application/json'
+    });
+
+    let params = new HttpParams();
+    params = params.append('userId', userId);
+
+    return this.http.get<Utilisateur>(this._url + "/category", { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
+  }
+
+
   getUsersByCategory(category: string): Observable<any> {
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
@@ -107,6 +120,18 @@ export class UserService {
     });
 
     return this.http.put<any>(this._url, user, { headers: reqHeader }).pipe(catchError(this.handleError));
+
+  }
+
+  deleteUser(id, token): Observable<any> {
+    let reqHeader = new HttpHeaders({
+      'accept': 'application/json',
+      'content-type': 'application/json',
+      'Authorization': 'Bearer ' + token
+    });
+
+
+    return this.http.delete<any>(this._url + '/' +  id,  {  headers: reqHeader }).pipe(catchError(this.handleError));
 
   }
 
