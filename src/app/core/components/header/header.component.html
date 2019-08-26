@@ -20,7 +20,9 @@
         <li *ngIf="isConnected == true"><a (click)="isShown = false" style="padding: 0px;"><img id="logo"
           src="..\..\..\assets\images\logo.PNG"></a></li>
 
-        <li *ngIf="isConnected == true"><a id="title" (click)="isShown = false" >WasteMart</a></li>
+        <li *ngIf="isConnected == true && type != 4 && type != 5"><a id="title" (click)="isShown = false" >WasteMart</a></li>
+
+        <li *ngIf="isConnected == true && (type == 4 || type == 5)"><a id="title" (click)="isShown = false" [routerLink]="['/accueil-admin']">WasteMart</a></li>
               
         
         <li id="item item_long"><a href="#" [routerLink]="['/associationsPartenaires']" (click)="isShown = false">

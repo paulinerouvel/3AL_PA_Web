@@ -33,13 +33,16 @@ export class LoginComponent implements OnInit {
 
         this.storageService.setItem("token", res.token);
         if (type == 1) {
+          //compte asso
           this._router.navigateByUrl('/boutique-asso');
         }
         else if (type == 3) {
+          //compte particulier
           this._router.navigateByUrl('/boutique-part');
         }
         else if (type == 4 || type == 5 ){
           //compte admin/employé
+          this._router.navigateByUrl('/accueil-admin');
         }
         else {
           this._router.navigateByUrl('/boutique');

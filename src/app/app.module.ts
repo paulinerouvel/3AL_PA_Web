@@ -20,11 +20,12 @@ import { ParticulierModule } from './particulier/particulier.module';
 import { Ng5SliderModule } from 'ng5-slider';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CoreModule } from './core/core.module';
+import { AdminModule } from './admin/admin.module';
 registerLocaleData(localeFr);
 
 @NgModule({
   declarations: [
-     AppComponent,
+    AppComponent,
     FooterComponent,
     HeaderComponent
     
@@ -33,6 +34,7 @@ registerLocaleData(localeFr);
     BrowserModule,
     AssociationModule,
     ParticulierModule,
+    AdminModule,
     AppRoutingModule,
     FormsModule,                               
     ReactiveFormsModule,

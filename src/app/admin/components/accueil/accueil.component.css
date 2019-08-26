@@ -1,0 +1,41 @@
+.marge{
+    height: 150px;
+}
+
+.button_accueil{
+    background: #c8295a;
+
+    border : none;
+    height: 150px;
+    width: 220px;
+    color : white;
+    margin-left :180px;
+    margin-top :150px;
+    margin-bottom :150px;
+    float: left;
+
+    padding: 10px;
+    font-size: 20px;
+}
+
+.button_accueil:hover{
+    background: #A71F49;
+    cursor: pointer;
+}
+
+
+.div_10{
+    width: 20%;
+    
+}
+
+.titre_page{
+    color: black;
+    font-size: 30px;
+    text-align: center;
+}
+
+.div_80{
+    width: 60%;
+    background: whitesmoke;
+}
