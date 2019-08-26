@@ -4,6 +4,8 @@
     <div class="div_10"></div>
     <div class="div_80">
       <div class="marge"></div>
+
+      <input type="button" class="btn btn-danger" [routerLink]="['/gestion-user']" value="Retour">
       <div class="alert alert-danger" *ngIf="errorMsg">
         {{errorMsg}}
       </div>

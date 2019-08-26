@@ -4,6 +4,7 @@
     <div class="col-6" style="background:white; ">
 
       <div class="marge"></div>
+      <input type="button" class="btn btn-danger" [routerLink]="['/gestion-alertes-part']" value="Retour">
       <div class="titre">Saisissez vos mots clés</div>
       <form #alertForm="ngForm" class="text-left" (ngSubmit)="onSubmit()" novalidate>
 

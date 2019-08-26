@@ -41,7 +41,7 @@
         Aucun produit ne correspond à votre recherche ! Nous vous conseillons de réinitialiser vos filtres.
       </div>
 
-      <div class="item" [routerLink]="['detail-produit-part']" [queryParams]="{id: item.id}" *ngFor="let item of produits;">
+      <div class="item" *ngFor="let item of produits;">
         <div class="row" style="min-height: 150px;">
           <div class="half_div">
             <img *ngIf="imageToShow[item.id]" class="img_item" [src]="imageToShow[item.id]" width="100px" />
@@ -60,6 +60,9 @@
             <p class="prix floatR">{{item.prix}}€</p>
             <button class="btn_panier" (click)="addPanier(item)">
               <img src="../../../../assets/images/shopping_basket.svg">
+            </button>
+            <button class="btn_panier" [routerLink]="['detail-produit-part']" [queryParams]="{id: item.id}">
+              <img src="../../../../assets/images/points.svg">
             </button>
           </div>
         </div>

@@ -1,9 +1,12 @@
 <div class="container-fluid" style="background:#383838;">
   <div class="row">
     <div class="col"></div>
+
+    
     <div *ngIf="produit" class="col-6"  style="background:white; ">
 
       <div class="marge"></div>
+      <input type="button" class="btn btn-danger" [routerLink]="['/boutique-part']" value="Retour">
       <div class="titre">{{produit.libelle}}</div>
 
       <div class="row">

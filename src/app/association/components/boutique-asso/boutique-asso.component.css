@@ -12,12 +12,6 @@
     float: left;
 }
 
-.item:hover{
-    /*background: lightgray;*/
-    cursor : pointer;
-    box-shadow: -1px 2px 10px 3px rgba(0, 0, 0, 0.3) inset;
-    border:none;
-}
 
 .item-panier{
     padding-top: 5px;

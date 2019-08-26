@@ -4,6 +4,7 @@
     <div *ngIf="produit" class="col-6"  style="background:white; ">
 
       <div class="marge"></div>
+      <input type="button" class="btn btn-danger" [routerLink]="['/boutique']" value="Retour">
       <div class="titre">{{produit.libelle}}</div>
 
       <div class="row">
