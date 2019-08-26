@@ -38,4 +38,6 @@
 .div_80{
     width: 60%;
     background: whitesmoke;
+    border-right: #A71F49 5px double;
+    border-left: grey 5px solid;
 }

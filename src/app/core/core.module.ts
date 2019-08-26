@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DetailProduitComponent } from './components/detail-produit/detail-produit.component';
+import { ConvertYesOrNoPipe } from './pipes/convert-yes-or-no.pipe';
 
 
 @NgModule({

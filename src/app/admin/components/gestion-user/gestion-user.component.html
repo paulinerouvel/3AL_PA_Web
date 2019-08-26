@@ -1,0 +1,75 @@
+<div class="container-fluid" style="background:#383838;">
+  <div class="row">
+    <div class="div_10"></div>
+
+
+    <div class="div_80">
+
+
+
+      <div class="marge"></div>
+
+      <div class="titre_page text-center">Gérer les utilisateurs</div>
+      <button class="btn btn-success" [routerLink]="['add']">
+        <img src="../../../../assets/images/add.svg"> Ajouter un utilisateur
+      </button>
+      <table class="table" >
+        <thead>
+          <tr>
+            <th scope="col">Libelle</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Prenom</th>
+            <th scope="col">Mail</th>
+            <th scope="col">Tel</th>
+            <th scope="col ">Adresse</th>
+            <th scope="col">Ville</th>
+            <th scope="col">Code Postal</th>
+            <th scope="col ">Pseudo</th>
+            <th scope="col">Photo</th>
+            <th scope="col">Description</th>
+            <th scope="col ">Taille Organisme</th>
+            <th scope="col">Est Valide</th>
+            <th scope="col">Siret</th>
+            <th scope="col ">Date De Naissance</th>
+            <th scope="col ">Nb Points Sourire</th>
+            <th scope="col ">Action</th>
+
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of users">
+            <td>{{item.libelle}}</td>
+            <td>{{item.nom}}</td>
+            <td>{{item.prenom}}</td>
+            <td>{{item.mail}}</td>
+            <td>{{item.tel}}</td>
+            <td>{{item.adresse }}</td>
+            <td>{{item.ville }}</td>
+            <td>{{item.codePostal}}</td>
+            <td>{{item.pseudo}}</td>
+            <td>{{item.photo }}</td>
+            <td><p>{{item.desc}}</p></td>
+            <td>{{item.tailleOrganisme}}</td>
+            <td>{{item.estValide | convertYesOrNo}}</td>
+            <td>{{item.siret}}</td>
+            <td>{{item.dateDeNaissance |date}}</td>
+            <td>{{item.nbPointsSourire}}</td>
+
+            <td>
+              <button class="btn_panier" (click)="deleteAlert(item.id)">
+                <img src="../../../../assets/images/clear.svg">
+              </button>
+
+              <button class="btn_panier" (click)="deleteAlert(item.id)">
+                  <img src="../../../../assets/images/edit.svg">
+                </button>
+            
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="div_10"></div>
+    </div>
+  </div>

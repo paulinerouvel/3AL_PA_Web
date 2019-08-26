@@ -65,6 +65,18 @@ export class UserService {
     return this.http.get<Utilisateur>(this._url + "/allByCategory", { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
   }
 
+
+  getCategoryById(id): Observable<any> {
+    let reqHeader = new HttpHeaders({
+      'accept': 'application/json',
+      'content-type': 'application/json'
+    });
+
+    let params = new HttpParams();
+    params = params.append('catId', id);
+    return this.http.get<Utilisateur>(this._url + "/category", { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
+  }
+
   getValidUsersByCategory(category: string): Observable<any> {
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
@@ -74,6 +86,15 @@ export class UserService {
     let params = new HttpParams();
     params = params.append('type', category);
     return this.http.get<Utilisateur>(this._url + "/allValidByCategory", { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
+  }
+
+  getAllUsers(): Observable<Utilisateur[]> {
+    let reqHeader = new HttpHeaders({
+      'accept': 'application/json',
+      'content-type': 'application/json'
+    });
+
+    return this.http.get<Utilisateur[]>(this._url , {  headers: reqHeader }).pipe(catchError(this.handleError));
   }
 
 
