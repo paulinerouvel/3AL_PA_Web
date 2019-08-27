@@ -10,7 +10,7 @@ export class Produit {
         public quantite: number,
         public dlc: string,
         public codeBarre: string,
-        public enRayon: number,
+        public enRayon: any,
         public dateMiseEnRayon: string,
         public categorieProduit_id: number,
         public listProduct_id: number,

@@ -10,7 +10,7 @@
         <div class="marge"></div>
   
         <div class="titre_page text-center">Gérer les produits</div>
-        <button class="btn btn-success" [routerLink]="['add']">
+        <button class="btn btn-success" [routerLink]="['/add-produit']">
           <img src="../../../../assets/images/add.svg"> Ajouter un produit
         </button>
         <table class="table" >
@@ -52,7 +52,7 @@
                   <img src="../../../../assets/images/clear.svg">
                 </button>
   
-                <button class="btn_panier" (click)="deleteAlert(item.id)">
+                <button class="btn_panier" [routerLink]="['/modif-produit']" [queryParams]="{id: item.id}">
                     <img src="../../../../assets/images/edit.svg">
                   </button>
               

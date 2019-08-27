@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate {
     if (token != undefined) {
 
 
-      if ((this.userService.decodeTokenType(token) == 4 || this.userService.decodeTokenType(token) == 5 )&& this.userService.verifyTokenValidity(token)) {
+      if ( this.userService.decodeTokenType(token) == 5 && this.userService.verifyTokenValidity(token)) {
         return true;
       }
     }

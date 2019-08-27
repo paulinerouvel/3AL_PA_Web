@@ -1,5 +1,109 @@
-<p>
-  modif-produit works!
-</p>
+<div class="container-fluid" style="background:#383838;">
+  <div class="row">
 
-<input type="button" class="btn btn-danger" [routerLink]="['/gestion-produit']" value="Retour">
+    <div class="div_10"></div>
+    <div class="div_80">
+      <div class="marge"></div>
+      <input type="button" class="btn btn-danger" [routerLink]="['/gestion-produit']" value="Retour">
+
+
+      <div class="titre_page"> Modifier un produit</div>
+
+
+
+      <form #addProduit="ngForm" class="text-left" (ngSubmit)="onSubmit()" novalidate class="text-left">
+
+        <div class="form-group">
+          <label for="libelleLabel">Libelle*</label>
+          <input #libelle="ngModel" [class.is-invalid]="libelle.invalid && libelle.touched" required [(ngModel)]="productModel.libelle"
+            type="text" class="form-control" name="libelle" placeholder="Libelle">
+        </div>
+
+        <div class="form-group">
+          <label for="descLabel">Description*</label>
+          <textarea #desc="ngModel" [class.is-invalid]="desc.invalid && desc.touched" required
+            [(ngModel)]="productModel.desc" type="text" class="form-control" name="desc">Description</textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="prixLabel">Prix*</label>
+          <input #prix="ngModel" [class.is-invalid]="prix.invalid && prix.touched" required
+            [(ngModel)]="productModel.prix" type="number" class="form-control" name="prix">
+        </div>
+
+        <div class="form-group">
+          <label for="quantiteLabel">Quantite*</label>
+          <input #quantite="ngModel" [class.is-invalid]="quantite.invalid && quantite.touched" required [(ngModel)]="productModel.quantite"
+            type="number" class="form-control" name="quantite" >
+        </div>
+        <div class="form-group">
+          <label for="dlcLabel">Date Limite de Consomation</label>
+          <input #dlc="ngModel" [class.is-invalid]="dlc.invalid && dlc.touched" [(ngModel)]="productModel.dlc" type="date"
+            class="form-control" name="dlc" >
+        </div>
+        <div class="form-group">
+          <label for="codeBarreLabel">Code Barre*</label>
+          <input #codeBarre="ngModel" [class.is-invalid]="codeBarre.invalid && codeBarre.touched" required
+            [(ngModel)]="productModel.codeBarre" type="text" class="form-control" name="codeBarre"
+           >
+        </div>
+
+        <div class="form-group">
+          <label for="enRayonLabel">En Rayon</label>
+          <select #enRayon="ngModel" [class.is-invalid]="enRayon.invalid && enRayon.touched" required [(ngModel)]="productModel.enRayon"
+          class="form-control" name="enRayon" >
+
+            <option value="1">Oui</option>
+            <option value="0">Non</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="dateMiseEnRayonLabel">Date Mise En Rayon*</label>
+          <input #dateMiseEnRayon="ngModel" [class.is-invalid]="dateMiseEnRayon.invalid && dateMiseEnRayon.touched" required
+            [(ngModel)]="productModel.dateMiseEnRayon" type="date" class="form-control" name="dateMiseEnRayon" >
+        </div>
+
+        <div class="form-group">
+          <label for="categorieProduitLabel">Catégorie*</label>
+          <select #categorieProduit="ngModel" [class.is-invalid]="categorieProduit.invalid && categorieProduit.touched" required
+            [(ngModel)]="productModel.categorieProduit_id"  class="form-control" name="categorieProduit">
+            <option *ngFor="let c of categoriesProduit" value="{{c.id}}">{{c.libelle}}</option>
+          </select>
+        </div>
+
+
+        <div class="form-group">
+          <label for="entrepotLabel">Entrepot</label>
+          <select #entrepot="ngModel" [class.is-invalid]="entrepot.invalid && entrepot.touched" required
+            [(ngModel)]="productModel.entrepotwm_id" class="form-control" name="entrepot">
+
+            <option *ngFor="let e of entrepots" value="{{e.id}}">{{e.libelle}}</option>
+
+          </select>
+        </div>
+
+        <div class="form-group">
+            <label for="destinataireLabel">Destinataire</label>
+            <select #destinataire="ngModel" [class.is-invalid]="destinataire.invalid && destinataire.touched" 
+              [(ngModel)]="productModel.destinataire" class="form-control" name="destinataire">
+  
+              <option *ngFor="let d of destinataires" value="{{d.id}}">{{d.libelle}}</option>
+  
+            </select>
+          </div>
+
+        <button [disabled]="addProduit.form.invalid" type="submit" class="btn float-right text-white"
+          style="background:#3db4b4;">Valider</button>
+      </form>
+
+      <div class="marge"></div>
+
+
+    </div>
+
+    <div class="div_10"></div>
+  </div>
+
+  <div class="marge"></div>
+</div>

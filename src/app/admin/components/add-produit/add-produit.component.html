@@ -11,82 +11,93 @@
 
 
 
-      <form #inscriptionParticulier="ngForm" class="text-left" (ngSubmit)="onSubmit()" novalidate class="text-left">
-
-
-
+      <form #addProduit="ngForm" class="text-left" (ngSubmit)="onSubmit()" novalidate class="text-left">
 
         <div class="form-group">
-          <label for="nomLabel">Nom*</label>
-          <input #nom="ngModel" [class.is-invalid]="nom.invalid && nom.touched" required [(ngModel)]="userModel.nom"
-            type="text" class="form-control" name="nom" placeholder="Nom">
+          <label for="libelleLabel">Libelle*</label>
+          <input #libelle="ngModel" [class.is-invalid]="libelle.invalid && libelle.touched" required [(ngModel)]="productModel.libelle"
+            type="text" class="form-control" name="libelle" placeholder="Libelle">
         </div>
 
         <div class="form-group">
-          <label for="prenomLabel">Prenom*</label>
-          <input #prenom="ngModel" [class.is-invalid]="prenom.invalid && prenom.touched" required
-            [(ngModel)]="userModel.prenom" type="text" class="form-control" name="prenom" placeholder="Prenom">
+          <label for="descLabel">Description*</label>
+          <textarea #desc="ngModel" [class.is-invalid]="desc.invalid && desc.touched" required
+            [(ngModel)]="productModel.desc" type="text" class="form-control" name="desc">Description</textarea>
         </div>
 
         <div class="form-group">
-          <label for="dateNaissance">Date de naissance*</label>
-          <input #dateNaissance="ngModel" [class.is-invalid]="dateNaissance.invalid && dateNaissance.touched" required
-            [(ngModel)]="userModel.dateDeNaissance" type="date" class="form-control" name="dateNaissance">
+          <label for="prixLabel">Prix*</label>
+          <input #prix="ngModel" [class.is-invalid]="prix.invalid && prix.touched" required
+            [(ngModel)]="productModel.prix" type="number" class="form-control" name="prix">
         </div>
 
         <div class="form-group">
-          <label for="emailLabel">Email*</label>
-          <input #mail="ngModel" [class.is-invalid]="mail.invalid && mail.touched" required [(ngModel)]="userModel.mail"
-            type="email" class="form-control" name="email" placeholder="name@example.com">
+          <label for="quantiteLabel">Quantite*</label>
+          <input #quantite="ngModel" [class.is-invalid]="quantite.invalid && quantite.touched" required [(ngModel)]="productModel.quantite"
+            type="number" class="form-control" name="quantite" >
         </div>
         <div class="form-group">
-          <label for="telLabel">Telephone</label>
-          <input #tel="ngModel" [class.is-invalid]="tel.invalid && tel.touched" [(ngModel)]="userModel.tel" type="text"
-            class="form-control" name="tel" placeholder="n° téléphone">
+          <label for="dlcLabel">Date Limite de Consomation</label>
+          <input #dlc="ngModel" [class.is-invalid]="dlc.invalid && dlc.touched" [(ngModel)]="productModel.dlc" type="date"
+            class="form-control" name="dlc" >
         </div>
         <div class="form-group">
-          <label for="adresseLabel">Adresse*</label>
-          <input #adresse="ngModel" [class.is-invalid]="adresse.invalid && adresse.touched" required
-            [(ngModel)]="userModel.adresse" type="text" class="form-control" name="adresse"
-            placeholder="12 Avenue des Champs Elysées">
-        </div>
-        <div class="form-group">
-          <label for="cpLabel">Code Postal*</label>
-          <input #cp="ngModel" [class.is-invalid]="cp.invalid && cp.touched" required [(ngModel)]="userModel.codePostal"
-            type="text" class="form-control" name="cp" placeholder="75008">
+          <label for="codeBarreLabel">Code Barre*</label>
+          <input #codeBarre="ngModel" [class.is-invalid]="codeBarre.invalid && codeBarre.touched" required
+            [(ngModel)]="productModel.codeBarre" type="text" class="form-control" name="codeBarre"
+           >
         </div>
 
         <div class="form-group">
-          <label for="villeLabel">Ville*</label>
-          <input #ville="ngModel" [class.is-invalid]="ville.invalid && ville.touched" required
-            [(ngModel)]="userModel.ville" type="text" class="form-control" name="ville" placeholder="Paris">
-        </div>
-        <div class="form-group">
-          <label for="pseudoLabel">Pseudo*</label>
-          <input #pseudo="ngModel" [class.is-invalid]="pseudo.invalid && pseudo.touched" required
-            [(ngModel)]="userModel.pseudo" type="text" class="form-control" name="pseudo" placeholder="">
-        </div>
-
-        <div class="form-group">
-          <label for="mdpLabel">Mot de passe*</label>
-          <input #mot_de_passe="ngModel" [class.is-invalid]="mot_de_passe.invalid && mot_de_passe.touched" required
-            [(ngModel)]="userModel.mdp" type="password" class="form-control" name="mot_de_passe" placeholder="">
-        </div>
-
-        <div class="form-group">
-          <label for="estValideLabel">Est Valide*</label>
-          <select #estValide="ngModel" [class.is-invalid]="estValide.invalid && estValide.touched" required
-            [(ngModel)]="userModel.estValide" class="form-control" name="estValide">
+          <label for="enRayonLabel">En Rayon</label>
+          <select #enRayon="ngModel" [class.is-invalid]="enRayon.invalid && enRayon.touched" required [(ngModel)]="productModel.enRayon"
+          class="form-control" name="enRayon" >
 
             <option value="1">Oui</option>
             <option value="0">Non</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="dateMiseEnRayonLabel">Date Mise En Rayon*</label>
+          <input #dateMiseEnRayon="ngModel" [class.is-invalid]="dateMiseEnRayon.invalid && dateMiseEnRayon.touched" required
+            [(ngModel)]="productModel.dateMiseEnRayon" type="date" class="form-control" name="dateMiseEnRayon" >
+        </div>
+
+        <div class="form-group">
+          <label for="categorieProduitLabel">Catégorie*</label>
+          <select #categorieProduit="ngModel" [class.is-invalid]="categorieProduit.invalid && categorieProduit.touched" required
+            [(ngModel)]="productModel.categorieProduit_id"  class="form-control" name="categorieProduit">
+            <option *ngFor="let c of categoriesProduit" value="{{c.id}}">{{c.libelle}}</option>
+          </select>
+        </div>
+
+
+        <div class="form-group">
+          <label for="entrepotLabel">Entrepot</label>
+          <select #entrepot="ngModel" [class.is-invalid]="entrepot.invalid && entrepot.touched" required
+            [(ngModel)]="productModel.entrepotwm_id" class="form-control" name="entrepot">
+
+            <option *ngFor="let e of entrepots" value="{{e.id}}">{{e.libelle}}</option>
 
           </select>
         </div>
 
-        <button [disabled]="inscriptionParticulier.form.invalid" type="submit" class="btn float-right text-white"
+        <div class="form-group">
+            <label for="destinataireLabel">Destinataire</label>
+            <select #destinataire="ngModel" [class.is-invalid]="destinataire.invalid && destinataire.touched" 
+              [(ngModel)]="productModel.destinataire" class="form-control" name="destinataire">
+  
+              <option *ngFor="let d of destinataires" value="{{d.id}}">{{d.libelle}}</option>
+  
+            </select>
+          </div>
+
+        <button [disabled]="addProduit.form.invalid" type="submit" class="btn float-right text-white"
           style="background:#3db4b4;">Valider</button>
       </form>
+
+      <div class="marge"></div>
 
 
     </div>

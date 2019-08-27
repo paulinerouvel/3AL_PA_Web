@@ -111,6 +111,16 @@ export class UserService {
   }
 
 
+  getAllCategory():Observable<any>{
+
+    let reqHeader = new HttpHeaders({
+      'accept': 'application/json',
+      'content-type': 'application/json'
+    });
+
+    return this.http.get<Utilisateur[]>(this._url + "/categories" , {  headers: reqHeader }).pipe(catchError(this.handleError));
+  }
+
 
   updateUser(user: Utilisateur, token): Observable<any> {
     let reqHeader = new HttpHeaders({

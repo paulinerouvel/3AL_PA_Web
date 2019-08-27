@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
 
       let type = this.userService.decodeTokenType(res.token)
 
-      if (type == 1 || type == 3 || type == 4 || type == 5) {
+      if (type == 1 || type == 3 || type == 5) {
 
         this.storageService.setItem("token", res.token);
         if (type == 1) {
@@ -40,8 +40,8 @@ export class LoginComponent implements OnInit {
           //compte particulier
           this._router.navigateByUrl('/boutique-part');
         }
-        else if (type == 4 || type == 5 ){
-          //compte admin/employé
+        else if (type == 5 ){
+          //compte admin
           this._router.navigateByUrl('/accueil-admin');
         }
         else {
@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
         }
       }
       else {
-        this.errorConnection = "Vous n'êtes pas autorisé à accéder au site car vous avez un compte professionnel."
+        this.errorConnection = "Vous n'êtes pas autorisé à accéder au site car vous avez un compte professionnel ou employé."
       }
 
 
