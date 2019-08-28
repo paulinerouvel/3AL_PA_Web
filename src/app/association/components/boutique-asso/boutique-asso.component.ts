@@ -24,6 +24,7 @@ export class BoutiqueAssoComponent implements OnInit {
   imageToShow=[];
 
   motCle="";
+  categorieId = -1;
 
   optionSelect = [];
 
@@ -199,71 +200,86 @@ export class BoutiqueAssoComponent implements OnInit {
 
   }
 
-  async filtreCategorie(id){
-    let produitDeBase;
 
-    produitDeBase = this.produits;
+  async filtreCategorie(produitDeBase, id){
 
 
-    
-    this.produits= [];
-    
-    let produitsFiltre = await this._produitService.getProductByCategorieAndDest(id, "1").toPromise();
+    let resultProduit = [];
+
+    let produitsFiltre = await this._produitService.getProductByCategorieAndDest(id, "3").toPromise();
 
 
     if(produitDeBase != null){
       for (const p of produitDeBase) {
         for (const p2 of produitsFiltre) {
           if(p.id == p2.id){
-            this.produits.push(p);
+            resultProduit.push(p);
           }
         }
       }
     }
 
-  
-    if(this.produits.length == 0){
-      this.produits = null;
+    if(this.categorieId != -1) {
+      return resultProduit;
     }
+    return produitDeBase;
+
+    
 
 
   }
 
 
-  async filtreMotCle(){
-    let produitDeBase;
 
+  async filtreMotCle(produitDeBase){
 
-    produitDeBase = this.produits;
-    
+    let resultProduit = [];
 
-    
-    this.produits= [];
-
-    let produitsFiltre = await this._produitService.getProductByNameAndDest(this.motCle, "1").toPromise();
+    let produitsFiltre = await this._produitService.getProductByNameAndDest(this.motCle, "3").toPromise();
 
     if(produitDeBase != null){
       for (const p of produitDeBase) {
         for (const p2 of produitsFiltre) {
           if(p.id == p2.id){
-            this.produits.push(p);
+            resultProduit.push(p);
           }
         }
       }
     }
 
-
-    if(this.produits.length == 0){
-      this.produits = null;
+    if(this.motCle != ""){
+      return resultProduit;
     }
-
-
-
+    return produitDeBase;
+    
   }
 
   motCleChange(e)
   {
     this.motCle = e.target.value;
+
+  }
+
+
+  categorieChange(e){
+    this.categorieId = e;
+  }
+
+
+  async appliqFiltre(){
+
+    if(this.produits == null){
+      this.produits = await this._produitService.getAllProductEnRayonByDest("1").toPromise();
+    }
+
+
+    let resuMotCle = await this.filtreMotCle(this.produits);
+
+    this.produits  = await this.filtreCategorie(resuMotCle, this.categorieId);
+
+    if(this.produits.length == 0){
+      this.produits = null;
+    }
 
   }
 

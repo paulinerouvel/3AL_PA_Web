@@ -13,32 +13,37 @@
 
           <p>Mot clé </p>
           <input class="btn" id="motCle" type="text" value="" (keyup)="motCleChange($event)" />
-          <button (click)="filtreMotCle()" class="btn btn-primary">Ok</button>
+
         </div>
 
         <div class="third-div">
           <p>Prix </p>
-          <ng5-slider style="color:white;" [(value)]="value" [(highValue)]="highValue" [options]="options"
-            (click)="filtrePrix()"></ng5-slider>
+          <input type="radio" (change)="prixChange($event.target.value)" value="0" name="prix"> Aucun <br/>
+          <input type="radio" (change)="prixChange($event.target.value)" value="1" name="prix"> - de 5  € <br/>
+          <input type="radio" (change)="prixChange($event.target.value)" value="2" name="prix"> 5 - 10  € <br/>
+          <input type="radio" (change)="prixChange($event.target.value)" value="3" name="prix"> 10 - 15  € <br/>
+          <input type="radio" (change)="prixChange($event.target.value)" value="4" name="prix"> + de 15  € 
 
         </div>
 
         <div class="third-div">
           <p>Catégorie</p>
-          <Select class="btn" (change)="filtreCategorie($event.target.value)">
+          <Select class="btn" (change)="categorieChange($event.target.value)">
             <option value="" selected></option>
             <option *ngFor="let o of optionSelect" value="{{o.id}}" id="{{o.id}}">{{o.libelle}}</option>
           </Select>
         </div>
-
         <input type="submit" class="btn_panier floatR" (click)="ngOnInit()" value="Réinitialiser">
+
+        <input type="submit" class="btn_panier floatR" (click)="appliqFiltre()" value="Appliquer">
+        
 
       </div>
 
 
       <div *ngIf="produits == null" class="text-center">
 
-        Aucun produit ne correspond à votre recherche ! Nous vous conseillons de réinitialiser vos filtres.
+        Aucun produit ne correspond à votre recherche ! 
       </div>
 
 

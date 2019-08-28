@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Options } from 'ng5-slider';
 
 import { ProduitService } from '../../services/produit.service';
 import { CookieService } from 'ngx-cookie-service';
@@ -13,12 +12,6 @@ import { ImageService } from '../../services/image.service';
 export class BoutiqueComponent implements OnInit {
 
 
-  value: number = 0;
-  highValue: number = 100;
-  options: Options = {
-    floor: 0,
-    ceil: 100
-  };
 
   produits;
   parsedPanier = [];
@@ -28,11 +21,14 @@ export class BoutiqueComponent implements OnInit {
 
 
   motCle ="";
+  basPrix= -1;
+  hautPrix= -1;
+  categorieId = -1;
 
   imageToShow=[];
 
   optionSelect = []
-  
+
 
   constructor(private _produitService: ProduitService, private _cookieService: CookieService, private _imageService : ImageService) { }
 
@@ -158,15 +154,11 @@ export class BoutiqueComponent implements OnInit {
 
 
 
-  async filtreCategorie(id){
-    let produitDeBase;
-
-    produitDeBase = this.produits;
+  async filtreCategorie(produitDeBase, id){
 
 
-    
-    this.produits= [];
-    
+    let resultProduit = [];
+
     let produitsFiltre = await this._produitService.getProductByCategorieAndDest(id, "3").toPromise();
 
 
@@ -174,59 +166,49 @@ export class BoutiqueComponent implements OnInit {
       for (const p of produitDeBase) {
         for (const p2 of produitsFiltre) {
           if(p.id == p2.id){
-            this.produits.push(p);
+            resultProduit.push(p);
           }
         }
       }
     }
 
-  
-    if(this.produits.length == 0){
-      this.produits = null;
+    if(this.categorieId != -1) {
+      return resultProduit;
     }
+    return produitDeBase;
+
+    
 
 
   }
 
-  async filtrePrix(){
+  async filtrePrix(produitDeBase){
 
-    let produitDeBase;
+    let resultProduit = [];
+    let produitsFiltre = await this._produitService.getProductByPrixAndDest(this.basPrix, this.hautPrix, "3").toPromise();
 
- 
-    produitDeBase = this.produits;
-
-
-    
-    this.produits= [];
-    
-    let produitsFiltre = await this._produitService.getProductByPrixAndDest(this.value, this.highValue, "3").toPromise();
-  
 
     if(produitDeBase != null){
       for (const p of produitDeBase) {
         for (const p2 of produitsFiltre) {
           if(p.id == p2.id){
-            this.produits.push(p);
+            resultProduit.push(p);
           }
         }
       }
     }
 
-    if(this.produits.length == 0){
-      this.produits = null;
+    if(this.basPrix != -1){
+      return resultProduit;
     }
+    return produitDeBase;
+    
 
   }
 
-  async filtreMotCle(){
-    let produitDeBase;
+  async filtreMotCle(produitDeBase){
 
-
-    produitDeBase = this.produits;
-    
-
-    
-    this.produits= [];
+    let resultProduit = [];
 
     let produitsFiltre = await this._produitService.getProductByNameAndDest(this.motCle, "3").toPromise();
 
@@ -234,24 +216,72 @@ export class BoutiqueComponent implements OnInit {
       for (const p of produitDeBase) {
         for (const p2 of produitsFiltre) {
           if(p.id == p2.id){
-            this.produits.push(p);
+            resultProduit.push(p);
           }
         }
       }
     }
 
-
-    if(this.produits.length == 0){
-      this.produits = null;
+    if(this.motCle != ""){
+      return resultProduit;
     }
-
-
-
+    return produitDeBase;
+    
   }
 
   motCleChange(e)
   {
     this.motCle = e.target.value;
+
+  }
+
+  prixChange(e){
+
+    if(e == 0){
+      this.basPrix = -1;
+      this.hautPrix = -1;
+    }
+
+    else if(e == 1){
+      this.basPrix = 0;
+      this.hautPrix = 5;
+    }
+    else if(e == 2){
+      this.basPrix = 5;
+      this.hautPrix = 10;
+    }
+    else if(e == 3){
+      this.basPrix = 10;
+      this.hautPrix = 15;
+    }
+    else{
+      this.basPrix = 15;
+      this.hautPrix = 10000;
+    }
+
+  }
+
+  categorieChange(e){
+    this.categorieId = e;
+  }
+
+
+  async appliqFiltre(){
+
+    if(this.produits == null){
+      this.produits = await this._produitService.getAllProductEnRayonByDest("3").toPromise();
+    }
+
+    let resuMotCle = await this.filtreMotCle(this.produits);
+
+
+    let resPrix = await this.filtrePrix(resuMotCle);
+
+    this.produits  = await this.filtreCategorie(resPrix, this.categorieId);
+
+    if(this.produits.length == 0){
+      this.produits = null;
+    }
 
   }
 
