@@ -91,6 +91,8 @@ export class DonAssoComponent implements OnInit {
 
       await this._userService.updateUser(curUser, token).toPromise();
 
+      await this._donService.sendMailAndFacture(lastDon[0].id, token).toPromise();
+
 
 
       alert("Votre don à bien été pris en compte, vous allez recevoir un mail de confirmation de votre don !");

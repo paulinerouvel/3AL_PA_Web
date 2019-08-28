@@ -28,6 +28,21 @@ export class DonService {
     return this.http.post<any>(this._url, don, {  headers: reqHeader }).pipe(catchError(this.handleError));
   }
 
+  sendMailAndFacture(idDon, token) {
+
+    let reqHeader = new HttpHeaders({
+      'accept': 'application/json',
+      'content-type': 'application/json',
+      'Authorization': 'Bearer ' + token
+    });
+
+
+
+    return this.http.post<any>(this._url,JSON.stringify({
+      "idDon": idDon}) ,{headers: reqHeader }).pipe(catchError(this.handleError));
+
+  }
+
   getAllDonByIdReceveur(idR: string, token) {
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
@@ -57,6 +72,8 @@ export class DonService {
     return this.http.get<any>(this._url, { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
 
   }
+
+
 
   getLastDonByIdDonneur(idD: string, token) {
     let reqHeader = new HttpHeaders({

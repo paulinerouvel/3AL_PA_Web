@@ -27,7 +27,7 @@
 
             <div class="full-div">
               <p class="prix">Total {{item.total}}€</p>
-              <p class="prix">BTN Facture</p>
+              <input type="button" class="btn" value="Télécharger ma facture" (click)="downloadPDF(item.id)">
             </div>
           </div>
         </div>

@@ -26,7 +26,7 @@
               Date du don : {{item.date | date}}
               <p>Contact : <b>{{item.contact}}</b></p>
 
-              //BTN FACTURE
+              <input type="button" class="btn" value="Télécharger ma facture" (click)="downloadPDF(item.id)">
             </div>
           </div>
         </div>

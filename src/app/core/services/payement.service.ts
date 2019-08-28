@@ -33,6 +33,13 @@ export class PayementService {
   }
 
 
+  public getFacture(factureName): Observable<Blob> {   
+        let uri = environment.UrlFacture + "/" + factureName;
+        
+        return this.http.get(uri, { responseType: 'blob' });
+  }
+
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
