@@ -20,12 +20,12 @@ export class StorageService {
     this.storageSub.next(data);
   }
 
-  removeItem(key) {
+  removeItem(key : string) {
     localStorage.removeItem(key);
     this.storageSub.next('remove');
   }
 
-  getItem(key) {
+  getItem(key : string) {
     return localStorage.getItem(key);
   }
 

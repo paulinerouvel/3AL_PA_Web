@@ -18,7 +18,7 @@ export class UserService {
   private _url: string = environment.UrlAPI + "/user";
 
 
-  addUserCategory(id: string, category: string): Observable<any> {
+  addUserCategory(id: string, category: string) {
 
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
@@ -29,9 +29,7 @@ export class UserService {
 
 
 
-
-
-  getUserById(id: string): Observable<any> {
+  getUserById(id: string): Observable<Utilisateur> {
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
       'content-type': 'application/json'
@@ -42,7 +40,7 @@ export class UserService {
 
   }
 
-  getUserByEmail(mail: string): Observable<any> {
+  getUserByEmail(mail: string): Observable<Utilisateur> {
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
       'content-type': 'application/json'
@@ -54,7 +52,7 @@ export class UserService {
   }
 
 
-  getCategoryOfUser(userId): Observable<any> {
+  getCategoryOfUser(userId:string){
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
       'content-type': 'application/json'
@@ -63,11 +61,11 @@ export class UserService {
     let params = new HttpParams();
     params = params.append('userId', userId);
 
-    return this.http.get<Utilisateur>(this._url + "/category", { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
+    return this.http.get<any>(this._url + "/category", { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
   }
 
 
-  getUsersByCategory(category: string): Observable<any> {
+  getUsersByCategory(category: string): Observable<Utilisateur> {
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
       'content-type': 'application/json'
@@ -79,7 +77,7 @@ export class UserService {
   }
 
 
-  getCategoryById(id): Observable<any> {
+  getCategoryById(id : string){
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
       'content-type': 'application/json'
@@ -87,10 +85,10 @@ export class UserService {
 
     let params = new HttpParams();
     params = params.append('catId', id);
-    return this.http.get<Utilisateur>(this._url + "/category", { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
+    return this.http.get<any>(this._url + "/category", { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
   }
 
-  getValidUsersByCategory(category: string): Observable<any> {
+  getValidUsersByCategory(category: string): Observable<Utilisateur[]> {
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
       'content-type': 'application/json'
@@ -98,7 +96,7 @@ export class UserService {
 
     let params = new HttpParams();
     params = params.append('type', category);
-    return this.http.get<Utilisateur>(this._url + "/allValidByCategory", { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
+    return this.http.get<Utilisateur[]>(this._url + "/allValidByCategory", { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
   }
 
   getAllUsers(): Observable<Utilisateur[]> {
@@ -111,18 +109,18 @@ export class UserService {
   }
 
 
-  getAllCategory():Observable<any>{
+  getAllCategory(){
 
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
       'content-type': 'application/json'
     });
 
-    return this.http.get<Utilisateur[]>(this._url + "/categories" , {  headers: reqHeader }).pipe(catchError(this.handleError));
+    return this.http.get<any>(this._url + "/categories" , {  headers: reqHeader }).pipe(catchError(this.handleError));
   }
 
 
-  updateUser(user: Utilisateur, token): Observable<any> {
+  updateUser(user: Utilisateur, token : string) {
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
       'content-type': 'application/json',
@@ -133,7 +131,7 @@ export class UserService {
 
   }
 
-  deleteUser(id, token): Observable<any> {
+  deleteUser(id : string, token : string){
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
       'content-type': 'application/json',
@@ -141,11 +139,11 @@ export class UserService {
     });
 
 
-    return this.http.delete<any>(this._url + '/' +  id,  {  headers: reqHeader }).pipe(catchError(this.handleError));
+    return this.http.delete(this._url + '/' +  id,  {  headers: reqHeader }).pipe(catchError(this.handleError));
 
   }
 
-  verifyTokenValidity(token){
+  verifyTokenValidity(token : string) : Boolean{
     let token_decoded = jwt_decode(token);
 
 
@@ -165,30 +163,26 @@ export class UserService {
 
   }
 
-  decodeTokenId(token){
+  decodeTokenId(token : string){
 
     let token_decoded = jwt_decode(token);
     return token_decoded['id'];
 
   }
 
-  decodeTokenType(token){
+  decodeTokenType(token : string){
     let token_decoded = jwt_decode(token);
-    return token_decoded['type'];
+    return token_decoded['type'].Categorie_utilisateur_id;
   }
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
-      // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error.message);
     } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what went wrong,
       console.error(
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);
     }
-    // return an observable with a user-facing error message
     return throwError(
       'The connection to API failed.');
   };

@@ -22,6 +22,8 @@ export class MonPanierPartComponent implements OnInit {
   curUser = new Utilisateur(0, "", "", "", "", "", "", "", "", "", "", "", "", 0, 0, "", "", 0)
   ptSourires = 0;
 
+  infoText="";
+
 
   async ngOnInit() {
     let cookie = this._cookieService.get("produitPanier");
@@ -97,8 +99,24 @@ export class MonPanierPartComponent implements OnInit {
 
   addReduction() {
     this.reduction = true;
-    //this.ptSourires = this.curUser.nbPointsSourire / 10;
-    this.totalPanier = this.totalPanier - this.ptSourires;
+
+    if(this.totalPanier - this.ptSourires < 0){
+      
+      
+      this.infoText = "Il vous reste " + (this.ptSourires - this.totalPanier)  + " points sourires !";
+      this.ptSourires = this.totalPanier;
+      this.totalPanier = 0;
+
+    }
+    else{
+      //this.ptSourires = this.curUser.nbPointsSourire / 10;
+      this.totalPanier = this.totalPanier - this.ptSourires;
+    }
+
+
+
+
+
 
 
 

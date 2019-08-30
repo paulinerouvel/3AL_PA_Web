@@ -191,7 +191,7 @@ export class BoutiquePartiComponent implements OnInit {
   async filtrePrix(produitDeBase){
 
     let resultProduit = [];
-    let produitsFiltre = await this._produitService.getProductByPrixAndDest(this.basPrix, this.hautPrix, "3").toPromise();
+    let produitsFiltre = await this._produitService.getProductByPrixAndDest(this.basPrix.toString(), this.hautPrix.toString(), "3").toPromise();
 
 
     if(produitDeBase != null){

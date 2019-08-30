@@ -15,17 +15,25 @@ export class ProduitService {
 
   private _url: string = environment.UrlAPI + "/product";
 
-  addProduct(product : Produit, token): Observable<any> {
+  /**************************************************/
+  /*                 ADD METHOD                     */
+  /**************************************************/
+
+  addProduct(product : Produit, token : string) {
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
       'content-type': 'application/json',
       'Authorization': 'Bearer ' + token
     });
-    return this.http.post<Produit>(this._url + "/", product, {  headers: reqHeader }).pipe(catchError(this.handleError));
+    return this.http.post<any>(this._url + "/", product, {  headers: reqHeader }).pipe(catchError(this.handleError));
   }
 
+  /**************************************************/
+  /*                 GET METHOD                     */
+  /**************************************************/
 
-  getProductById(id): Observable<any> {
+
+  getProductById(id : string): Observable<Produit> {
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
       'content-type': 'application/json'
@@ -35,7 +43,7 @@ export class ProduitService {
     return this.http.get<Produit>(this._url + "/", { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
   }
 
-  getAllProductEnRayonByDest(dest): Observable<any> {
+  getAllProductEnRayonByDest(dest : string): Observable<Produit[]> {
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
       'content-type': 'application/json'
@@ -44,7 +52,7 @@ export class ProduitService {
     let params = new HttpParams();
     params = params.append('dest', dest);
 
-    return this.http.get<Produit>(this._url + "/enRayon", { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
+    return this.http.get<Produit[]>(this._url + "/enRayon", { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
   }
 
   getAllProducts(): Observable<Produit[]> {
@@ -59,7 +67,7 @@ export class ProduitService {
 
 
 
-  getProductByCategorieAndDest(idCategorie, dest): Observable<any> {
+  getProductByCategorieAndDest(idCategorie : string, dest : string): Observable<Produit[]> {
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
       'content-type': 'application/json'
@@ -69,12 +77,12 @@ export class ProduitService {
     params = params.append('dest', dest);
     params = params.append('idCategorie', idCategorie);
 
-    return this.http.get<Produit>(this._url + "/enRayon", { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
+    return this.http.get<Produit[]>(this._url + "/enRayon", { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
   }
 
     
 
-  getProductByNameAndDest(name, dest): Observable<any> {
+  getProductByNameAndDest(name : string, dest : string): Observable<Produit[]> {
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
       'content-type': 'application/json'
@@ -84,12 +92,12 @@ export class ProduitService {
     params = params.append('dest', dest);
     params = params.append('name', name);
 
-    return this.http.get<Produit>(this._url + "/enRayon", { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
+    return this.http.get<Produit[]>(this._url + "/enRayon", { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
   }
 
 
      
-  getProductByPrixAndDest(prixMin, prixMax, dest): Observable<any> {
+  getProductByPrixAndDest(prixMin : string, prixMax : string, dest : string): Observable<Produit[]> {
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
       'content-type': 'application/json'
@@ -100,11 +108,11 @@ export class ProduitService {
     params = params.append('prixMin', prixMin);
     params = params.append('prixMax', prixMax);
 
-    return this.http.get<Produit>(this._url + "/enRayon", { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
+    return this.http.get<Produit[]>(this._url + "/enRayon", { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
   }
 
 
-  getCategoryById(id): Observable<any> {
+  getCategoryById(id : string) {
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
       'content-type': 'application/json'
@@ -117,19 +125,19 @@ export class ProduitService {
   }
 
 
-  getAllProductsCategorie(){
+  getAllProductsCategorie() : Observable<Produit[]>{
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
       'content-type': 'application/json'
     });
 
 
-    return this.http.get<any>(this._url + "/category", {  headers: reqHeader }).pipe(catchError(this.handleError));
+    return this.http.get<Produit[]>(this._url + "/category", {  headers: reqHeader }).pipe(catchError(this.handleError));
   
   }
 
 
-  updateProduct(produit, token): Observable<any> {
+  updateProduct(produit : Produit, token : string) {
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
       'content-type': 'application/json',
@@ -137,11 +145,11 @@ export class ProduitService {
     });
 
 
-    return this.http.put<Produit>(this._url, produit, { headers: reqHeader }).pipe(catchError(this.handleError));
+    return this.http.put<any>(this._url, produit, { headers: reqHeader }).pipe(catchError(this.handleError));
 
   }
 
-  deleteProduct(id, token): Observable<any> {
+  deleteProduct(id : string, token : string) {
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
       'content-type': 'application/json',
@@ -151,7 +159,7 @@ export class ProduitService {
     let params = new HttpParams();
     params = params.append('id', id);
 
-    return this.http.delete<Produit>(this._url, { params : params, headers: reqHeader }).pipe(catchError(this.handleError));
+    return this.http.delete<any>(this._url, { params : params, headers: reqHeader }).pipe(catchError(this.handleError));
 
   }
 

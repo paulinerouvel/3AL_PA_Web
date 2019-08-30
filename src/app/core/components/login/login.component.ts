@@ -27,7 +27,9 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this._authService.login(this.userModel).subscribe(res => {
 
-      let type = this.userService.decodeTokenType(res.token)
+      let type = this.userService.decodeTokenType(res.token);
+
+
 
       if (type == 1 || type == 3 || type == 5) {
 
