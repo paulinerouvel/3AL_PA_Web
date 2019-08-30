@@ -102,6 +102,7 @@ export class MonPanierPartComponent implements OnInit {
 
     if(this.totalPanier - this.ptSourires < 0){
       
+
       
       this.infoText = "Il vous reste " + (this.ptSourires - this.totalPanier)  + " points sourires !";
       this.ptSourires = this.totalPanier;
@@ -114,18 +115,13 @@ export class MonPanierPartComponent implements OnInit {
     }
 
 
-
-
-
-
-
-
   }
 
   deleteReduction() {
+    this.infoText = undefined;
     this.reduction = false;
     this.totalPanier = this.totalPanier + this.ptSourires;
-    //this.ptSourires = 0;
+    this.ptSourires = this.curUser.nbPointsSourire / 10;
   }
 
   

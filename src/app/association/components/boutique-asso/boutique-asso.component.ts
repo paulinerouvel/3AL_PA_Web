@@ -14,11 +14,11 @@ import { UserService } from 'src/app/core/services/user.service';
 })
 export class BoutiqueAssoComponent implements OnInit {
 
-  produits;
-  parsedPanier = [];
-  totalPanier = 0;
-  maxArticle = 50;
-  maxArticleFixe = 50;
+  public produits;
+  public parsedPanier = [];
+  public totalPanier = 0;
+  public maxArticle = 50;
+  public maxArticleFixe = 50;
 
 
   imageToShow=[];
@@ -204,9 +204,11 @@ export class BoutiqueAssoComponent implements OnInit {
   async filtreCategorie(produitDeBase, id){
 
 
+
+
     let resultProduit = [];
 
-    let produitsFiltre = await this._produitService.getProductByCategorieAndDest(id, "3").toPromise();
+    let produitsFiltre = await this._produitService.getProductByCategorieAndDest(id, "1").toPromise();
 
 
     if(produitDeBase != null){
@@ -235,7 +237,7 @@ export class BoutiqueAssoComponent implements OnInit {
 
     let resultProduit = [];
 
-    let produitsFiltre = await this._produitService.getProductByNameAndDest(this.motCle, "3").toPromise();
+    let produitsFiltre = await this._produitService.getProductByNameAndDest(this.motCle, "1").toPromise();
 
     if(produitDeBase != null){
       for (const p of produitDeBase) {
@@ -274,6 +276,8 @@ export class BoutiqueAssoComponent implements OnInit {
 
 
     let resuMotCle = await this.filtreMotCle(this.produits);
+
+    console.log(resuMotCle);
 
     this.produits  = await this.filtreCategorie(resuMotCle, this.categorieId);
 

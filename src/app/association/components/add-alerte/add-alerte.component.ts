@@ -12,7 +12,7 @@ import { UserService } from 'src/app/core/services/user.service';
 })
 export class AddAlerteComponent implements OnInit {
 
-  alerte: Alerte = new Alerte(-1, "", "", 0);
+  public alerte: Alerte = new Alerte(-1, "", "", 0);
 
   constructor(private _alerteService: AlerteService, private _storageService: StorageService, private _router: Router, private userService : UserService) { }
 

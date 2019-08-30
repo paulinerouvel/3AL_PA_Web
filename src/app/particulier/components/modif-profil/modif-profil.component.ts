@@ -27,7 +27,9 @@ export class ModifProfilComponent implements OnInit {
   async onSubmit() {
     let token = this._storageService.getItem("token");
     this._userService.updateUser(this.userModel, token).toPromise();
-    location.reload();
+
+    alert("Profil modifié !");
+    location.replace('/boutique-part');
   }
 
 }

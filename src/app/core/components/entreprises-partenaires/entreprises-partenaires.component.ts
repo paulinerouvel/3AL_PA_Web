@@ -31,9 +31,9 @@ export class EntreprisesPartenairesComponent implements OnInit {
 
     this.listeEntreprises.forEach(element => {
       this._imageService.getImage(element.photo).subscribe(res => {
-        this.createImageFromBlob(res, element.Utilisateur_id);
+        this.createImageFromBlob(res, element.id);
       }, err => {
-        //console.log(err)
+        console.log(err)
       });
     });
   }

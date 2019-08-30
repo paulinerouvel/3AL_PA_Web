@@ -4,6 +4,8 @@ import { UserService } from 'src/app/core/services/user.service';
 import { ProduitService } from 'src/app/core/services/produit.service';
 import { Produit } from 'src/app/core/models/produit';
 import { StorageService } from 'src/app/core/services/storage.service';
+import { Utilisateur } from 'src/app/core/models/utilisateur';
+import { Entrepot } from 'src/app/core/models/entrepot';
 
 @Component({
   selector: 'app-add-produit',
@@ -15,11 +17,11 @@ export class AddProduitComponent implements OnInit {
   constructor(private entrepotService: EntrepotService, private userService: UserService, private produitService: ProduitService,
     private storageService : StorageService) { }
 
-  destinataires;
-  entrepots;
-  categoriesProduit;
+  public destinataires : Utilisateur[];
+  public entrepots : Entrepot[];
+  public categoriesProduit : string[];
 
-  productModel = new Produit(0, "", "", "", 0, 0, 0, "", "", 0, "", 0, null, 0, 0);
+  public productModel = new Produit(0, "", "", "", 0, 0, 0, "", "", 0, "", 0, null, 0, 0);
 
   async ngOnInit() {
 

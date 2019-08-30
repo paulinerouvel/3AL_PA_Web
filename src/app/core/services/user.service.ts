@@ -12,7 +12,7 @@ import { StorageService } from './storage.service';
 })
 export class UserService {
 
-  constructor(private http: HttpClient, private storageService :StorageService) { }
+  constructor(private http: HttpClient, private storageService : StorageService) { }
 
 
   private _url: string = environment.UrlAPI + "/user";
@@ -88,7 +88,7 @@ export class UserService {
     return this.http.get<any>(this._url + "/category", { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
   }
 
-  getValidUsersByCategory(category: string): Observable<Utilisateur[]> {
+  getValidUsersByCategory(category: string) {
     let reqHeader = new HttpHeaders({
       'accept': 'application/json',
       'content-type': 'application/json'
@@ -96,7 +96,7 @@ export class UserService {
 
     let params = new HttpParams();
     params = params.append('type', category);
-    return this.http.get<Utilisateur[]>(this._url + "/allValidByCategory", { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
+    return this.http.get<any>(this._url + "/allValidByCategory", { params: params, headers: reqHeader }).pipe(catchError(this.handleError));
   }
 
   getAllUsers(): Observable<Utilisateur[]> {

@@ -20,6 +20,8 @@ export class AssociationsPartenairesComponent implements OnInit {
     private router : Router, private storageService: StorageService) { }
 
   createImageFromBlob(image: Blob, id ) {
+
+
     let reader = new FileReader();
     reader.addEventListener("load", () => {
       this.imageToShow[id] = reader.result;
@@ -48,8 +50,10 @@ export class AssociationsPartenairesComponent implements OnInit {
 
     this.listeAssos.forEach(element => {
       this._imageService.getImage(element.photo).subscribe(async res => {
+        
 
-        this.createImageFromBlob(res, element.Utilisateur_id);
+
+        this.createImageFromBlob(res, element.id);
       }, err => {
         console.log(err)
       });

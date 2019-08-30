@@ -27,9 +27,9 @@ export class GestionAlertesComponent implements OnInit {
   }
 
 
-  deleteAlert(id) {
+  async deleteAlert(id) {
     let token = this._storageService.getItem('token');
-    this._alertService.deleteAlertById(id, token).toPromise();
+    await this._alertService.deleteAlertById(id, token).toPromise();
     location.reload();
   }
 

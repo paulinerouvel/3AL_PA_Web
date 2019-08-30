@@ -10,17 +10,17 @@ import { UserService } from 'src/app/core/services/user.service';
 })
 export class AddUserComponent implements OnInit {
 
-  userModel = new Utilisateur(-1, "", "", "", "", "", "", "", "", "", "", "", "", 0, 0, "", "", 0);
-  userType = 3;
-  errorMsg = "";
-  infoMsg = "";
+  public userModel : Utilisateur = new Utilisateur(-1, "", "", "", "", "", "", "", "", "", "", "", "", 0, 0, "", "", 0);
+  private userType : Number= 3;
+  public errorMsg : string = "";
+  public infoMsg : string = "";
 
   constructor(private authentificationService: AuthentificationService, private userService: UserService) { }
 
   ngOnInit() {
   }
 
-  changeUserType(type){
+  changeUserType(type : number){
     this.userType = type;
   }
 

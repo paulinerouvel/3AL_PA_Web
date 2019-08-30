@@ -11,10 +11,10 @@ import { StorageService } from 'src/app/core/services/storage.service';
 })
 export class ModifUserComponent implements OnInit {
 
-  userModel = new Utilisateur(-1, "", "", "", "", "", "", "", "", "", "", "", "", 0, 0, "", "", 0);
-  userType = 0;
-  errorMsg = "";
-  infoMsg = "";
+  public userModel = new Utilisateur(-1, "", "", "", "", "", "", "", "", "", "", "", "", 0, 0, "", "", 0);
+  public userType = 0;
+  public errorMsg = "";
+  public infoMsg = "";
   constructor(private route: ActivatedRoute, private userService: UserService, private storageService : StorageService) { }
 
   async ngOnInit() {
@@ -22,8 +22,13 @@ export class ModifUserComponent implements OnInit {
     let idUser = this.route.snapshot.queryParamMap.get('id');
     this.userModel = await this.userService.getUserById(idUser).toPromise();
 
+
+    
+
     this.userModel.dateDeNaissance = this.userModel.dateDeNaissance.split('T')[0];
     this.userType = await this.userService.getCategoryOfUser(idUser).toPromise();
+    this.userType = this.userType['Categorie_utilisateur_id'];
+
   }
 
 

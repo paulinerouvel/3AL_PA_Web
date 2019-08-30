@@ -5,6 +5,8 @@ import { ProduitService } from 'src/app/core/services/produit.service';
 import { StorageService } from 'src/app/core/services/storage.service';
 import { Produit } from 'src/app/core/models/produit';
 import { ActivatedRoute } from '@angular/router';
+import { Utilisateur } from 'src/app/core/models/utilisateur';
+import { Entrepot } from 'src/app/core/models/entrepot';
 
 @Component({
   selector: 'app-modif-produit',
@@ -16,17 +18,20 @@ export class ModifProduitComponent implements OnInit {
   constructor(private route: ActivatedRoute,private entrepotService: EntrepotService, private userService: UserService, private produitService: ProduitService,
     private storageService : StorageService) { }
 
-    destinataires;
-    entrepots;
-    categoriesProduit;
+    public destinataires : Utilisateur[];
+    public entrepots : Entrepot[];
+    public categoriesProduit;
+    photoInit= "";
   
-    productModel = new Produit(0, "", "", "", 0, 0, 0, "", "", 0, "", 0, null, 0, 0);
+    public productModel = new Produit(0, "", "", "", 0, 0, 0, "", "", 0, "", 0, null, 0, 0);
 
     async ngOnInit() {
 
 
       let idProduit = this.route.snapshot.queryParamMap.get('id');
       this.productModel = await this.produitService.getProductById(idProduit).toPromise();
+
+      this.photoInit = this.productModel.photo;
 
 
       this.productModel.dateMiseEnRayon = this.productModel.dateMiseEnRayon.split('T')[0];
@@ -57,7 +62,11 @@ export class ModifProduitComponent implements OnInit {
     async onSubmit(){
 
       let token = this.storageService.getItem('token');
-      this.productModel.photo = "img_product.jpg";
+
+      if(this.productModel.photo == null || this.productModel.photo == undefined || this.productModel.photo == ""){
+        this.productModel.photo = this.photoInit;
+      }
+      
   
       if(this.productModel.enRayon == 1){
         this.productModel.enRayon = true;

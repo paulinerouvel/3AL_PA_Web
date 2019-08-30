@@ -25,15 +25,18 @@ export class GestionProduitComponent implements OnInit {
 
     for (let p of this.produits) {
 
-      let entrepot :Entrepot = await this.entrepotService.getEntrepotById(p.entrepotwm_id).toPromise();
+
+      let entrepot :Entrepot = await this.entrepotService.getEntrepotById(p.entrepotwm_id.toString()).toPromise();
 
       p.entrepotwm_id = entrepot[0].libelle;
 
-      let categorieProduit = await this.produitsService.getCategoryById(p.categorieProduit_id).toPromise();     
+      let categorieProduit = await this.produitsService.getCategoryById(p.categorieProduit_id.toString()).toPromise();     
+
+
       p.categorieProduit_id = categorieProduit.libelle;
 
 
-      let categoryUser = await this.userService.getCategoryById(p.destinataire).toPromise();
+      let categoryUser = await this.userService.getCategoryById(p.destinataire.toString()).toPromise();
       p.destinataire = categoryUser.libelle;
       
 
@@ -42,8 +45,8 @@ export class GestionProduitComponent implements OnInit {
 
 
   
-  async deleteProduit(id){
-    let token = this.storageService.getItem('token');
+  async deleteProduit(id : string){
+    let token : string = this.storageService.getItem('token');
     await this.produitsService.deleteProduct(id, token).toPromise();
 
     alert("Produit supprimé !");

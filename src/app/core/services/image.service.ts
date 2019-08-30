@@ -18,7 +18,7 @@ export class ImageService {
   /*                 ADD METHOD                     */
   /**************************************************/
 
-  postImage(name : string , image : File) {
+  postImage(name  , image : File) {
 
 
 
@@ -35,7 +35,7 @@ export class ImageService {
   /*                 GET METHOD                     */
   /**************************************************/
 
-  getImage(name : string): Observable<Blob> {
+  getImage(name ): Observable<Blob> {
 
     return this.http.get(this._url + "/" + name, { responseType: 'blob' });
   }
