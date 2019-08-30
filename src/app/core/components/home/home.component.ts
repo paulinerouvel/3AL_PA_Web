@@ -69,6 +69,12 @@ export class HomeComponent implements OnInit {
     //l'utilisateur est valide car un particulier n'a pas besoin de faire valider son profil
     this.userModel.estValide = 1;
 
+    
+    this.userModel.libelle = "";
+    this.userModel.siret = "";
+    this.userModel.tailleOrganisme = 0;
+    this.userModel.desc = "";
+
 
 
     let res = await this.authentificationService.register(this.userModel).toPromise();
@@ -92,6 +98,11 @@ export class HomeComponent implements OnInit {
   }
 
   async onSubmitAsso() {
+
+
+    this.userModel.nom = "";
+    this.userModel.prenom = "";
+
     let res = await this.authentificationService.register(this.userModel).toPromise();
 
     if (res == null) {

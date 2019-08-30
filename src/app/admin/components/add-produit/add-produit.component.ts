@@ -54,24 +54,36 @@ export class AddProduitComponent implements OnInit {
 
   async onSubmit(){
 
-    let token = this.storageService.getItem('token');
-    this.productModel.photo = "img_product.jpg";
 
-    if(this.productModel.enRayon == 1){
-      this.productModel.enRayon = true;
+
+
+
+    if(this.productModel.prix <= 0 || this.productModel.quantite <= 0 
+      || new Date(this.productModel.dateMiseEnRayon) < new Date(Date.now()) || new Date(this.productModel.dlc) < new Date(Date.now())){
+      alert('Certains champs ne sont pas valides')
     }
     else{
-      this.productModel.enRayon = false; 
+      let token = this.storageService.getItem('token');
+      this.productModel.photo = "img_product.jpg";
+  
+      if(this.productModel.enRayon == 1){
+        this.productModel.enRayon = true;
+      }
+      else{
+        this.productModel.enRayon = false; 
+      }
+  
+      this.productModel.prixInitial = 0;
+  
+      let res = await this.produitService.addProduct(this.productModel, token).toPromise();
+  
+      console.log(res)
+  
+      alert('Produit ajouté !');
+      location.replace('/gestion-produit');
     }
 
-    this.productModel.prixInitial = 0;
 
-    let res = await this.produitService.addProduct(this.productModel, token).toPromise();
-
-    console.log(res)
-
-    alert('Produit ajouté !');
-    location.replace('/gestion-produit');
   }
 
 }
