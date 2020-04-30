@@ -29,7 +29,7 @@
     "@types/leaflet": "^1.5.1",
     "bootstrap": "^4.3.1",
     "core-js": "^2.6.9",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jwt-decode": "^2.2.0",
     "leaflet": "^1.5.1",
     "ng5-slider": "^1.2.4",
